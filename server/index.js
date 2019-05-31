@@ -39,7 +39,7 @@ massive(CONNECTION_STRING).then(db => {
 // app.get('/messages/:room_id', msgCtrl.getMessagesByRoomId)
 // app.post('/messages', msgCtrl.storeMessage)
 
-// app.get('/rooms/:co_id', roomCtrl.getAllRoomsByCompany)
+app.get('/rooms/:co_id', roomCtrl.getAllRoomsByCompany)
 // app.post('/rooms', roomCtrl.addNewRoom)
 // app.put('/rooms/:room_id', roomCtrl.updateRoom)
 // app.delete('/rooms/:room_id', roomCtrl.deleteRoom)
