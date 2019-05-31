@@ -5,7 +5,7 @@ class LandingLogin extends Component {
 
   render() {
     <div>
-      LandingLogin
+      {/* <LoginForm/> */}
     </div>
   }
 }
