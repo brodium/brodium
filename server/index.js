@@ -5,7 +5,7 @@ const session = require('express-session')
 
 const app = express()
 
-const { SERVER_PORT, SESSION_SECRET } = process.env
+const { SERVER_PORT, SESSION_SECRET, CONNECTION_STRING } = process.env
 
 // middleware
 app.use(express.json())
@@ -18,4 +18,9 @@ app.use(session({
     }
 }))
 
-app.listen(SERVER_PORT, () => {console.log(`listening on port ${SERVER_PORT}`)})
+massive(CONNECTION_STRING).then(db => {
+    app.set("db", db)
+    console.log("database set!")
+    console.log(db.listTables())
+    app.listen(SERVER_PORT, () => { console.log(`listening on port ${SERVER_PORT}`) })
+})
