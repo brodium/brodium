@@ -24,3 +24,6 @@ massive(CONNECTION_STRING).then(db => {
     console.log(db.listTables())
     app.listen(SERVER_PORT, () => { console.log(`listening on port ${SERVER_PORT}`) })
 })
+
+
+
