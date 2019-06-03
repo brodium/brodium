@@ -8,6 +8,7 @@ const msgCtrl = require('./controller/messagesCtrl')
 const roomCtrl = require('./controller/roomCtrl')
 const tmCtrl = require('./controller/teamMemberCtrl')
 const companyCtrl = require('./controller/companyCtrl')
+const googleCtrl = require('./controller/googleCtrl')
 
 const app = express()
 
@@ -33,8 +34,10 @@ massive(CONNECTION_STRING).then(db => {
 
 // app.get('/auth', authCtrl.getCurrentUser)
 // app.post('/auth/login', authCtrl.login)
-// app.post('/auth/register', authCtrl.register)
+app.post('/auth/register-company', authCtrl.registerCompany)
+app.post('/auth/register-user', authCtrl.registerUser)
 // app.get('/auth/logout', authCtrl.logout)
+app.get('/auth/session', authCtrl.getSessionUser)
 
 // app.get('/messages/:room_id', msgCtrl.getMessagesByRoomId)
 // app.post('/messages', msgCtrl.storeMessage)
@@ -54,3 +57,5 @@ app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)
 // app.post('/company', companyCtrl.addCompany)
 // app.put('/company', companyCtrl.updateCompany)
 // app.delete('/company', companyCtrl.deleteCompany)
+
+app.get('/places/search/:company', googleCtrl.searchPlaces)
