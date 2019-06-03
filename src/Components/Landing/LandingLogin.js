@@ -1,7 +1,7 @@
-<<<<<<< HEAD
 // import axios from 'axios'
 import React from 'react'
 import LoginForm from './LoginForm'
+import RegisterForm from './RegisterForm';
 
 const LandingLogin = () => {
 
@@ -9,20 +9,9 @@ const LandingLogin = () => {
     <>
       <div>
         <LoginForm />
+        <RegisterForm />
       </div>
     </>
-=======
-import React from 'react';
-import RegisterForm from './RegisterForm';
-
-function LandingLogin() {
-
-  return (
-    <div>
-      LandingLogin
-      <RegisterForm />
-    </div>
->>>>>>> master
   )
 }
 export default LandingLogin
