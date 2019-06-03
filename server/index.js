@@ -8,6 +8,7 @@ const msgCtrl = require('./controller/messagesCtrl')
 const roomCtrl = require('./controller/roomCtrl')
 const tmCtrl = require('./controller/teamMemberCtrl')
 const companyCtrl = require('./controller/companyCtrl')
+const googleCtrl = require('./controller/googleCtrl')
 
 const app = express()
 
@@ -55,3 +56,5 @@ app.get('/rooms/:co_id', roomCtrl.getAllRoomsByCompany)
 // app.post('/company', companyCtrl.addCompany)
 // app.put('/company', companyCtrl.updateCompany)
 // app.delete('/company', companyCtrl.deleteCompany)
+
+app.get('/places/search/:company', googleCtrl.searchPlaces)

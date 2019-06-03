@@ -4,7 +4,7 @@ module.exports = {
 	async registerCompany(req, res) {
 		const db = req.app.get('db')
 		
-		const {company_name, street, city, state, zip, google_places_id} = req.body.company
+		const {company_name, address, google_places_id} = req.body.company
 
 		//check if company is in db
 		const companyExists = await db.getCompanyByPlaceId({google_places_id})
@@ -12,7 +12,7 @@ module.exports = {
 			return res.status(409).send('Company is already registered. Please sign in.')
 		}
 
-		const companyRegistered = await db.registerCompany({company_name, street, city, state,zip, google_places_id})
+		const companyRegistered = await db.registerCompany({company_name, address, google_places_id})
 		const company = companyRegistered[0]
 
 		//add default chat room
