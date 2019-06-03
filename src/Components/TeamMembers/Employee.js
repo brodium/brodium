@@ -4,9 +4,6 @@ import axios from "axios"
 
 const Employee = (props) => {
 
-  console.log("THIS IS PROPS", props)
-  console.log("THIS IS PROPS FIRST NAME", props.member.firstname)
-
   const [edit, setEdit] = useState(false)
 
   const [editMember, setEditMember] = useState({
@@ -19,7 +16,10 @@ const Employee = (props) => {
   // -- METHODS -- //
 
   // Delete Team Member
-  const deleteTeamMember = team_member_id => { axios.delete(`/team-member/${team_member_id}`) }
+  const deleteTeamMember = team_member_id => {
+    axios.delete(`/team-member/${team_member_id}`)
+      .then(window.location.reload())
+  }
   // ----- -----
 
   // Edit Team Member
@@ -29,7 +29,7 @@ const Employee = (props) => {
 
   const handleCancelEditTeamMember = (event) => {
     event.preventDefault()
-    setEditMember({ ...editMember, firstname: "", lastname: "", email: "", isadmin: false })
+    // setEditMember({ ...editMember, firstname: "", lastname: "", email: "", isadmin: false })
     setEdit(!edit)
   }
 
@@ -63,16 +63,13 @@ const Employee = (props) => {
     const { firstname, lastname, email, isadmin } = editMember
 
     axios.put("/team-member", { team_member_id, firstname, lastname, email, isadmin })
-      .then(setEditMember({ ...editMember, firstname: "", lastname: "", email: "", isadmin: false }))
       .then(setEdit(!edit))
+      .then(window.location.reload())
   }
-
-
-  console.log(editMember)
   // ----- -----
 
+  // -- JSX -- //
   return (
-
     !edit ?
       <div className="team-member" key={props.member.team_member_id}>
         <div>{props.member.firstname}</div>
@@ -124,6 +121,7 @@ const Employee = (props) => {
               type="checkbox"
               name="isadmin"
               onClick={handleEditTeamMemberCheckIsAdmin}
+              checked={editMember.isadmin ? true : false}
             />
           </label>
           <div>

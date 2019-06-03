@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react"
 // import connect from "react-redux"
+// import { withRouter } from "react-router-dom"
+import christianLogic from "./../../christianLogic/christianLogic"
 import Employee from "./Employee"
 
 import axios from "axios"
-
-// ****** Do I need to conditionally render this whole page based on whether or not the user is an Admin? ****** //
-// ****** I have static data for company_id below to make it work, once things get up and running comment that code out and un-commment the code that allows for dynamic rendering ****** //
 
 const TeamMembers = () => {
 
@@ -19,29 +18,36 @@ const TeamMembers = () => {
     newLastname: "",
     newEmail: "",
     newIsadmin: false,
-    newImg: "default link" // "https://sunrisepublish.com/wp-content/uploads/2016/03/placeholder-profile-male.jpg"
+    newImg: "default link"
   })
 
   // -- LIFECYCLE EVENTS -- //
+  // useEffect(() => {
+  //   if (!this.props.isadmin) {
+  //     this.props.history.push("/")
+  //   }
+  // }, [])
+
   const getTeamMembers = async () => {
     // const { companyId } = this.props
+
     const companyId = 2
     const response = await axios.get(`/team-members/${companyId}`)
     if (response.data.length !== teamMembers.length) {
       setTeamMembers(response.data)
     }
   }
-  useEffect(() => { getTeamMembers(teamMembers) }, [teamMembers])
+  useEffect(() => { getTeamMembers() }, [teamMembers])
 
 
   // -- METHODS -- //
 
   // Add Team Member
-  const handleAddNewMember = () => { setAddNewMember(!addNewMember) }
+  const handleAddNewMember = () => { setAddNewMember(christianLogic.reverseValue(addNewMember)) }
 
   const handleCancelAddNewMember = event => {
     event.preventDefault()
-    setAddNewMember(!addNewMember)
+    setAddNewMember(christianLogic.reverseValue(addNewMember))
   }
 
   const updateField = event => {
@@ -77,6 +83,7 @@ const TeamMembers = () => {
     axios.post("/team-member", { firstname, lastname, email, isadmin, company_id, img })
       .then(setValues({ ...form, newFirstname: "", newLastname: "", newEmail: "", newIsadmin: false }))
       .then(setAddNewMember(!addNewMember))
+      .then(window.location.reload())
   }
   // ----- -----  
 
@@ -91,7 +98,7 @@ const TeamMembers = () => {
         {teamMember}
       </div>
 
-      <div className="add-team-member" style={{ "border": "1px solid red" }}>
+      <div className="add-team-member">
         {
           !addNewMember ?
             <div>
@@ -156,5 +163,4 @@ export default TeamMembers
 //   return state
 // }
 
-// export default connect(mapStateToProps)(TeamMembers)
-
+// export default connect(mapStateToProps)(withRouter(TeamMembers))

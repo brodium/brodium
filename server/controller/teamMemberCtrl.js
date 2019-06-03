@@ -13,26 +13,27 @@ module.exports = {
     const team_member_id = +id
     const db = req.app.get("db")
     db.deleteTeamMember({ team_member_id })
-      .then(
-        res.sendStatus(200)
-      )
+      .then(res.sendStatus(200))
+      .catch((err) => { console.log(`Delete Member Error: ${err}`) })
   },
 
-  addMember: (req, res) => {
+  addMember: async (req, res) => {
     const { firstname, lastname, email, isadmin, company_id, img } = req.body
     const db = req.app.get("db")
-    db.addTeamMember({ firstname, lastname, email, isadmin, company_id, img })
-      .then(
-        res.sendStatus(200)
-      )
+
+    const addTeamMember = await db.addTeamMember({ firstname, lastname, isadmin, company_id, img })
+    const team_member_id = addTeamMember[0].team_member_id
+
+    await db.addTeamMemberLogin({ email, team_member_id })
+      .then(res.sendStatus(200))
+      .catch((err) => { console.log(`Add Member Error: ${err}`) })
   },
 
   updateMember: (req, res) => {
     const { firstname, lastname, isadmin, team_member_id, email } = req.body
     const db = req.app.get("db")
     db.updateMember({ firstname, lastname, isadmin, team_member_id, email })
-      .then(
-        res.sendStatus(200)
-      )
+      .then(res.sendStatus(200))
+      .catch((err) => { console.log(`Updatae Member Error: ${err}`) })
   }
 }

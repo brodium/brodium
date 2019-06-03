@@ -1,5 +1,8 @@
-export const addTodo = (todos, todo) => {
+module.exports = {
 
-  return [...todos, todo]
+  reverseValue: (value) => {
+    return !value
+  }
+
 }
 
