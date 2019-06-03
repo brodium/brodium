@@ -1,13 +1,17 @@
-import axios from 'axios'
-import React, { Components } from 'react'
+// import axios from 'axios'
+import React from 'react'
+import LoginForm from './LoginForm'
+import RegisterForm from './RegisterForm';
 
-class LandingLogin extends Component {
+const LandingLogin = () => {
 
-  render() {
-    <div>
-      LandingLogin
-    </div>
-  }
+  return (
+    <>
+      <div>
+        <LoginForm />
+        <RegisterForm />
+      </div>
+    </>
+  )
 }
-
 export default LandingLogin
