@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import Axios from 'axios';
 import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 import Place from './Place';
-
+import {setUser, setCompany} from '../../mightyDucks/authReducer';
 
 function RegisterForm(props) {
 
@@ -22,7 +23,6 @@ function RegisterForm(props) {
 	const findCompany = () => {
 		Axios.get(`/places/search/${company} ${city} ${state}`)
 			.then(res => {
-				console.log(res.data)
 				setSearchResults(res.data.results)
 			}).catch(console.log)
 	}
@@ -32,11 +32,15 @@ function RegisterForm(props) {
 		Axios.post('/auth/register-company', {
 			company: {company_name: name, address: formatted_address, google_places_id: place_id}
 		})
-		.then(() => {
+		.then(company => {
 			Axios.post('/auth/register-user', {
 				user: {firstname, lastname, isadmin: true, email, password}
 			})
-			.then(() => props.history.push('/'))
+			.then(user => {
+				props.setCompany(company.data)
+				props.setUser(user.data)
+				props.history.push('/')
+			})
 		})
 	}
 
@@ -92,4 +96,9 @@ function RegisterForm(props) {
 	)
 }
 
-export default withRouter(RegisterForm)
+const mapDispatchToProps = {
+  setCompany,
+  setUser
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(RegisterForm))

@@ -43,7 +43,14 @@ module.exports = {
 
 		req.session.user = memberAdded[0]
 		req.session.user.email = loginAdded[0].email
-		res.sendStatus(200)
+		res.status(200).send(req.session.user)
+	},
+
+	getSessionUser(req, res) {
+		if (req.session.user) {
+			return res.status(200).send(req.session)
+		}
+		res.send()
 	}
 
 }
