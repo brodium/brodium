@@ -8,6 +8,7 @@ const msgCtrl = require('./controller/messagesCtrl')
 const roomCtrl = require('./controller/roomCtrl')
 const tmCtrl = require('./controller/teamMemberCtrl')
 const companyCtrl = require('./controller/companyCtrl')
+const googleCtrl = require('./controller/googleCtrl')
 
 const app = express()
 
@@ -32,9 +33,16 @@ massive(CONNECTION_STRING).then(db => {
 })
 
 // app.get('/auth', authCtrl.getCurrentUser)
+<<<<<<< HEAD
 app.post('/auth/login', authCtrl.login)
 // app.post('/auth/register', authCtrl.register)
+=======
+// app.post('/auth/login', authCtrl.login)
+app.post('/auth/register-company', authCtrl.registerCompany)
+app.post('/auth/register-user', authCtrl.registerUser)
+>>>>>>> master
 // app.get('/auth/logout', authCtrl.logout)
+app.get('/auth/session', authCtrl.getSessionUser)
 
 // app.get('/messages/:room_id', msgCtrl.getMessagesByRoomId)
 // app.post('/messages', msgCtrl.storeMessage)
@@ -44,14 +52,18 @@ app.post('/auth/login', authCtrl.login)
 // app.put('/rooms/:room_id', roomCtrl.updateRoom)
 // app.delete('/rooms/:room_id', roomCtrl.deleteRoom)
 
-// app.get('/team-member/:co_id', tmCtrl.getMembersByCompany)
-// app.get('/team-member/:room_id', tmCtrl.getMembersByRoom)
-// app.post('/team-member', tmCtrl.addMember)
-// app.put('/team-member', tmCtrl.updateMember)
-// app.delete('/team-member/:member_id', tmCtrl.deleteMember)
+app.get('/team-members/:co_id', tmCtrl.getMembersByCompany)
+// app.get('/team-members/:room_id', tmCtrl.getMembersByRoom)
+app.post('/team-member', tmCtrl.addMember)
+app.put('/team-member', tmCtrl.updateMember)
+app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)
 
 // app.get('/company', companyCtrl.getCompany)
 // app.post('/company', companyCtrl.addCompany)
 // app.put('/company', companyCtrl.updateCompany)
 // app.delete('/company', companyCtrl.deleteCompany)
 
+<<<<<<< HEAD
+=======
+app.get('/places/search/:company', googleCtrl.searchPlaces)
+>>>>>>> master
