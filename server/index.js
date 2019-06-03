@@ -44,10 +44,10 @@ app.get('/auth/session', authCtrl.getSessionUser)
 // app.get('/messages/:room_id', msgCtrl.getMessagesByRoomId)
 // app.post('/messages', msgCtrl.storeMessage)
 
-// app.get('/rooms/:co_id', roomCtrl.getAllRoomsByCompany)
-// app.post('/rooms', roomCtrl.addNewRoom)
+app.get('/rooms/:co_id', roomCtrl.getAllRoomsByCompany)
+app.post('/rooms', roomCtrl.addNewRoom)
 // app.put('/rooms/:room_id', roomCtrl.updateRoom)
-// app.delete('/rooms/:room_id', roomCtrl.deleteRoom)
+app.delete('/rooms/:room_id', roomCtrl.deleteRoom)
 
 app.get('/team-members/:co_id', tmCtrl.getMembersByCompany)
 // app.get('/team-members/:room_id', tmCtrl.getMembersByRoom)
