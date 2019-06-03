@@ -1,11 +1,6 @@
 const bcrypt = require('bcryptjs');
 
 module.exports = {
-<<<<<<< HEAD
-	// register(req, res) {
-	// 	const db = req.app.get('db')
-	// 	const {firstname, lastname, email, password, companyName, address}
-=======
 	async registerCompany(req, res) {
 		const db = req.app.get('db')
 
@@ -26,9 +21,8 @@ module.exports = {
 		req.session.company = company
 
 		res.status(200).send(company)
->>>>>>> master
 
-	// },
+	},
 	login: async (req, res) => {
 		console.log('login@authCtrl')
 		const db = req.app.get(`db`)
@@ -50,7 +44,6 @@ module.exports = {
 			res.sendStatus(401)
 		}
 	},
-
 	async registerUser(req, res) {
 		const db = req.app.get('db')
 		const { firstname, lastname, isadmin, img, email, password } = req.body.user
