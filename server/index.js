@@ -33,7 +33,8 @@ massive(CONNECTION_STRING).then(db => {
 
 // app.get('/auth', authCtrl.getCurrentUser)
 // app.post('/auth/login', authCtrl.login)
-// app.post('/auth/register', authCtrl.register)
+app.post('/auth/register-company', authCtrl.registerCompany)
+app.post('/auth/register-user', authCtrl.registerUser)
 // app.get('/auth/logout', authCtrl.logout)
 
 // app.get('/messages/:room_id', msgCtrl.getMessagesByRoomId)
