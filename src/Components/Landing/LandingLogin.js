@@ -2,14 +2,18 @@
 import React from 'react'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm';
+import ConditionalRenderComp from './ConditionalRenderComp'
 
-const LandingLogin = () => {
+const LandingLogin = (props) => {
 
   return (
     <>
       <div>
-        <LoginForm />
-        <RegisterForm />
+        {/* <LoginForm /> */}
+        {/* <RegisterForm /> */}
+        <ConditionalRenderComp
+          history={props.history}
+        />
       </div>
     </>
   )
