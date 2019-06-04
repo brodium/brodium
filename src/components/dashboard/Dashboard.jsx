@@ -3,6 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import ChatWindow from './chatWindow/ChatWindow';
 import AddChatRoom from './AddChatRoom/AddChatRoom';
+import EditChatRoom from './EditChatRoom/EditChatRoom';
 // import { handleChatRoomClick } from './../../jacksonLogic/Functions'
 
 const chatWindow = {
@@ -28,30 +29,33 @@ const sideBar = {
 	justifyContent: 'space-between'
 }
 
-const h4 = {
-	marginTop: '0',
-	paddingTop: '20px'
-}
-
 function Dashboard(props) {
 
 	const [company, setCompany] = useState([])
 	let [displayChatRoom, setDisplayChatRoom] = useState(null) // props.google_places_id
 	let [showAddRoom, setShowAddRoom] = useState(false)
+	let [showEditField, setEditField] = useState(false)
 
 	useEffect(() => {
-		// const {companyId} = props
+		const {company_id} = props
 
-		let co_id = 1 // companyId // make this number dynamic when there is a session
-
+		let co_id = company_id // make this number dynamic when there is a session
+		console.log('co_id',co_id)
 		axios.get(`/rooms/${co_id}`).then( res => {
 			setCompany(res.data)
 		})
 	}, [])
-	console.log(company)
+
+	const handleDeleteChatRoom = (id) => {
+		axios.delete(`/rooms/${id}`).then( res => {
+			let co_id = props.company_id
+			axios.get(`/rooms/${co_id}`).then( res => {
+				setCompany(res.data)
+			})
+		})
+	}
 
 	const handleChatRoomClick = (id) => {
-		// console.log(id)
 		setDisplayChatRoom(displayChatRoom = id)
 		console.log(displayChatRoom)
 	}
@@ -62,7 +66,7 @@ function Dashboard(props) {
 	}
 
 	const renderEverything = () => {
-		let co_id = 1
+		let co_id = props.company_id
 		axios.get(`/rooms/${co_id}`).then( res => {
 			setCompany(res.data)
 			setShowAddRoom(false)
@@ -72,11 +76,12 @@ function Dashboard(props) {
 
 	const chatRooms = company.map((el,i) => {
 		return (
-			<div key={i} onClick={() => handleChatRoomClick(el.chat_room_id)}>
-				<h4 style={h4}> {el.title} </h4>
-				<label> {el.description} </label>
-				<div> <i className="far fa-edit"></i> <i className="far fa-trash-alt"></i> </div>
-			</div>
+			<EditChatRoom 
+				key={el.chat_room_id} title={el.title} chat_room_id={el.chat_room_id} 
+				description={el.description} chatRoomClick={handleChatRoomClick}
+				deleteChatRoom={handleDeleteChatRoom} 
+				showEditField={showEditField}
+				setEditField={setEditField} setCompany={setCompany} />
 		)
 	})
 	return (
@@ -90,15 +95,15 @@ function Dashboard(props) {
 			<div style={chatWindow} > 
 				<ChatWindow /> 
 			</div>
-			{showAddRoom ? <AddChatRoom companyId={1} renderEverything={renderEverything} /> : null}
+			{showAddRoom ? <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} /> : null}
 		</div>
 	)
 }
 
 const mapStateToProps = (reduxState) => {
-	const { companyId } = reduxState
+	const { company_id } = reduxState
 	return {
-		companyId
+		company_id
 	}
 }
 

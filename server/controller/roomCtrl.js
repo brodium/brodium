@@ -18,6 +18,16 @@ module.exports = {
         })
     },
 
+    updateRoom: (req, res) => {
+        const db = req.app.get('db')
+        const { room_id } = req.params
+        const { title, description } = req.body
+
+        db.updateChatRoom({room_id, title, description}).then( response => {
+            res.status(200).send(response)
+        }).catch( err => console.log('updating room chat didnt work', err))
+    },
+
     deleteRoom: (req, res) => {
         const db = req.app.get('db')
         const { room_id } = req.params
