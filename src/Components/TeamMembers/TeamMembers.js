@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
-// import connect from "react-redux"
-// import { withRouter } from "react-router-dom"
+import { connect } from "react-redux"
+import { withRouter } from "react-router-dom"
 import christianLogic from "./../../christianLogic/christianLogic"
 import Employee from "./Employee"
 
 import axios from "axios"
 
-const TeamMembers = () => {
+const TeamMembers = (props) => {
 
   // -- STATE -- //
   const [teamMembers, setTeamMembers] = useState([])
@@ -22,23 +22,29 @@ const TeamMembers = () => {
   })
 
   // -- LIFECYCLE EVENTS -- //
+
   // useEffect(() => {
-  //   if (!this.props.isadmin) {
-  //     this.props.history.push("/")
+  //   if (!props.isadmin) {
+  //     props.history.push("/")
   //   }
-  // }, [])
+  // }, [props.isadmin])
 
   const getTeamMembers = async () => {
-    // const { companyId } = this.props
+    // const { company_id } = props
+    const company_id = 2
 
-    const companyId = 2
-    const response = await axios.get(`/team-members/${companyId}`)
-    if (response.data.length !== teamMembers.length) {
-      setTeamMembers(response.data)
-    }
+    await axios.get(`/team-members/${company_id}`)
+      .then(res => {
+        console.log("TEAM MEMBERS FROM DB", res.data)
+        if (res.data.length !== teamMembers.length) {
+          setTeamMembers(res.data)
+          return teamMembers
+        }
+      })
   }
   useEffect(() => { getTeamMembers() }, [teamMembers])
 
+  useEffect(() => { getTeamMembers() }, [])
 
   // -- METHODS -- //
 
@@ -74,22 +80,23 @@ const TeamMembers = () => {
     })
   }
 
-  const handleAddNewUserFormSubmit = event => {
+  const handleAddNewUserFormSubmit = async (event) => {
     event.preventDefault()
     const { newFirstname: firstname, newLastname: lastname, newEmail: email, newIsadmin: isadmin, newImg: img } = form
-    // const { companyId: company_id } = this.props
+    // const { company_id } = props
     const company_id = 2
 
-    axios.post("/team-member", { firstname, lastname, email, isadmin, company_id, img })
-      .then(setValues({ ...form, newFirstname: "", newLastname: "", newEmail: "", newIsadmin: false }))
-      .then(setAddNewMember(!addNewMember))
-      .then(window.location.reload())
+
+    await axios.post("/team-member", { firstname, lastname, email, isadmin, company_id, img })
+      .then(getTeamMembers)
+      .then(() => { setValues({ ...form, newFirstname: "", newLastname: "", newEmail: "", newIsadmin: false }) })
+      .then(() => { setAddNewMember(!addNewMember) })
   }
   // ----- -----  
 
   // -- JSX -- //
-  const teamMember = teamMembers.map((member) => {
-    return <Employee member={member} key={member.team_member_id} />
+  const teamMember = teamMembers && teamMembers.map((member) => {
+    return <Employee member={member} getTeamMembers={getTeamMembers} key={member.team_member_id} teamMembers={teamMembers} setTeamMembers={setTeamMembers} />
   })
 
   return (
@@ -156,11 +163,11 @@ const TeamMembers = () => {
 }
 
 
-export default TeamMembers
+// export default TeamMembers
 
 
-// function mapSateToProps(state) {
-//   return state
-// }
+function mapStateToProps(state) {
+  return state
+}
 
-// export default connect(mapStateToProps)(withRouter(TeamMembers))
+export default connect(mapStateToProps)(withRouter(TeamMembers))
