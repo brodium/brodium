@@ -47,7 +47,6 @@ module.exports = {
 			res.sendStatus(401)
 		}
 	},
-
 	async registerUser(req, res) {
 		const db = req.app.get('db')
 		const { firstname, lastname, isadmin, img, email, password } = req.body.user
@@ -72,7 +71,7 @@ module.exports = {
 
 	getSessionUser(req, res) {
 		if (req.session.user) {
-			return res.status(200).send(req.session)
+			return res.status(200).send({company: req.session.company, user: req.session.user})
 		}
 		res.send()
 	}
