@@ -39,7 +39,7 @@ export default (state = initialState, action) => {
 		case SET_USER:
 			return {...state, ...payload}
 		case SET_COMPANY:
-			return {...state, company: payload.company}
+			return {...state, ...payload}
 		case CLEAR_USER:
 			return {
 				memberId: null,
