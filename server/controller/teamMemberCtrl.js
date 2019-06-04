@@ -31,10 +31,13 @@ module.exports = {
   },
 
   updateMember: (req, res) => {
-    const { firstname, lastname, isadmin, team_member_id, email } = req.body
+    const { firstname, lastname, isadmin, team_member_id, email, img } = req.body
     const db = req.app.get("db")
-    db.updateMember({ firstname, lastname, isadmin, team_member_id, email })
-      .then(res.sendStatus(200))
+    db.updateMember({ firstname, lastname, isadmin, team_member_id, email, img })
+      .then(() => {
+        req.session.user.img = img
+        res.sendStatus(200)
+      })
       .catch((err) => { console.log(`Updatae Member Error: ${err}`) })
   }
 }

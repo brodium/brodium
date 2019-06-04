@@ -9,6 +9,7 @@ const roomCtrl = require('./controller/roomCtrl')
 const tmCtrl = require('./controller/teamMemberCtrl')
 const companyCtrl = require('./controller/companyCtrl')
 const googleCtrl = require('./controller/googleCtrl')
+const awsCtrl = require('./controller/awsCtrl')
 
 const app = express()
 
@@ -61,3 +62,5 @@ app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)
 // app.delete('/company', companyCtrl.deleteCompany)
 
 app.get('/places/search/:company', googleCtrl.searchPlaces)
+
+app.get('/api/sig', awsCtrl.getSig)
