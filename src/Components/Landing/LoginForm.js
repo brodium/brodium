@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios';
 import { withRouter } from 'react-router-dom'
-
+import { connect } from 'react-redux'
+import { setUser, setCompany } from '../../mightyDucks/authReducer'
 
 const LoginForm = (props) => {
   const [email, setEmail] = useState('')
@@ -12,36 +13,38 @@ const LoginForm = (props) => {
     console.log('does this work')
     e.preventDefault();
 
-    const res = await axios.post(`/auth/login`,
-      {
-        email,
-        password
-      })
-    console.log(`handleSub@LoginForm`, res.data)
-    setEmail(email)
-    setPassword(password)
+    try {
+      const res = await axios.post(`/auth/login`,
+        {
+          email,
+          password
+        })
 
-    props.history.push(`/`)
+        const {team_member_id, firstname, lastname, isadmin, company, company_id, img} = res.data
+        console.log(company_id)
+
+        props.setUser({team_member_id, firstname, lastname, email, isadmin, img})
+        props.setCompany({company, company_id})
+
+        // setEmail('')
+        // setPassword('')
+    
+        props.history.push(`/`)
+    }
+    catch (err) {
+      console.log(err)
+    }
 
   }
 
-
   const handleInputChange1 = (e) => {
-    console.log(`handleInput1 on LoginForm`, email)
     e.persist();
-
-    if (e.target.name === email) {
-      setEmail(e.target.value)
-    }
+    setEmail(e.target.value)
   }
 
   const handleInputChange2 = (e) => {
-    console.log(`handleInput2 on LoginForm`, password)
     e.persist();
-    if (e.target.name === password) {
-      setPassword(e.target.value)
-    }
-
+    setPassword(e.target.value)
   }
 
   return (
@@ -52,7 +55,7 @@ const LoginForm = (props) => {
             placeholder='Email'
             type='email'
             onChange={handleInputChange1}
-            value={email.setEmail}
+            value={email}
           />
         </div>
         <div>
@@ -60,7 +63,7 @@ const LoginForm = (props) => {
             placeholder='Password'
             type='password'
             onChange={handleInputChange2}
-            value={password.setPassword}
+            value={password}
           />
         </div>
         <button
@@ -72,6 +75,9 @@ const LoginForm = (props) => {
     </>
   )
 }
+const mapDispatchToProps = {
+  setCompany,
+  setUser
+}
 
-
-export default withRouter(LoginForm)
+export default connect(null, mapDispatchToProps)(withRouter(LoginForm))
