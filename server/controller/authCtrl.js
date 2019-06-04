@@ -47,7 +47,6 @@ module.exports = {
 			res.sendStatus(401)
 		}
 	},
-
 	async registerUser(req, res) {
 		const db = req.app.get('db')
 		const { firstname, lastname, isadmin, img, email, password } = req.body.user
