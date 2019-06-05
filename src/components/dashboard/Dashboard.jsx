@@ -37,19 +37,19 @@ function Dashboard(props) {
 	let [showEditField, setEditField] = useState(false)
 
 	useEffect(() => {
-		const {company_id} = props
+		const { company_id } = props
 
 		let co_id = company_id // make this number dynamic when there is a session
-		console.log('co_id',co_id)
-		axios.get(`/rooms/${co_id}`).then( res => {
+		console.log('co_id', co_id)
+		axios.get(`/rooms/${co_id}`).then(res => {
 			setCompany(res.data)
 		})
 	}, [])
 
 	const handleDeleteChatRoom = (id) => {
-		axios.delete(`/rooms/${id}`).then( res => {
+		axios.delete(`/rooms/${id}`).then(res => {
 			let co_id = props.company_id
-			axios.get(`/rooms/${co_id}`).then( res => {
+			axios.get(`/rooms/${co_id}`).then(res => {
 				setCompany(res.data)
 			})
 		})
@@ -67,19 +67,19 @@ function Dashboard(props) {
 
 	const renderEverything = () => {
 		let co_id = props.company_id
-		axios.get(`/rooms/${co_id}`).then( res => {
+		axios.get(`/rooms/${co_id}`).then(res => {
 			setCompany(res.data)
 			setShowAddRoom(false)
 		})
 	}
 
 
-	const chatRooms = company.map((el,i) => {
+	const chatRooms = company.map((el, i) => {
 		return (
-			<EditChatRoom 
-				key={el.chat_room_id} title={el.title} chat_room_id={el.chat_room_id} 
+			<EditChatRoom
+				key={el.chat_room_id} title={el.title} chat_room_id={el.chat_room_id}
 				description={el.description} chatRoomClick={handleChatRoomClick}
-				deleteChatRoom={handleDeleteChatRoom} 
+				deleteChatRoom={handleDeleteChatRoom}
 				showEditField={showEditField}
 				setEditField={setEditField} setCompany={setCompany} />
 		)
@@ -88,12 +88,14 @@ function Dashboard(props) {
 		<div style={flex} className="main_sideBar">
 			<div style={sideBar}>
 				<div> {chatRooms} </div>
-				<div> 
-					<button onClick={() => handleAddingChatRoom()}> add Chat Room </button> 
+				<div>
+					<button onClick={() => handleAddingChatRoom()}> add Chat Room </button>
 				</div>
 			</div>
-			<div style={chatWindow} > 
-				<ChatWindow /> 
+			<div style={chatWindow} >
+				<ChatWindow
+					displayChatRoom={displayChatRoom}
+				/>
 			</div>
 			{showAddRoom ? <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} /> : null}
 		</div>
