@@ -18,20 +18,20 @@ const TeamMembers = (props) => {
     newLastname: "",
     newEmail: "",
     newIsadmin: false,
-    newImg: "default link"
+    newImg: "https://www.aber.ac.uk/staff-profile-assets/img/noimg.png"
   })
 
   // -- LIFECYCLE EVENTS -- //
 
-  // useEffect(() => {
-  //   if (!props.isadmin) {
-  //     props.history.push("/")
-  //   }
-  // }, [props.isadmin])
+  useEffect(() => {
+    if (!props.isadmin) {
+      props.history.push("/")
+    }
+  }, [])
 
   const getTeamMembers = async () => {
-    // const { company_id } = props
-    const company_id = 2
+    const { company_id } = props
+    // const company_id = 2
 
     await axios.get(`/team-members/${company_id}`)
       .then(res => {
@@ -83,8 +83,8 @@ const TeamMembers = (props) => {
   const handleAddNewUserFormSubmit = async (event) => {
     event.preventDefault()
     const { newFirstname: firstname, newLastname: lastname, newEmail: email, newIsadmin: isadmin, newImg: img } = form
-    // const { company_id } = props
-    const company_id = 2
+    const { company_id } = props
+    // const company_id = 2
 
 
     await axios.post("/team-member", { firstname, lastname, email, isadmin, company_id, img })
