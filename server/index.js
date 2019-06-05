@@ -47,7 +47,7 @@ app.get('/auth/session', authCtrl.getSessionUser)
 
 app.get('/rooms/:co_id', roomCtrl.getAllRoomsByCompany)
 app.post('/rooms', roomCtrl.addNewRoom)
-// app.put('/rooms/:room_id', roomCtrl.updateRoom)
+app.put('/rooms/:room_id', roomCtrl.updateRoom)
 app.delete('/rooms/:room_id', roomCtrl.deleteRoom)
 
 app.get('/team-members/:co_id', tmCtrl.getMembersByCompany)

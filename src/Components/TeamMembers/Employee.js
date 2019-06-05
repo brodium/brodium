@@ -18,7 +18,7 @@ const Employee = (props) => {
   // Delete Team Member
   const deleteTeamMember = team_member_id => {
     axios.delete(`/team-member/${team_member_id}`)
-      .then(window.location.reload())
+      .then(props.getTeamMembers)
   }
   // ----- -----
 
@@ -29,7 +29,6 @@ const Employee = (props) => {
 
   const handleCancelEditTeamMember = (event) => {
     event.preventDefault()
-    // setEditMember({ ...editMember, firstname: "", lastname: "", email: "", isadmin: false })
     setEdit(!edit)
   }
 
@@ -58,13 +57,15 @@ const Employee = (props) => {
     })
   }
 
-  const handleEditMemberFormSubmit = (event, team_member_id) => {
+  const handleEditMemberFormSubmit = async (event, team_member_id) => {
     event.preventDefault()
     const { firstname, lastname, email, isadmin } = editMember
 
-    axios.put("/team-member", { team_member_id, firstname, lastname, email, isadmin })
-      .then(setEdit(!edit))
-      .then(window.location.reload())
+    await axios.put("/team-member", { team_member_id, firstname, lastname, email, isadmin })
+      .then(() => { setEdit(!edit) })
+      .then(() => {
+        props.setTeamMembers([...props.teamMembers, {}])
+      })
   }
   // ----- -----
 
@@ -122,6 +123,7 @@ const Employee = (props) => {
               name="isadmin"
               onClick={handleEditTeamMemberCheckIsAdmin}
               checked={editMember.isadmin ? true : false}
+              readOnly
             />
           </label>
           <div>
