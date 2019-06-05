@@ -4,7 +4,6 @@ module.exports = {
     const db = req.app.get("db")
     db.getTeamMembers({ co_id })
       .then(results => {
-        console.log("-- GET MEMBERS BY COMPANY RESULTS --", results)
         res.status(200).send(results)
       })
   },
