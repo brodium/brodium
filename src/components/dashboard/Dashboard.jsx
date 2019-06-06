@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ChatWindow from './chatWindow/ChatWindow';
 import AddChatRoom from './AddChatRoom/AddChatRoom';
 import EditChatRoom from './EditChatRoom/EditChatRoom';
+import { setUser, setCompany } from '../../mightyDucks/authReducer'
 // import { handleChatRoomClick } from './../../jacksonLogic/Functions'
 
 const chatWindow = {
@@ -38,25 +39,32 @@ function Dashboard(props) {
 
 	useEffect(() => {
 		const { company_id } = props
-
 		let co_id = company_id // make this number dynamic when there is a session
 		console.log('co_id', co_id)
 		axios.get(`/rooms/${co_id}`).then(res => {
 			setCompany(res.data)
-		})
+		}).catch(console.log)
 	}, [])
+
+	useEffect(() => {
+		const { company_id } = props
+		let co_id = company_id // make this number dynamic when there is a session
+		axios.get(`/rooms/${co_id}`).then(res => {
+			setCompany(res.data)
+		}).catch(console.log)
+	}, [props.company_id])
 
 	const handleDeleteChatRoom = (id) => {
 		axios.delete(`/rooms/${id}`).then(res => {
 			let co_id = props.company_id
 			axios.get(`/rooms/${co_id}`).then(res => {
 				setCompany(res.data)
-			})
-		})
+			}).catch(console.log)
+		}).catch(console.log)
 	}
 
 	const handleChatRoomClick = (id) => {
-		setDisplayChatRoom(displayChatRoom = id)
+		setDisplayChatRoom(id)
 		console.log(displayChatRoom)
 	}
 
@@ -70,7 +78,7 @@ function Dashboard(props) {
 		axios.get(`/rooms/${co_id}`).then(res => {
 			setCompany(res.data)
 			setShowAddRoom(false)
-		})
+		}).catch(console.log)
 	}
 
 
@@ -93,9 +101,11 @@ function Dashboard(props) {
 				</div>
 			</div>
 			<div style={chatWindow} >
-				<ChatWindow
-					displayChatRoom={displayChatRoom}
-				/>
+				{props.company_id && (
+					<ChatWindow
+						displayChatRoom={displayChatRoom}
+					/>)
+				}
 			</div>
 			{showAddRoom ? <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} /> : null}
 		</div>

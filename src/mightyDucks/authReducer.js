@@ -1,11 +1,11 @@
 const initialState = {
 	team_member_id: null,
-	firstname: '',
+	firstname: null,
 	lastname: '',
 	email: '',
 	isadmin: false,
 	company_name: '',
-	company_id: null,
+	company_id: 0,
 	img: null
 }
 
