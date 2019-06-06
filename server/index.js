@@ -74,7 +74,7 @@ app.post('/auth/login', authCtrl.login)
 // app.post('/auth/login', authCtrl.login)
 app.post('/auth/register-company', authCtrl.registerCompany)
 app.post('/auth/register-user', authCtrl.registerUser)
-// app.get('/auth/logout', authCtrl.logout)
+app.get('/auth/logout', authCtrl.logout)
 app.get('/auth/session', authCtrl.getSessionUser)
 
 // app.get('/messages/:room_id', msgCtrl.getMessagesByRoomId)

@@ -28,7 +28,7 @@ function EditChatRoom(props) {
     const saveEditChanges = (id) => {
         let title = editTitle
         let description = editDescription
-        
+
         let newObj = {
             title,
             description
