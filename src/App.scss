@@ -1,9 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,500,600,700,800,900&display=swap');
+
 @import './Components/header/Header';
 @import './Components/Landing/Landing';
 @import './Components/dashboard/chatWindow/ChatWindow';
 @import './Components/dashboard/chatWindow/Messages';
+@import './Components/TeamMembers/Employee';
+@import './Components/TeamMembers/TeamMembers';
+
 
 
 .App {
   text-align: center;
+}
+
+body {
+  font-family: 'Libre Franklin', sans-serif;
 }
