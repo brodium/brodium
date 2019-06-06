@@ -105,8 +105,9 @@ const TeamMembers = (props) => {
   })
 
   return (
-    <div className="team-members">
-      <div>
+    <div className="team-members" >
+      <h1>Team Members</h1>
+      <div className="team-members-hero">
         {teamMember}
       </div>
 
@@ -114,7 +115,7 @@ const TeamMembers = (props) => {
         {
           !addNewMember ?
             <div>
-              <button onClick={handleAddNewMember}>Add New Team Member</button>
+              <button className="add-new-team-member-btn" onClick={handleAddNewMember}>Add New Team Member</button>
             </div> :
             <div>
               <form className="add-new-team-member" onSubmit={handleAddNewUserFormSubmit}>
@@ -155,7 +156,7 @@ const TeamMembers = (props) => {
                     onClick={handleNewTeamMemberCheckIsAdmin}
                   />
                 </label>
-                <div>
+                <div className="add-new-team-member-btns">
                   <button>Submit</button>
                   <button onClick={handleCancelAddNewMember}>Cancel</button>
                 </div>
