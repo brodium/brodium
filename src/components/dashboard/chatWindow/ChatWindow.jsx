@@ -30,8 +30,8 @@ function ChatWindow(props) {
 		setSocket(socket)
 		socket.emit('socket room', company_id)
 		socket.on('socket room message', messageReceiver)
-	}, [])
-
+  }, [])
+	
 	const messageReceiver = data => {
 		//make one chat room based off the company id not the chat room id. the company id will become the socket room for each company.
 		// make logic to show the message or not based off of the company id
@@ -55,6 +55,7 @@ function ChatWindow(props) {
 			company_id,
 			room
 		})
+
 		setMessageInput('')
 	}
 
