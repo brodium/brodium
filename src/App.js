@@ -20,7 +20,7 @@ function App(props) {
         props.setUser(res.data.user)
         props.setCompany(res.data.company)
       }
-    })
+    }).catch(console.log)
   }, [])
 
   return (
