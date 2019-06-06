@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import '../../App.scss'
 
 import Place from './Place';
 import { setUser, setCompany } from '../../mightyDucks/authReducer';
