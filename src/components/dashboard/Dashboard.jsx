@@ -65,7 +65,6 @@ function Dashboard(props) {
 
 	const handleChatRoomClick = (id) => {
 		setDisplayChatRoom(id)
-		console.log(displayChatRoom)
 	}
 
 	const handleAddingChatRoom = () => {
@@ -85,11 +84,16 @@ function Dashboard(props) {
 	const chatRooms = company.map((el, i) => {
 		return (
 			<EditChatRoom
-				key={el.chat_room_id} title={el.title} chat_room_id={el.chat_room_id}
-				description={el.description} chatRoomClick={handleChatRoomClick}
+				key={el.chat_room_id}
+				title={el.title}
+				chat_room_id={el.chat_room_id}
+				description={el.description}
+				chatRoomClick={handleChatRoomClick}
 				deleteChatRoom={handleDeleteChatRoom}
 				showEditField={showEditField}
-				setEditField={setEditField} setCompany={setCompany} />
+				setEditField={setEditField}
+				setCompany={setCompany}
+			/>
 		)
 	})
 	return (
@@ -101,7 +105,7 @@ function Dashboard(props) {
 				</div>
 			</div>
 			<div style={chatWindow} >
-				{props.company_id && (
+				{displayChatRoom && (
 					<ChatWindow
 						displayChatRoom={displayChatRoom}
 					/>)
@@ -113,9 +117,10 @@ function Dashboard(props) {
 }
 
 const mapStateToProps = (reduxState) => {
-	const { company_id } = reduxState
+	const { company_id, team_member_id } = reduxState
 	return {
-		company_id
+		company_id,
+		team_member_id
 	}
 }
 

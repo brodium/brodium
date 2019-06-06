@@ -9,7 +9,7 @@ const Messages = (props) => {
         props.username === `${props.firstname} ${props.lastname}` ? "my-message" : "message"
       }>
         <div className="message-username">{props.username}</div>
-        <div className="message-message">{props.message.messageInput}</div>
+        <div className="message-message">{props.message.message}</div>
       </div>
     </>
   )

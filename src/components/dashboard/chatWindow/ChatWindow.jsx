@@ -18,11 +18,19 @@ function ChatWindow(props) {
 	const scrollToBottom = () => { messagesEndRef.current.scrollIntoView({ behavior: "smooth" }) }
 
 	useEffect(() => { scrollToBottom() }, [messages])
-	// useEffect(() => {
-	// 	Axios.get(`/messages/${room}`).then(res => {
-	// 		setMessages(res.data)
-	// 	})
-	// }, [])
+
+	useEffect(() => {
+		Axios.get(`/messages/${props.displayChatRoom}`).then(res => {
+			setMessages(res.data)
+		})
+	}, [])
+
+	useEffect(() => {
+		Axios.get(`/messages/${room}`).then(res => {
+			console.log(res.data)
+			setMessages(res.data)
+		})
+	}, [props.displayChatRoom])
 
 	useEffect(() => {
 		const socket = io.connect(':4444')
@@ -32,28 +40,28 @@ function ChatWindow(props) {
 	}, [])
 	
 	const messageReceiver = data => {
-		//make one chat room based off the company id not the chat room id. the company id will become the socket room for each company.
 		// make logic to show the message or not based off of the company id
-		// cron job? connect it to sockets? it will send it as a new message when it comes into the company channel. 
-		setMessages(state => [...state, { messageInput: data.messageInput }])
+		console.log(data)
+		if (data.room === room) {
+			setMessages(state => [...state, { message: data.messageInput }])
+		}
 	}
-
-	// const broadcast = () => {
-	// 	socket.emit('socket room message', {
-	// 		messageInput,
-	// 		name: firstname + ' ' + lastname,
-	// 		company_id,
-	// 		room
-	// 	})
-
 
 	const broadcast = () => {
 		socket.emit('socket room message', {
 			messageInput,
 			name: firstname + ' ' + lastname,
 			company_id,
-			room
+			room,
+			team_member_id: props.team_member_id
 		})
+
+		Axios.post('/messages', {
+			messageInput, 
+			google_review: false,
+			team_member_id: props.team_member_id,
+			room
+		}).catch(console.log)
 
 		setMessageInput('')
 	}
