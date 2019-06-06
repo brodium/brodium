@@ -97,7 +97,7 @@ function Dashboard(props) {
 			<div style={sideBar}>
 				<div> {chatRooms} </div>
 				<div>
-					<button onClick={() => handleAddingChatRoom()}> add Chat Room </button>
+					<button onClick={() => handleAddingChatRoom()}> Add Chatroom </button>
 				</div>
 			</div>
 			<div style={chatWindow} >
