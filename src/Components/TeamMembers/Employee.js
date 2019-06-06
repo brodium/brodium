@@ -19,6 +19,7 @@ const Employee = (props) => {
   const deleteTeamMember = team_member_id => {
     axios.delete(`/team-member/${team_member_id}`)
       .then(props.getTeamMembers)
+      .catch(console.log)
   }
   // ----- -----
 
@@ -65,17 +66,19 @@ const Employee = (props) => {
       .then(() => { setEdit(!edit) })
       .then(() => {
         props.setTeamMembers([...props.teamMembers, {}])
-      })
+      }).catch(console.log)
   }
   // ----- -----
 
   // -- JSX -- //
   return (
     !edit ?
-      <div className="team-member" key={props.member.team_member_id}>
-        <div>{props.member.firstname}</div>
-        <div>{props.member.lastname}</div>
-        <div>{props.member.email}</div>
+      <div className="display-team-member" key={props.member.team_member_id}>
+        <div className="name">
+          <div>{props.member.firstname}</div>
+          <div>{props.member.lastname}</div>
+        </div>
+        <div className="member-email">{props.member.email}</div>
         {props.member.isadmin ?
           <div className="tm-admin-true">Admin</div> :
           <div className="tm-admin-false">Not Admin</div>
@@ -126,7 +129,7 @@ const Employee = (props) => {
               readOnly
             />
           </label>
-          <div>
+          <div className="edit-team-member-btns">
             <button>Submit</button>
             <button onClick={handleCancelEditTeamMember}>Cancel</button>
           </div>

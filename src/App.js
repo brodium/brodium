@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './Components/header/Header';
-import './App.css';
+import './App.scss';
 import routes from './routes';
 import Axios from 'axios';
 import { setUser, setCompany } from './mightyDucks/authReducer';
+import Landing from './Components/Landing/LandingLogin'
 
 //Brodium is da Best
 
@@ -14,13 +15,12 @@ function App(props) {
 
   useEffect(() => {
     Axios.get('/auth/session').then(res => {
-      if (!res.data.user) {
-        props.history.push('/landing')
-      } else {
+      if (res.data.user) {
+        console.log(res.data.user)
         props.setUser(res.data.user)
         props.setCompany(res.data.company)
       }
-    })
+    }).catch(console.log)
   }, [])
 
   return (
@@ -31,9 +31,14 @@ function App(props) {
   );
 }
 
+const mapStateToProps = state => {
+  const { firstname } = state
+  return { firstname }
+}
+
 const mapDispatchToProps = {
   setCompany,
   setUser
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(App));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

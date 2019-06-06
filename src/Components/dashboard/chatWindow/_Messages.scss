@@ -1,0 +1,27 @@
+.message {
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  height: 4vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  word-wrap: break-word;
+  overflow-x: scroll;
+  padding: .5em;
+  background-color: lightblue;
+  margin: 5px 10px;
+  margin-left: 15rem;
+  div {
+    margin: 0 1rem;
+  }
+  .message-username {
+    font-weight: 700
+  }
+}
+.my-message {
+  @extend .message;
+  color: #363adb;
+  background-color: #fff;
+  margin-right: 15rem;
+  margin-left: 0;
+}

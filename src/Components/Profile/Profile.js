@@ -23,7 +23,7 @@ function Profile(props) {
 		}).then(res => {
 			const { signedRequest, url } = res.data
 			uploadFile(file, signedRequest, url)
-		})
+		}).catch(console.log)
 	}
 
 	const uploadFile = (file, signedRequest, url) => {
@@ -44,8 +44,8 @@ function Profile(props) {
       }).then(() => {
         props.setUser({img: url})
         setLoading(false)
-      })
-    })
+      }).catch(console.log)
+    }).catch(console.log)
   }
 
   return (
