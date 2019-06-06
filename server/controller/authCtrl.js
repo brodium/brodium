@@ -71,7 +71,6 @@ module.exports = {
 
 	getSessionUser(req, res) {
 		if (req.session.user) {
-			console.log('run')
 			return res.status(200).send({company: req.session.company, user: req.session.user})
 		}
 		res.send()

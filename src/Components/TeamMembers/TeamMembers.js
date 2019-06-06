@@ -40,7 +40,7 @@ const TeamMembers = (props) => {
           setTeamMembers(res.data)
           return teamMembers
         }
-      })
+      }).catch(console.log)
   }
   useEffect(() => { getTeamMembers() }, [teamMembers])
 
@@ -95,6 +95,7 @@ const TeamMembers = (props) => {
       .then(getTeamMembers)
       .then(() => { setValues({ ...form, newFirstname: "", newLastname: "", newEmail: "", newIsadmin: false }) })
       .then(() => { setAddNewMember(!addNewMember) })
+      .catch(console.log)
   }
   // ----- -----  
 

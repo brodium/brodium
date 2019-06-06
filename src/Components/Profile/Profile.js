@@ -45,7 +45,7 @@ function Profile(props) {
         props.setUser({img: url})
         setLoading(false)
       }).catch(console.log)
-    })
+    }).catch(console.log)
   }
 
   return (

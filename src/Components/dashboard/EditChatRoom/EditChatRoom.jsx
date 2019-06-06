@@ -39,8 +39,8 @@ function EditChatRoom(props) {
             axios.get(`/rooms/${co_id}`).then( res => {
                 props.setCompany(res.data)
                 setEditField(!showEditField)
-            })
-        })
+            }).catch(console.log)
+        }).catch(console.log)
     }
     
     return (
