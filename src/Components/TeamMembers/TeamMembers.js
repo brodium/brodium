@@ -88,6 +88,10 @@ const TeamMembers = (props) => {
 
 
     await axios.post("/team-member", { firstname, lastname, email, isadmin, company_id, img })
+      .then(results => {
+        const { team_member_id, firstname, email } = results.data[0]
+        axios.post("/email-team-member", { team_member_id, firstname, email })
+      })
       .then(getTeamMembers)
       .then(() => { setValues({ ...form, newFirstname: "", newLastname: "", newEmail: "", newIsadmin: false }) })
       .then(() => { setAddNewMember(!addNewMember) })
@@ -101,8 +105,9 @@ const TeamMembers = (props) => {
   })
 
   return (
-    <div className="team-members">
-      <div>
+    <div className="team-members" >
+      <h1>Team Members</h1>
+      <div className="team-members-hero">
         {teamMember}
       </div>
 
@@ -110,7 +115,7 @@ const TeamMembers = (props) => {
         {
           !addNewMember ?
             <div>
-              <button onClick={handleAddNewMember}>Add New Team Member</button>
+              <button className="add-new-team-member-btn" onClick={handleAddNewMember}>Add New Team Member</button>
             </div> :
             <div>
               <form className="add-new-team-member" onSubmit={handleAddNewUserFormSubmit}>
@@ -151,7 +156,7 @@ const TeamMembers = (props) => {
                     onClick={handleNewTeamMemberCheckIsAdmin}
                   />
                 </label>
-                <div>
+                <div className="add-new-team-member-btns">
                   <button>Submit</button>
                   <button onClick={handleCancelAddNewMember}>Cancel</button>
                 </div>

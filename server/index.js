@@ -13,6 +13,7 @@ const tmCtrl = require('./controller/teamMemberCtrl')
 const companyCtrl = require('./controller/companyCtrl')
 const googleCtrl = require('./controller/googleCtrl')
 const awsCtrl = require('./controller/awsCtrl')
+const mailerCtrl = require('./controller/nodemailerCtrl')
 
 const app = express()
 
@@ -59,7 +60,7 @@ io.on('connection', socket => {
         // figure out how to save data from messages here
         // new messages comes in we need to add all team members from company to unread table .We meed company id from room id (props.company_id?)
         // Whenever they are on the dashboard we need to have it show that there is a new message in the chat room (create a notification next to room)
-        // 
+        
         io.in(data.company_id).emit('socket room message', data)
     })
 
@@ -76,8 +77,8 @@ app.post('/auth/register-user', authCtrl.registerUser)
 app.get('/auth/logout', authCtrl.logout)
 app.get('/auth/session', authCtrl.getSessionUser)
 
-// app.get('/messages/:room_id', msgCtrl.getMessagesByRoomId)
-// app.post('/messages', msgCtrl.storeMessage)
+app.get('/messages/:room', msgCtrl.getMessagesByRoomId)
+app.post('/messages', msgCtrl.addMessage)
 
 app.get('/rooms/:co_id', roomCtrl.getAllRoomsByCompany)
 app.post('/rooms', roomCtrl.addNewRoom)
@@ -98,3 +99,8 @@ app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)
 app.get('/places/search/:company', googleCtrl.searchPlaces)
 
 app.get('/api/sig', awsCtrl.getSig)
+
+// onBoarding
+app.get('/onboarding/:team_member_id', tmCtrl.onBoardingTeamMember)
+app.put('/onboarding/:team_member_id', tmCtrl.onBoardingUpdatePassword)
+app.post('/email-team-member', mailerCtrl.sendLoginRequest)

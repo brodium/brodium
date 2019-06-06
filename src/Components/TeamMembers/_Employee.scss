@@ -1,0 +1,66 @@
+.display-team-member {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  height: 2.5em;
+  .name {
+    display: flex;
+    align-items: flex-start;
+    width: 30%;
+    margin-right: 1%;
+    div {
+      text-align: left;
+      width: 50%;
+      margin: 0 10px;
+    }
+  }
+  .member-email {
+    width: 30%;
+    margin-right: 1%;
+    text-align: left;
+  }
+  .tm-admin-true, .tm-admin-false {
+    width: 12%;
+    margin-right: 1%;
+    text-align: left;
+  }
+  .tm-btns {
+    width: 24%;
+    margin-right: 1%;
+    button {
+      margin: 0 15px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  }
+}
+
+.display-team-member:hover {
+  background-color: #999999;
+}
+
+.edit-team-member {
+  padding: 15px 0;
+  width: 100%;
+  label {
+    font-weight: 700;
+    margin: 0 15px;
+    input {
+    margin-left: 10px;
+    font-size: 1em;
+    }
+  }
+  .edit-team-member-btns {
+    margin-top: 15px;
+    button {
+      font-size: 1em;
+      background-color: white;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+  }
+}
+
+.edit-team-member:hover {
+  background-color: #999999;
+}

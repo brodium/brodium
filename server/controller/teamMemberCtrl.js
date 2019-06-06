@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs')
+
 module.exports = {
   getMembersByCompany: (req, res) => {
     const { co_id } = req.params
@@ -25,7 +27,10 @@ module.exports = {
     const team_member_id = addTeamMember[0].team_member_id
 
     await db.addTeamMemberLogin({ email, team_member_id })
-      .then(res.sendStatus(200))
+      // .then(res.sendStatus(200))
+      .then(results => {
+        res.status(200).send(results)
+      })
       .catch((err) => { console.log(`Add Member Error: ${err}`) })
   },
 
@@ -38,5 +43,43 @@ module.exports = {
         res.sendStatus(200)
       })
       .catch((err) => { console.log(`Updatae Member Error: ${err}`) })
+  },
+  onBoardingTeamMember: (req, res) => {
+    const { team_member_id } = req.params
+    const db = req.app.get('db')
+    db.onBoardingTeamMember({ team_member_id })
+      .then(user => {
+        // console.log(user[0], '111')
+        res.send(user[0])
+      })
+      .catch((error) => { console.log(`Error with OnBoarding: ${error}`) })
+  },
+  onBoardingUpdatePassword: (req, res) => {
+    const { team_member_id } = req.params
+    const { oldPassword, password } = req.body
+    // console.log(oldPassword, password)
+    const db = req.app.get('db')
+
+    // db.onBoardingTeamMember({})
+
+    const salt = bcrypt.genSaltSync(10)
+    const hash = bcrypt.hashSync(password, salt)
+
+
+    db.onBoardingUpdatePassword({ team_member_id, hash })
+      .then(resp => {
+        res.status(200).send(resp)
+      }).catch((error) => { console.log(`error at updatePassword ${error}`) })
+
+
+    // get team_member id so that I can get the corect user_login
+    // get old password off of user_login
+    // compare old password from sql to the old password from front end
+    // if not same send stattus 401 if not the same
+    // update new password with old password
+    // if everything checks out send new body back
+
   }
+
+
 }
