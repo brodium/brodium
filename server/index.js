@@ -3,6 +3,9 @@ const express = require('express');
 const massive = require('massive')
 const session = require('express-session')
 
+const socket = require('socket.io')
+
+
 const authCtrl = require('./controller/authCtrl')
 const msgCtrl = require('./controller/messagesCtrl')
 const roomCtrl = require('./controller/roomCtrl')
@@ -30,8 +33,40 @@ massive(CONNECTION_STRING).then(db => {
     app.set("db", db)
     console.log("database set!")
     console.log(db.listTables())
-    app.listen(SERVER_PORT, () => { console.log(`listening on port ${SERVER_PORT}`) })
 })
+
+
+// sockets
+const io = socket(app.listen(SERVER_PORT, () => { console.log(`listening on port ${SERVER_PORT}`) }))
+io.on('connection', socket => {
+    console.log(`users are connected`)
+
+    socket.on('socket room', data => {
+        socket.join(data)
+
+        console.log('joined socket room', data)
+
+        socket.to(data).emit('join socket room', data)
+    })
+
+    // socket.on('leave socket room', data => {
+    //     socket.leave(data)
+    //     console.log('left socket room', data)
+    // })
+
+
+    socket.on('socket room message', data => {
+        // figure out how to save data from messages here
+        // new messages comes in we need to add all team members from company to unread table .We meed company id from room id (props.company_id?)
+        // Whenever they are on the dashboard we need to have it show that there is a new message in the chat room (create a notification next to room)
+        // 
+
+        io.in(data.company_id).emit('socket room message', data)
+    })
+
+})
+
+
 
 // app.get('/auth', authCtrl.getCurrentUser)
 app.post('/auth/login', authCtrl.login)
