@@ -71,7 +71,7 @@ function ChatWindow(props) {
 	// }
 
 	return (
-		<div>
+		<div className="chatWindow_div">
 
 			<div className="message-container">
 				{messages.map((message) => {

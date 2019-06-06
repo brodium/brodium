@@ -25,7 +25,10 @@ module.exports = {
     const team_member_id = addTeamMember[0].team_member_id
 
     await db.addTeamMemberLogin({ email, team_member_id })
-      .then(res.sendStatus(200))
+      // .then(res.sendStatus(200))
+      .then(results => {
+        res.status(200).send(results)
+      })
       .catch((err) => { console.log(`Add Member Error: ${err}`) })
   },
 

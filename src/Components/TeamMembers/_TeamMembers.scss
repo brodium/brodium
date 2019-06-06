@@ -1,0 +1,39 @@
+.team-members {
+  padding: 0 10px;
+}
+
+.team-members-hero {
+  padding: 10px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.add-team-member {
+  margin-top: 15px;
+  padding: 15px 0;
+  width: 100%;
+  label {
+    font-weight: 700;
+    margin: 0 15px;
+    input {
+    margin-left: 10px;
+    font-size: 1em;
+    }
+  }
+  .add-new-team-member-btns {
+    margin-top: 15px;
+    button {
+      font-size: 1em;
+      background-color: white;
+      margin: 0 5px;
+      cursor: pointer;
+    }
+  }
+  .add-new-team-member-btn {
+    padding: 9px 15px;
+    font-size: 1em;
+    color: white;
+    background: #3AD468;
+    cursor: pointer;
+  }
+}
