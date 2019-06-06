@@ -100,4 +100,7 @@ app.get('/places/search/:company', googleCtrl.searchPlaces)
 
 app.get('/api/sig', awsCtrl.getSig)
 
+// onBoarding
+app.get('/onboarding/:team_member_id', tmCtrl.onBoardingTeamMember)
+app.put('/onboarding/:team_member_id', tmCtrl.onBoardingUpdatePassword)
 app.post('/email-team-member', mailerCtrl.sendLoginRequest)
