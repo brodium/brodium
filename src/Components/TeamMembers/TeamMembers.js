@@ -23,15 +23,15 @@ const TeamMembers = (props) => {
 
   // -- LIFECYCLE EVENTS -- //
 
-  useEffect(() => {
-    if (!props.isadmin) {
-      props.history.push("/")
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (!props.isadmin) {
+  //     props.history.push("/")
+  //   }
+  // }, [])
 
   const getTeamMembers = async () => {
-    const { company_id } = props
-    // const company_id = 2
+    // const { company_id } = props
+    const company_id = 2
 
     await axios.get(`/team-members/${company_id}`)
       .then(res => {
@@ -83,11 +83,15 @@ const TeamMembers = (props) => {
   const handleAddNewUserFormSubmit = async (event) => {
     event.preventDefault()
     const { newFirstname: firstname, newLastname: lastname, newEmail: email, newIsadmin: isadmin, newImg: img } = form
-    const { company_id } = props
-    // const company_id = 2
+    // const { company_id } = props
+    const company_id = 2
 
 
     await axios.post("/team-member", { firstname, lastname, email, isadmin, company_id, img })
+      .then(results => {
+        const { team_member_id, firstname, email } = results.data[0]
+        axios.post("/email-team-member", { team_member_id, firstname, email })
+      })
       .then(getTeamMembers)
       .then(() => { setValues({ ...form, newFirstname: "", newLastname: "", newEmail: "", newIsadmin: false }) })
       .then(() => { setAddNewMember(!addNewMember) })
@@ -163,11 +167,11 @@ const TeamMembers = (props) => {
 }
 
 
-// export default TeamMembers
+export default TeamMembers
 
 
-function mapStateToProps(state) {
-  return state
-}
+// function mapStateToProps(state) {
+//   return state
+// }
 
-export default connect(mapStateToProps)(withRouter(TeamMembers))
+// export default connect(mapStateToProps)(withRouter(TeamMembers))
