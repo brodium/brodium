@@ -59,7 +59,7 @@ io.on('connection', socket => {
         // figure out how to save data from messages here
         // new messages comes in we need to add all team members from company to unread table .We meed company id from room id (props.company_id?)
         // Whenever they are on the dashboard we need to have it show that there is a new message in the chat room (create a notification next to room)
-        // 
+        
         io.in(data.company_id).emit('socket room message', data)
     })
 
@@ -76,8 +76,8 @@ app.post('/auth/register-user', authCtrl.registerUser)
 // app.get('/auth/logout', authCtrl.logout)
 app.get('/auth/session', authCtrl.getSessionUser)
 
-// app.get('/messages/:room_id', msgCtrl.getMessagesByRoomId)
-// app.post('/messages', msgCtrl.storeMessage)
+app.get('/messages/:room', msgCtrl.getMessagesByRoomId)
+app.post('/messages', msgCtrl.addMessage)
 
 app.get('/rooms/:co_id', roomCtrl.getAllRoomsByCompany)
 app.post('/rooms', roomCtrl.addNewRoom)

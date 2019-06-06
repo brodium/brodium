@@ -7,7 +7,6 @@ import './App.scss';
 import routes from './routes';
 import Axios from 'axios';
 import { setUser, setCompany } from './mightyDucks/authReducer';
-import Landing from './Components/Landing/LandingLogin'
 
 //Brodium is da Best
 
@@ -16,9 +15,10 @@ function App(props) {
   useEffect(() => {
     Axios.get('/auth/session').then(res => {
       if (res.data.user) {
-        console.log(res.data.user)
         props.setUser(res.data.user)
         props.setCompany(res.data.company)
+      } else {
+        props.history.push('/landing')
       }
     }).catch(console.log)
   }, [])
