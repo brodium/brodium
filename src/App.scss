@@ -1,2 +1,9 @@
 @import './Components/header/Header';
 @import './Components/Landing/Landing';
+@import './Components/dashboard/chatWindow/ChatWindow';
+@import './Components/dashboard/chatWindow/Messages';
+
+
+.App {
+  text-align: center;
+}

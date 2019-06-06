@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from "react-redux"
 
 const Messages = (props) => {
 
-
-
   return (
     <>
-
-      <div>
-        {props.username}
-        {props.message.messageInput}
-
+      <div className={
+        props.username === `${props.firstname} ${props.lastname}` ? "my-message" : "message"
+      }>
+        <div className="message-username">{props.username}</div>
+        <div className="message-message">{props.message.messageInput}</div>
       </div>
-
     </>
   )
-
 }
 
-export default Messages
+const mapStateToProps = (reduxState) => {
+  return reduxState
+}
+
+export default connect(mapStateToProps)(Messages)

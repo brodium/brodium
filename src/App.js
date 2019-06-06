@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './Components/header/Header';
-import './App.css';
+import './App.scss';
 import routes from './routes';
 import Axios from 'axios';
 import { setUser, setCompany } from './mightyDucks/authReducer';
