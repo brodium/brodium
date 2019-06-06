@@ -19,6 +19,7 @@ const Employee = (props) => {
   const deleteTeamMember = team_member_id => {
     axios.delete(`/team-member/${team_member_id}`)
       .then(props.getTeamMembers)
+      .catch(console.log)
   }
   // ----- -----
 
@@ -65,7 +66,7 @@ const Employee = (props) => {
       .then(() => { setEdit(!edit) })
       .then(() => {
         props.setTeamMembers([...props.teamMembers, {}])
-      })
+      }).catch(console.log)
   }
   // ----- -----
 

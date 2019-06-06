@@ -34,7 +34,7 @@ function RegisterForm(props) {
 						props.setCompany(company.data)
 						props.setUser(user.data)
 						props.history.push('/')
-					})
+					}).catch(console.log)
 			}).catch(console.log)
 	}
 
