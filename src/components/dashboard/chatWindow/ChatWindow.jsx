@@ -9,6 +9,7 @@ function ChatWindow(props) {
 	const [room, setRoom] = useState(props.displayChatRoom)
 	const [messages, setMessages] = useState([])
 	const [messageInput, setMessageInput] = useState('')
+	const [socket, setSocket] = useState(null)
 
 	const { firstname, lastname, company_id, img } = props
 
@@ -18,16 +19,20 @@ function ChatWindow(props) {
 	// 	})
 	// }, [])
 
-	const socket = io.connect(':4444')
-	socket.emit('socket room', company_id)
-	socket.on('socket room message', data => {
+	useEffect(() => {
+		const socket = io.connect(':4444')
+		console.log(socket)
+		setSocket(socket)
+		socket.emit('socket room', company_id)
+		socket.on('socket room message', messageReceiver)
+	}, [])
 
+	const messageReceiver = data => {
 		//make one chat room based off the company id not the chat room id. the company id will become the socket room for each company.
-		// make logic to show the message or not based off of the company id
-		// cron job? connect it to sockets? it will send it as a new message when it comes into the company channel. 
-		setMessages([...messages, { messageInput: data.messageInput }])
-	})
-
+			// make logic to show the message or not based off of the company id
+			// cron job? connect it to sockets? it will send it as a new message when it comes into the company channel. 
+			setMessages(state => [...state, { messageInput: data.messageInput }])
+	}
 
 	const broadcast = () => {
 		socket.emit('socket room message', {

@@ -6,6 +6,7 @@ import '../../App.scss'
 
 import Place from './Place';
 import { setUser, setCompany } from '../../mightyDucks/authReducer';
+import { findCompany } from '../../ShawnsTests/utils';
 
 function RegisterForm(props) {
 
@@ -21,13 +22,6 @@ function RegisterForm(props) {
 
 	const [searchResults, setSearchResults] = useState([])
 
-	const findCompany = () => {
-		Axios.get(`/places/search/${company} ${city} ${state}`)
-			.then(res => {
-				setSearchResults(res.data.results)
-			}).catch(console.log)
-	}
-
 	const register = () => {
 		const { formatted_address, name, place_id } = place
 		Axios.post('/auth/register-company', {
@@ -42,7 +36,7 @@ function RegisterForm(props) {
 						props.setUser(user.data)
 						props.history.push('/')
 					})
-			})
+			}).catch(console.log)
 	}
 
 	return (
@@ -64,7 +58,7 @@ function RegisterForm(props) {
 
 					<div className="inputs">
 						<label htmlFor="email">Email:</label>
-						<input value={email} id="email" type="text" onChange={(e) => setEmail(e.target.value)} />
+						<input value={email} id="email" type="email" onChange={(e) => setEmail(e.target.value)} />
 					</div>
 
 					<div className="inputs">
@@ -98,7 +92,9 @@ function RegisterForm(props) {
 
 							</div>
 						</div>
-						<button onClick={findCompany}>Find Company</button>
+						<button onClick={async () => {
+							setSearchResults(await findCompany(company, city, state))
+						}}>Find Company</button>
 					</div>
 
 
