@@ -1,8 +1,60 @@
 .fullHeader_div {
-    border: solid black .5px;
+    border-bottom: solid black .5px;
+    position: relative;
+    width: 100vw;
 }
 
 
 .brodiumLogo_div {
-    border: solid black .5px;
+    // border: solid black .5px;
+}
+
+.hamyMenu_div {
+    border: solid black 1px;
+    position: absolute;
+    font-size: 22px;
+    // left: 1190px;
+    right: 0px;
+    top: 125px;
+    // bottom: 125px;
+    background-color: rgba(65, 65, 65, 0.8);
+    width: 225px;
+    height: 200px;
+    margin-right: 1px;
+}
+
+.unOrderedList_header {
+    list-style: none;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: flex-start;
+    align-content: stretch;
+    // border: solid black;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.unOrderedList_header li {
+    text-decoration: none;
+    color: #39D468;
+    font-weight: 600;
+    cursor: pointer;
+    // border: solid red 1px;
+    padding: 5px;
+    width: 100%;
+    text-align: left;
+}
+
+.unOrderedList_header li:hover {
+    background-color: #39D468;
+    color: #414141;
+    transition-duration: .3s;
+}
+
+.link {
+    text-decoration: none;
+    width: 100%;
 }
