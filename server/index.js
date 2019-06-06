@@ -60,7 +60,6 @@ io.on('connection', socket => {
         // new messages comes in we need to add all team members from company to unread table .We meed company id from room id (props.company_id?)
         // Whenever they are on the dashboard we need to have it show that there is a new message in the chat room (create a notification next to room)
         // 
-
         io.in(data.company_id).emit('socket room message', data)
     })
 
