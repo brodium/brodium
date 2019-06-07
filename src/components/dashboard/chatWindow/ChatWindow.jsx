@@ -6,7 +6,7 @@ import Messages from './Messages';
 
 
 function ChatWindow(props) {
-	const [room, setRoom] = useState(props.displayChatRoom)
+	// const [room, setRoom] = useState(props.displayChatRoom)
 	const [messages, setMessages] = useState([])
 	const [messageInput, setMessageInput] = useState('')
 	const [socket, setSocket] = useState(null)
@@ -26,7 +26,8 @@ function ChatWindow(props) {
 	}, [])
 
 	useEffect(() => {
-		Axios.get(`/messages/${room}`).then(res => {
+		// setRoom(props.displayChatRoom)
+		Axios.get(`/messages/${props.displayChatRoom}`).then(res => {
 			console.log(res.data)
 			setMessages(res.data)
 		})
@@ -37,12 +38,16 @@ function ChatWindow(props) {
 		setSocket(socket)
 		socket.emit('socket room', company_id)
 		socket.on('socket room message', messageReceiver)
+
+		return () => {
+			socket.emit('leave socket room', props.company_id)
+		}
 	}, [])
 	
 	const messageReceiver = data => {
 		// make logic to show the message or not based off of the company id
 		console.log(data)
-		if (data.room === room) {
+		if (data.room === props.displayChatRoom) {
 			setMessages(state => [...state, { message: data.messageInput }])
 		}
 	}
@@ -52,7 +57,7 @@ function ChatWindow(props) {
 			messageInput,
 			name: firstname + ' ' + lastname,
 			company_id,
-			room,
+			room: props.displayChatRoom,
 			team_member_id: props.team_member_id
 		})
 
@@ -60,7 +65,7 @@ function ChatWindow(props) {
 			messageInput, 
 			google_review: false,
 			team_member_id: props.team_member_id,
-			room
+			room: props.displayChatRoom
 		}).catch(console.log)
 
 		setMessageInput('')
