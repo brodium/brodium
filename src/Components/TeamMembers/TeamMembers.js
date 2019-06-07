@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
-import christianLogic from "./../../christianLogic/christianLogic"
+import { reverseValue } from "./../../christianLogic/christianLogic"
 import Employee from "./Employee"
 
 import axios from "axios"
@@ -49,11 +49,11 @@ const TeamMembers = (props) => {
   // -- METHODS -- //
 
   // Add Team Member
-  const handleAddNewMember = () => { setAddNewMember(christianLogic.reverseValue(addNewMember)) }
+  const handleAddNewMember = () => { setAddNewMember(reverseValue(addNewMember)) }
 
   const handleCancelAddNewMember = event => {
     event.preventDefault()
-    setAddNewMember(christianLogic.reverseValue(addNewMember))
+    setAddNewMember(reverseValue(addNewMember))
   }
 
   const updateField = event => {
