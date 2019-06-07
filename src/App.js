@@ -17,7 +17,7 @@ function App(props) {
       if (res.data.user) {
         props.setUser(res.data.user)
         props.setCompany(res.data.company)
-      } else {
+      } else if (props.location.pathname === '/') {
         props.history.push('/landing')
       }
     }).catch(console.log)

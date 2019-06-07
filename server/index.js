@@ -87,6 +87,7 @@ app.delete('/rooms/:room_id', roomCtrl.deleteRoom)
 
 app.get('/team-members/:co_id', tmCtrl.getMembersByCompany)
 // app.get('/team-members/:room_id', tmCtrl.getMembersByRoom)
+app.get('/team-member/:team_member_id', tmCtrl.getMember)
 app.post('/team-member', tmCtrl.addMember)
 app.put('/team-member', tmCtrl.updateMember)
 app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)

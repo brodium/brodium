@@ -31,6 +31,7 @@ function RegisterForm(props) {
 					user: { firstname, lastname, isadmin: true, email, password }
 				})
 					.then(user => {
+						console.log(company.data)
 						props.setCompany(company.data)
 						props.setUser(user.data)
 						props.history.push('/')
