@@ -9,6 +9,18 @@ module.exports = {
 				res.status(200).send(place.data)
 			})
 			.catch(console.log)
+	},
+
+	getGoogleReviews(req, res) {
+		const db = req.app.get("db")
+		const { company_id } = req.params
+
+		db.getGoogleReviewsByCompanyId({ company_id })
+			.then(results => {
+				res.status(200).send(results)
+			})
+			.catch(console.log)
+
 	}
 
 }
