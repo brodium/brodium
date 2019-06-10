@@ -27,11 +27,12 @@ function RegisterForm(props) {
 			company: { company_name: name, address: formatted_address, google_places_id: place_id }
 		})
 			.then(company => {
+				
 				Axios.post('/auth/register-user', {
 					user: { firstname, lastname, isadmin: true, email, password }
 				})
 					.then(user => {
-						console.log(company.data)
+						
 						props.setCompany(company.data)
 						props.setUser(user.data)
 						props.history.push('/')
