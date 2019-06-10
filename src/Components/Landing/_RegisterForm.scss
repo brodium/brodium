@@ -1,0 +1,95 @@
+.registerLandingComp{
+  display: flex;
+  justify-content: center;
+ //  height: 400px;
+ //  width: 100%;
+  align-items: center;
+ //  border: 5px solid black;
+ margin-top: 30px;
+ margin-bottom: 30px;
+ height: 100%;
+ width: 100%;
+ }
+ 
+ .registerBox1{
+   // border: 1px solid black;
+   // border-radius: 10%;
+   // box-shadow: 2px 2px black;
+   // justify-content: space-between;
+   // width: 250px;
+   // height: 300px;
+   // margin-bottom: 35px;
+   // margin-bottom: 10px;
+   // border-bottom: 1px solid black;
+   padding-bottom: 5px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   text-align: left;
+   input{
+     width: 90%;
+   }
+   label{
+     width: 10%;
+   }
+   .company-city{
+     margin-top: 15px;
+     span{
+       font-weight: 600;
+     }
+   }
+   .register-box-inputs{
+     padding-bottom: 10px;
+     border-bottom: 1px solid black;
+   }
+ }
+ 
+ 
+ 
+ // .inputs{
+ //   display: flex;
+ //   justify-content: space-between;
+ //   // flex-wrap: wrap;
+ // }
+ 
+ // .registerBox2{
+ //   border: 1px solid black;
+ //   box-shadow: 2px 2px black;
+ //   width: 250px;
+ //   height: 175px;
+ // }
+ 
+ // wrap every single one in a div to make them display side to side
+ 
+ // .label{
+ //   flex-wrap: wrap;
+ // }
+ 
+ .companyBoxDisplayed{
+   // border: 1px solid black;
+   cursor: pointer;
+   padding: 5px 0;
+   margin: 5px 0;
+ }
+ 
+ .companyMappedDisplayed{
+   hr{
+     width: 20%;
+   }
+ }
+ 
+ .companyBoxDisplayed:hover{
+   background-color: grey;
+  font-size: 18px;
+  transition-delay: .25s
+ }
+ 
+ .register-btn{
+   margin-top: 20px;
+   
+ }
+ .find-co-btn{
+   margin-top: 20px;
+ 
+ }
+ 

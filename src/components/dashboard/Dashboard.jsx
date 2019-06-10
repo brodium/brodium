@@ -83,17 +83,20 @@ function Dashboard(props) {
 
 	const chatRooms = company.map((el, i) => {
 		return (
-			<EditChatRoom
-				key={el.chat_room_id}
-				title={el.title}
-				chat_room_id={el.chat_room_id}
-				description={el.description}
-				chatRoomClick={handleChatRoomClick}
-				deleteChatRoom={handleDeleteChatRoom}
-				showEditField={showEditField}
-				setEditField={setEditField}
-				setCompany={setCompany}
-			/>
+			<div className='chat-rooms'>
+				<EditChatRoom
+					key={el.chat_room_id}
+					title={el.title}
+					chat_room_id={el.chat_room_id}
+					description={el.description}
+					chatRoomClick={handleChatRoomClick}
+					deleteChatRoom={handleDeleteChatRoom}
+					showEditField={showEditField}
+					setEditField={setEditField}
+					setCompany={setCompany}
+				/>
+				<hr />
+			</div>
 		)
 	})
 	return (
