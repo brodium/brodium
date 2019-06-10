@@ -43,9 +43,7 @@ function RegisterForm(props) {
 	return (
 		<div className="registerLandingComp">
 			<div className='registerBox1'>
-				<div>
-
-
+				<div className='register-box-inputs'>
 					<h2>Register</h2>
 					<div className="inputs">
 						<label htmlFor="firstname">First Name:</label>
@@ -71,8 +69,9 @@ function RegisterForm(props) {
 					</div> */}
 
 
-					<div className="inputs">
-
+					<div className="company-city">
+						<span >Company Search</span>
+						<br />
 						<label htmlFor="company">Company:</label>
 						<input value={company} id="company" type="text" onChange={(e) => setCompany(e.target.value)} />
 						<div>
@@ -85,7 +84,7 @@ function RegisterForm(props) {
 
 					</div>
 					<div>
-						<div className="inputs">
+						<div>
 							<div>
 
 								<label htmlFor="state">State:</label>
@@ -93,13 +92,17 @@ function RegisterForm(props) {
 
 							</div>
 						</div>
-						<button onClick={async () => {
-							setSearchResults(await findCompany(company, city, state))
-						}}>Find Company</button>
+						<button
+							className='find-co-btn'
+							onClick={async () => {
+								setSearchResults(await findCompany(company, city, state))
+							}}>Find Company</button>
 					</div>
 
 
-					<button onClick={register}>Register</button>
+					<button
+						className='register-btn'
+						onClick={register}>Register</button>
 				</div>
 
 
@@ -109,6 +112,7 @@ function RegisterForm(props) {
 							<div className='companyBoxDisplayed'>
 								<Place place={place} />
 							</div>
+							<hr />
 						</div>
 					))}
 				</div>
