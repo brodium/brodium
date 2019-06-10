@@ -45,3 +45,9 @@ CREATE TABLE room_members (
     team_member_id INTEGER REFERENCES team_members(team_member_id),
     chat_room_id INTEGER REFERENCES chat_room(chat_room_id)
 );
+
+create table unread_messages (
+    unread_message_id serial primary key,
+    chat_room_id integer references chat_room(chat_room_id),
+    team_member_id integer references team_members(team_member_id)
+);

@@ -15,5 +15,40 @@ module.exports = {
 		db.getMessagesByRoomId({room}).then(messages => {
 			res.status(200).send(messages)
 		}).catch(console.log)
+	},
+
+	getUnreadMessages(req, res) {
+		console.log('do i fire???')
+		const db = req.app.get('db') 
+		const { team_member_id } = req.params
+		console.log(team_member_id)
+		db.getUnreadMessages({team_member_id}).then( response => {
+			console.log('response', response)
+			res.status(200).send(response)
+		})
+	},
+
+	addUnreadMessages (req, res) {
+		const db = req.app.get('db')
+		const { chat_room_id, co_id } = req.body
+
+		db.getTeamMembers({co_id}).then( members => {
+			members.forEach( member => {
+				db.addUnreadMessages({chat_room_id, team_member_id: member.team_member_id})
+				.catch(console.log)
+			});
+			res.sendStatus(200)
+		})
+		.catch(console.log)
+	},
+
+	removeUnreadMessages (req, res) {
+		const db = req.app.get('db')
+		const { team_member_id } = req.params
+
+		db.removeUnreadMessages({team_member_id}).then( res => {
+			res.sendStatus(200)
+		})
+		.catch(console.log)
 	}
 }

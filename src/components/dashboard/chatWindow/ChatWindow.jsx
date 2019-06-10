@@ -28,7 +28,7 @@ function ChatWindow(props) {
 	useEffect(() => {
 		// setRoom(props.displayChatRoom)
 		Axios.get(`/messages/${props.displayChatRoom}`).then(res => {
-			console.log(res.data)
+			// console.log(res.data)
 			setMessages(res.data)
 		})
 	}, [props.displayChatRoom])
@@ -46,7 +46,7 @@ function ChatWindow(props) {
 	
 	const messageReceiver = data => {
 		// make logic to show the message or not based off of the company id
-		console.log(data)
+		// console.log(data)
 		if (data.room === props.displayChatRoom) {
 			setMessages(state => [...state, { message: data.messageInput }])
 		}
