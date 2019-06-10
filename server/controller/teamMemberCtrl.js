@@ -71,14 +71,15 @@ module.exports = {
         res.status(200).send(resp)
       }).catch((error) => { console.log(`error at updatePassword ${error}`) })
 
+  },
 
-    // get team_member id so that I can get the corect user_login
-    // get old password off of user_login
-    // compare old password from sql to the old password from front end
-    // if not same send stattus 401 if not the same
-    // update new password with old password
-    // if everything checks out send new body back
+  getMember(req, res) {
+    const db = req.app.get('db')
+    const {team_member_id} = req.params
 
+    db.getMember({team_member_id}).then(member => {
+      res.status(200).send(member[0])
+    }).catch(console.log)
   }
 
 

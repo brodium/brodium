@@ -28,7 +28,7 @@ function ChatWindow(props) {
 	useEffect(() => {
 		// setRoom(props.displayChatRoom)
 		Axios.get(`/messages/${props.displayChatRoom}`).then(res => {
-			console.log(res.data)
+			// console.log(res.data)
 			setMessages(res.data)
 		})
 	}, [props.displayChatRoom])
@@ -46,9 +46,9 @@ function ChatWindow(props) {
 	
 	const messageReceiver = data => {
 		// make logic to show the message or not based off of the company id
-		console.log(data)
+		// console.log(data)
 		if (data.room === props.displayChatRoom) {
-			setMessages(state => [...state, { message: data.messageInput }])
+			setMessages(state => [...state, { message: data.messageInput,  team_member_id: data.team_member_id}])
 		}
 	}
 
@@ -68,12 +68,13 @@ function ChatWindow(props) {
 			room: props.displayChatRoom
 		}).catch(console.log)
 
+		Axios.post('/unread-messages', {
+			chat_room_id: props.displayChatRoom,
+			co_id: props.company_id
+		}).catch(console.log)
+
 		setMessageInput('')
 	}
-
-	// const leave = () => {
-	// 	socket.emit('leave socket room', props.company_id)
-	// }
 
 	return (
 		<div className="chatWindow_div">
