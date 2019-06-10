@@ -61,6 +61,32 @@ CREATE TABLE room_members (
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE google_reviews (
     google_review_id SERIAL PRIMARY KEY,
     author_name VARCHAR(50),
