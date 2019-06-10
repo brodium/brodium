@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const googleCtrl = require('./googleCtrl')
 
 module.exports = {
 	async registerCompany(req, res) {
@@ -6,21 +7,46 @@ module.exports = {
 
 		const { company_name, address, google_places_id } = req.body.company
 
-		//check if company is in db
-		const companyExists = await db.getCompanyByPlaceId({ google_places_id })
-		if (companyExists[0]) {
-			return res.status(409).send('Company is already registered. Please sign in.')
+		try {
+
+			//check if company is in db
+			const companyExists = await db.getCompanyByPlaceId({ google_places_id })
+			if (companyExists[0]) {
+				return res.status(409).send('Company is already registered. Please sign in.')
+			}
+	
+			const companyRegistered = await db.registerCompany({ company_name, address, google_places_id })
+			const company = companyRegistered[0]
+	
+			//add default review chat room
+			db.addCompanyChatRoom({
+				title: 'Reviews',
+				description: 'Monitor and discuss company reviews',
+				companyId: company.company_id
+			}).catch(console.log)
+			//add company reviews to db
+			const reviews = await googleCtrl.getDetails(company.google_places_id)
+			reviews.forEach(review => {
+				const {author_name, author_url, language, profile_photo_url, rating, text, time} = review
+				db.addReview({
+					author_name, 
+					author_url, 
+					lang: language, 
+					profile_photo_url, 
+					rating, 
+					review: text, 
+					time_stamp: time, 
+					company_id: company.company_id
+				}).catch(console.log)
+			})
+	
+			//add to session
+			req.session.company = company
+	
+			res.status(200).send(company)
+		} catch(error) {
+			console.log(error)
 		}
-
-		const companyRegistered = await db.registerCompany({ company_name, address, google_places_id })
-		const company = companyRegistered[0]
-
-		//add default chat room
-
-		//add to session
-		req.session.company = company
-
-		res.status(200).send(company)
 
 	},
 	login: async (req, res) => {

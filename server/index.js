@@ -2,10 +2,10 @@ require('dotenv').config()
 const express = require('express');
 const massive = require('massive')
 const session = require('express-session')
-
+const CronJob = require('cron').CronJob;
 const socket = require('socket.io')
 
-
+const reviewCtrl = require('./controller/reviewCtrl')
 const authCtrl = require('./controller/authCtrl')
 const msgCtrl = require('./controller/messagesCtrl')
 const roomCtrl = require('./controller/roomCtrl')
@@ -66,7 +66,8 @@ io.on('connection', socket => {
 
 })
 
-
+// const job = new CronJob('*/59 * * * * *', reviewCtrl.checkForReviews, null, true, 'America/Los_Angeles')
+// job.start()
 
 // app.get('/auth', authCtrl.getCurrentUser)
 app.post('/auth/login', authCtrl.login)
@@ -87,6 +88,7 @@ app.delete('/rooms/:room_id', roomCtrl.deleteRoom)
 
 app.get('/team-members/:co_id', tmCtrl.getMembersByCompany)
 // app.get('/team-members/:room_id', tmCtrl.getMembersByRoom)
+app.get('/team-member/:team_member_id', tmCtrl.getMember)
 app.post('/team-member', tmCtrl.addMember)
 app.put('/team-member', tmCtrl.updateMember)
 app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)
