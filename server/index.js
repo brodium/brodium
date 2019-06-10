@@ -60,7 +60,7 @@ io.on('connection', socket => {
         // figure out how to save data from messages here
         // new messages comes in we need to add all team members from company to unread table .We meed company id from room id (props.company_id?)
         // Whenever they are on the dashboard we need to have it show that there is a new message in the chat room (create a notification next to room)
-        
+
         io.in(data.company_id).emit('socket room message', data)
     })
 
@@ -97,8 +97,10 @@ app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)
 // app.post('/company', companyCtrl.addCompany)
 // app.put('/company', companyCtrl.updateCompany)
 // app.delete('/company', companyCtrl.deleteCompany)
+app.get('/company-ids', companyCtrl.getCompanies)
 
 app.get('/places/search/:company', googleCtrl.searchPlaces)
+app.get('/google-reviews/:company_id', googleCtrl.getGoogleReviews)
 
 app.get('/api/sig', awsCtrl.getSig)
 

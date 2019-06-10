@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
-import christianLogic from "./../../christianLogic/christianLogic"
+import { reverseValue, redirectIfFalse, emailNewTeamMember, getNumberOfTeamMembers, checkNewMemberIsAdmin } from "./../../christianLogic/christianLogic"
 import Employee from "./Employee"
 
 import axios from "axios"
@@ -24,23 +24,30 @@ const TeamMembers = (props) => {
   // -- LIFECYCLE EVENTS -- //
 
   useEffect(() => {
-    if (!props.isadmin) {
+    // if (!props.isadmin) {
+    //   props.history.push("/")
+    // }
+    const checkIsAdmin = redirectIfFalse(props.admin)
+    if (checkIsAdmin) {
       props.history.push("/")
     }
   }, [])
 
   const getTeamMembers = async () => {
     const { company_id } = props
-    // const company_id = 2
+    // await axios.get(`/team-members/${company_id}`)
+    //   .then(res => {
+    //     if (res.data.length !== teamMembers.length) {
+    //       setTeamMembers(res.data)
+    //       return teamMembers
+    //     }
+    //   }).catch(console.log)
+    const numberOfTeamMembers = await getNumberOfTeamMembers(company_id)
 
-    await axios.get(`/team-members/${company_id}`)
-      .then(res => {
-        console.log("TEAM MEMBERS FROM DB", res.data)
-        if (res.data.length !== teamMembers.length) {
-          setTeamMembers(res.data)
-          return teamMembers
-        }
-      }).catch(console.log)
+    if (numberOfTeamMembers.length !== teamMembers.length) {
+      setTeamMembers(numberOfTeamMembers)
+      return teamMembers
+    }
   }
   useEffect(() => { getTeamMembers() }, [teamMembers])
 
@@ -49,11 +56,11 @@ const TeamMembers = (props) => {
   // -- METHODS -- //
 
   // Add Team Member
-  const handleAddNewMember = () => { setAddNewMember(christianLogic.reverseValue(addNewMember)) }
+  const handleAddNewMember = () => { setAddNewMember(reverseValue(addNewMember)) }
 
   const handleCancelAddNewMember = event => {
     event.preventDefault()
-    setAddNewMember(christianLogic.reverseValue(addNewMember))
+    setAddNewMember(reverseValue(addNewMember))
   }
 
   const updateField = event => {
@@ -68,12 +75,16 @@ const TeamMembers = (props) => {
     checkIsAdmin.value = checkIsAdmin.checked
 
     const value = () => {
-      if (checkIsAdmin.value === "true") {
-        return true
-      } else {
-        return false
-      }
+      return checkNewMemberIsAdmin(checkIsAdmin.value)
     }
+
+    // const value = () => {
+    //   if (checkIsAdmin.value === "true") {
+    //     return true
+    //   } else {
+    //     return false
+    //   }
+    // }
 
     setValues({
       ...form, newIsadmin: value()
@@ -84,13 +95,12 @@ const TeamMembers = (props) => {
     event.preventDefault()
     const { newFirstname: firstname, newLastname: lastname, newEmail: email, newIsadmin: isadmin, newImg: img } = form
     const { company_id } = props
-    // const company_id = 2
-
 
     await axios.post("/team-member", { firstname, lastname, email, isadmin, company_id, img })
       .then(results => {
         const { team_member_id, firstname, email } = results.data[0]
-        axios.post("/email-team-member", { team_member_id, firstname, email })
+        emailNewTeamMember(team_member_id, firstname, email)
+        // axios.post("/email-team-member", { team_member_id, firstname, email })
       })
       .then(getTeamMembers)
       .then(() => { setValues({ ...form, newFirstname: "", newLastname: "", newEmail: "", newIsadmin: false }) })
@@ -167,10 +177,6 @@ const TeamMembers = (props) => {
     </div>
   )
 }
-
-
-// export default TeamMembers
-
 
 function mapStateToProps(state) {
   return state
