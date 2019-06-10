@@ -46,8 +46,56 @@ CREATE TABLE room_members (
     chat_room_id INTEGER REFERENCES chat_room(chat_room_id)
 );
 
-create table unread_messages (
-    unread_message_id serial primary key,
-    chat_room_id integer references chat_room(chat_room_id),
-    team_member_id integer references team_members(team_member_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CREATE TABLE google_reviews (
+    google_review_id SERIAL PRIMARY KEY,
+    author_name VARCHAR(50),
+    author_url TEXT,
+    lang VARCHAR(10),
+    profile_photo_url TEXT,
+    rating INTEGER,
+    relative_time_description TEXT,
+    review TEXT,
+    time_stamp INTEGER,
+    company_id INTEGER REFERENCES company(company_id)
 );

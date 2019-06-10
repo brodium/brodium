@@ -48,7 +48,7 @@ function ChatWindow(props) {
 		// make logic to show the message or not based off of the company id
 		// console.log(data)
 		if (data.room === props.displayChatRoom) {
-			setMessages(state => [...state, { message: data.messageInput }])
+			setMessages(state => [...state, { message: data.messageInput,  team_member_id: data.team_member_id}])
 		}
 	}
 

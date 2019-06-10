@@ -2,10 +2,10 @@ require('dotenv').config()
 const express = require('express');
 const massive = require('massive')
 const session = require('express-session')
-
+const CronJob = require('cron').CronJob;
 const socket = require('socket.io')
 
-
+const reviewCtrl = require('./controller/reviewCtrl')
 const authCtrl = require('./controller/authCtrl')
 const msgCtrl = require('./controller/messagesCtrl')
 const roomCtrl = require('./controller/roomCtrl')
@@ -60,13 +60,14 @@ io.on('connection', socket => {
         // figure out how to save data from messages here
         // new messages comes in we need to add all team members from company to unread table .We meed company id from room id (props.company_id?)
         // Whenever they are on the dashboard we need to have it show that there is a new message in the chat room (create a notification next to room)
-        
+
         io.in(data.company_id).emit('socket room message', data)
     })
 
 })
 
-
+// const job = new CronJob('*/59 * * * * *', reviewCtrl.checkForReviews, null, true, 'America/Los_Angeles')
+// job.start()
 
 // app.get('/auth', authCtrl.getCurrentUser)
 app.post('/auth/login', authCtrl.login)
@@ -87,6 +88,7 @@ app.delete('/rooms/:room_id', roomCtrl.deleteRoom)
 
 app.get('/team-members/:co_id', tmCtrl.getMembersByCompany)
 // app.get('/team-members/:room_id', tmCtrl.getMembersByRoom)
+app.get('/team-member/:team_member_id', tmCtrl.getMember)
 app.post('/team-member', tmCtrl.addMember)
 app.put('/team-member', tmCtrl.updateMember)
 app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)
@@ -95,8 +97,10 @@ app.delete('/team-member/:team_member_id', tmCtrl.deleteMember)
 // app.post('/company', companyCtrl.addCompany)
 // app.put('/company', companyCtrl.updateCompany)
 // app.delete('/company', companyCtrl.deleteCompany)
+app.get('/company-ids', companyCtrl.getCompanies)
 
 app.get('/places/search/:company', googleCtrl.searchPlaces)
+app.get('/google-reviews/:company_id', googleCtrl.getGoogleReviews)
 
 app.get('/api/sig', awsCtrl.getSig)
 
