@@ -2,18 +2,18 @@ import React, {useState} from 'react';
 import axios from 'axios';
 
 function AddChatRoom(props) {
-    console.log(props)
+    // console.log(props)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
 
     const titleInput = (val) => {
         setTitle(val)
-        console.log(title)
+        // console.log(title)
     }
 
     const descriptionInput = (val) => {
         setDescription(val)
-        console.log(description)
+        // console.log(description)
     }
 
     const addNewRoomToList = () => {
