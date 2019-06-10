@@ -46,7 +46,8 @@ function Dashboard(props) {
 			setCompany(res.data)
 		}).catch(console.log)
 	}, [])
-
+	console.log(company)
+	
 	useEffect(() => {
 		const { company_id } = props
 		let co_id = company_id // make this number dynamic when there is a session
@@ -55,24 +56,19 @@ function Dashboard(props) {
 		}).catch(console.log)
 	}, [props.company_id])
 
+	// UNREAD MESSAGES USEFFECT
 	useEffect(() => {
 		const { team_member_id } = props
-		console.log( team_member_id )
 		axios.get(`/unread-messages/${team_member_id}`).then( res => {
-			console.log('does this fire??')
-			console.log(res.data)
 			setUnreadMessage(res.data)
 		}).catch(err => console.log('didnt get unread messages', err))
-
-		// const {company_id} = props
-		// let co_id = company_id
-		// console.log(company.chat_room_id)
-	
-		// for(let i = 0; i < company.length; i++){
-		// 	return console.log(company)
-		// }
-		console.log('unread messages', unreadMessage)
 	}, [])
+	useEffect(() => {
+		const { team_member_id } = props
+		axios.get(`/unread-messages/${team_member_id}`).then( res => {
+			setUnreadMessage(res.data)
+		}).catch(err => console.log('didnt get unread messages', err))
+	}, [props.team_member_id])
 
 	const handleDeleteChatRoom = (id) => {
 		axios.delete(`/rooms/${id}`).then(res => {
@@ -100,7 +96,7 @@ function Dashboard(props) {
 			setShowAddRoom(false)
 		}).catch(console.log)
 	}
-
+	
 
 	const chatRooms = company.map((el, i) => {
 		return (
@@ -114,9 +110,12 @@ function Dashboard(props) {
 				showEditField={showEditField}
 				setEditField={setEditField}
 				setCompany={setCompany}
+				unreadMessage={unreadMessage}
 			/>
 		)
 	})
+	//undefined
+	console.log('im looking for chat room id for chat window', company.chat_room_id)
 	return (
 		<div style={flex} className="main_sideBar">
 			<div style={sideBar}>
@@ -129,6 +128,7 @@ function Dashboard(props) {
 				{displayChatRoom && (
 					<ChatWindow
 						displayChatRoom={displayChatRoom}
+						chat_room_id={company.chat_room_id}
 					/>)
 				}
 			</div>
@@ -144,5 +144,7 @@ const mapStateToProps = (reduxState) => {
 		team_member_id
 	}
 }
+
+
 
 export default connect(mapStateToProps)(Dashboard)

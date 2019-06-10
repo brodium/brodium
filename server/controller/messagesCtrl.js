@@ -18,12 +18,9 @@ module.exports = {
 	},
 
 	getUnreadMessages(req, res) {
-		console.log('do i fire???')
 		const db = req.app.get('db') 
 		const { team_member_id } = req.params
-		console.log(team_member_id)
 		db.getUnreadMessages({team_member_id}).then( response => {
-			console.log('response', response)
 			res.status(200).send(response)
 		})
 	},

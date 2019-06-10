@@ -68,12 +68,13 @@ function ChatWindow(props) {
 			room: props.displayChatRoom
 		}).catch(console.log)
 
+		Axios.post('/unread-messages', {
+			chat_room_id: props.displayChatRoom,
+			co_id: props.company_id
+		}).catch(console.log)
+
 		setMessageInput('')
 	}
-
-	// const leave = () => {
-	// 	socket.emit('leave socket room', props.company_id)
-	// }
 
 	return (
 		<div className="chatWindow_div">
