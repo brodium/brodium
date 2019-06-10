@@ -26,7 +26,7 @@ describe("Axios calls", () => {
     }
   )
   test(
-    "should return an array", () => {
+    "should return truthy", () => {
       expect(getNumberOfTeamMembers(2)).toBeTruthy()
     }
   )

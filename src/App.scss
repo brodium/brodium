@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,500,600,700,800,900&display=swap');
 
+@import './variables';
 @import './Components/header/Header';
 @import './Components/Landing/Landing';
 @import './Components/dashboard/chatWindow/ChatWindow';
@@ -8,11 +9,23 @@
 @import './Components/TeamMembers/TeamMembers';
 
 
-
-.App {
-  text-align: center;
+* {
+	margin: 0;
+	padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Libre Franklin', sans-serif;
+  font-size: 1em;
+  text-rendering: optimizeLegibility;
+  // padding: 0 10px;
 }
+
+// header {
+//   width: 100%;
+//   position: relative;
+//   top: 0;
+//   height: 6.25em;
+//   z-index: 100;
+// }
