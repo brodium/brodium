@@ -36,18 +36,20 @@ function Dashboard(props) {
 	let [displayChatRoom, setDisplayChatRoom] = useState(null) // props.google_places_id
 	let [showAddRoom, setShowAddRoom] = useState(false)
 	let [showEditField, setEditField] = useState(false)
-	let [ unreadMessage, setUnreadMessage ] = useState([])
+	let [unreadMessage, setUnreadMessage] = useState([])
 
 	useEffect(() => {
 		const { company_id } = props
-		let co_id = company_id // make this number dynamic when there is a session
-		// console.log('co_id', co_id)
-		axios.get(`/rooms/${co_id}`).then(res => {
-			setCompany(res.data)
-		}).catch(console.log)
+		if (company_id) {
+			let co_id = company_id // make this number dynamic when there is a session
+			// console.log('co_id', co_id)
+			axios.get(`/rooms/${co_id}`).then(res => {
+				setCompany(res.data)
+			}).catch(console.log)
+		}
 	}, [])
 	console.log(company)
-	
+
 	useEffect(() => {
 		const { company_id } = props
 		let co_id = company_id // make this number dynamic when there is a session
@@ -59,15 +61,20 @@ function Dashboard(props) {
 	// UNREAD MESSAGES USEFFECT
 	useEffect(() => {
 		const { team_member_id } = props
-		axios.get(`/unread-messages/${team_member_id}`).then( res => {
-			setUnreadMessage(res.data)
-		}).catch(err => console.log('didnt get unread messages', err))
+		if (team_member_id) {
+			axios.get(`/unread-messages/${team_member_id}`).then(res => {
+				setUnreadMessage(res.data)
+			}).catch(err => console.log('didnt get unread messages', err))
+		}
 	}, [])
+
 	useEffect(() => {
 		const { team_member_id } = props
-		axios.get(`/unread-messages/${team_member_id}`).then( res => {
-			setUnreadMessage(res.data)
-		}).catch(err => console.log('didnt get unread messages', err))
+		if (team_member_id) {
+			axios.get(`/unread-messages/${team_member_id}`).then(res => {
+				setUnreadMessage(res.data)
+			}).catch(err => console.log('didnt get unread messages', err))
+		}
 	}, [props.team_member_id])
 
 	const handleDeleteChatRoom = (id) => {
@@ -77,6 +84,14 @@ function Dashboard(props) {
 				setCompany(res.data)
 			}).catch(console.log)
 		}).catch(console.log)
+	}
+
+	const newMessageTrigger = () => {
+		const { team_member_id } = props
+		axios.get(`/unread-messages/${team_member_id}`).then(res => {
+			console.log('message trigger')
+			setUnreadMessage(res.data)
+		}).catch(err => console.log('didnt get unread messages', err))
 	}
 
 	const handleChatRoomClick = (id) => {
@@ -96,7 +111,7 @@ function Dashboard(props) {
 			setShowAddRoom(false)
 		}).catch(console.log)
 	}
-	
+
 
 	const chatRooms = company.map((el, i) => {
 		return (
@@ -129,6 +144,7 @@ function Dashboard(props) {
 					<ChatWindow
 						displayChatRoom={displayChatRoom}
 						chat_room_id={company.chat_room_id}
+						newMessageTrigger={newMessageTrigger}
 					/>)
 				}
 			</div>

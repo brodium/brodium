@@ -22,7 +22,7 @@ module.exports = {
 		const { team_member_id } = req.params
 		db.getUnreadMessages({team_member_id}).then( response => {
 			res.status(200).send(response)
-		})
+		}).catch(console.log)
 	},
 
 	addUnreadMessages (req, res) {
