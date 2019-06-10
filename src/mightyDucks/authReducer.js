@@ -6,12 +6,13 @@ const initialState = {
 	isadmin: false,
 	company_name: '',
 	company_id: 0,
-	img: null
+	img: null,
 }
 
 const SET_USER = 'SET_USER';
 const SET_COMPANY = 'SET_COMPANY';
 const CLEAR_USER = 'CLEAR_USER';
+
 
 export function setUser(userInfo) {
 

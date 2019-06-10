@@ -136,3 +136,7 @@ app.get('/api/sig', awsCtrl.getSig)
 app.get('/onboarding/:team_member_id', tmCtrl.onBoardingTeamMember)
 app.put('/onboarding/:team_member_id', tmCtrl.onBoardingUpdatePassword)
 app.post('/email-team-member', mailerCtrl.sendLoginRequest)
+
+app.get('/unread-messages/:team_member_id', msgCtrl.getUnreadMessages )
+app.post(`/unread-messages`, msgCtrl.addUnreadMessages)
+app.delete(`/unread-messages/:team-member-id`, msgCtrl.removeUnreadMessages)

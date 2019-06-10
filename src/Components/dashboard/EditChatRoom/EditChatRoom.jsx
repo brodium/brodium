@@ -1,12 +1,20 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+const notification = {
+    height: '10px',
+    width: '10px',
+    borderRadius: '1200px',
+    backgroundColor: 'red'
+}
+
 function EditChatRoom(props) {
-    console.log('edit chat room rendered')
+    // console.log('edit chat room rendered')
     let [showEditField, setEditField] = useState(false)
     let [ editTitle, setEditTitle] = useState(props.title)
     let [ editDescription, setEditDescription ] = useState(props.description)
+    let [ showNotification, setShowNotification ] = useState(false)
 
     const handleEditView = () => {
             setEditField(!showEditField)
@@ -22,7 +30,7 @@ function EditChatRoom(props) {
 
     const handleInputDescript = (val) => {
         setEditDescription(val)
-        console.log(editDescription)
+        // console.log(editDescription)
     }
     
     const saveEditChanges = (id) => {
@@ -43,10 +51,20 @@ function EditChatRoom(props) {
         }).catch(console.log)
     }
     
+    // console.log('unread message chat room id', props.unreadMessage)
+
+    useEffect(() => {
+        const showNotification = props.unreadMessage.find((el) => {
+            return el.chat_room_id === props.chat_room_id
+        })
+            setShowNotification(showNotification)
+    })
+
     return (
         <div onClick={() => props.chatRoomClick(props.chat_room_id)}>
             <h4> {props.title} </h4>
             <label> {props.description} </label>
+            { showNotification && <div style={notification}> </div> }
             <div> 
                 <div> {!showEditField ?
                     <i 
