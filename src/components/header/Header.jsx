@@ -49,7 +49,7 @@ function Header(props) {
 	}
 
 	const logout = () => {
-		console.log(props.clearUser)
+		// console.log(props.clearUser)
 		Axios.get('/auth/logout').then(res => {
 			props.clearUser()
 			props.history.push('/landing')
