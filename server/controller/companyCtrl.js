@@ -3,7 +3,7 @@ module.exports = {
     const db = req.app.get("db")
 
     db.getAllCompanies()
-      .then(res.sendStatus(200))
+      .then(companies => res.status(200).send(companies))
       .catch(console.log)
   }
 }

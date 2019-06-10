@@ -30,44 +30,72 @@ app.use(session({
     }
 }))
 
+
 massive(CONNECTION_STRING).then(db => {
     app.set("db", db)
     console.log("database set!")
     console.log(db.listTables())
 })
 
-
 // sockets
 const io = socket(app.listen(SERVER_PORT, () => { console.log(`listening on port ${SERVER_PORT}`) }))
 io.on('connection', socket => {
     console.log(`users are connected`)
-
     socket.on('socket room', data => {
         socket.join(data)
-
         console.log('joined socket room', data)
-
         socket.to(data).emit('join socket room', data)
     })
-
-    // socket.on('leave socket room', data => {
-    //     socket.leave(data)
-    //     console.log('left socket room', data)
-    // })
-
-
     socket.on('socket room message', data => {
-        // figure out how to save data from messages here
-        // new messages comes in we need to add all team members from company to unread table .We meed company id from room id (props.company_id?)
-        // Whenever they are on the dashboard we need to have it show that there is a new message in the chat room (create a notification next to room)
-
         io.in(data.company_id).emit('socket room message', data)
     })
 
 })
 
-// const job = new CronJob('*/59 * * * * *', reviewCtrl.checkForReviews, null, true, 'America/Los_Angeles')
-// job.start()
+const checkForReviews = async () => {
+    console.log("cron job")
+    const db = await app.get('db')
+    try {
+        const companies = await db.getAllCompanies().catch(console.log)
+        companies.forEach(async company => {
+            if (!company.google_places_id || company.google_places_id === 'gid') {
+                return
+            }
+            const storedReviews = await db.getGoogleReviewsByCompanyId({company_id: company.company_id}).catch(console.log)
+            const reviewsOnGoogle = await googleCtrl.getDetails(company.google_places_id)
+            if (reviewsOnGoogle.length > storedReviews.length) {
+                const newReviewCount = reviewsOnGoogle.length - storedReviews.length
+                //emit to socket
+                for (let i = 0; i < newReviewCount; i++) {
+                    const {text, author_name, author_url, language, profile_photo_url, rating, time} = reviewsOnGoogle[i]
+
+                    io.in(company.company_id).emit('socket room message', {
+                        messageInput: text,
+                        name: author_name,
+                        company_id: company.company_id,
+                        room: company.chat_room_id,
+                        team_member_id: null
+                    })
+                    db.addReview({author_name, author_url, lang: language, profile_photo_url, rating,review: text, time_stamp: time, company_id: company.company_id})
+                    .catch(console.log)
+
+                    db.addMessage({
+                        message: text,
+                        google_review: true,
+                        chat_room_id: company.chat_room_id,
+                        time_stamp: new Date(),
+                    }).catch(console.log)
+                }
+            }
+        });
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+const job = new CronJob('*/30 * * * * *', checkForReviews, null, true, 'America/Los_Angeles')
+job.start()
 
 // app.get('/auth', authCtrl.getCurrentUser)
 app.post('/auth/login', authCtrl.login)
