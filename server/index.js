@@ -94,8 +94,8 @@ const checkForReviews = async () => {
     }
 }
 
-const job = new CronJob('*/59 * * * * *', checkForReviews, null, true, 'America/Los_Angeles')
-job.start()
+// const job = new CronJob('*/59 * * * * *', checkForReviews, null, true, 'America/Los_Angeles')
+// job.start()
 
 // app.get('/auth', authCtrl.getCurrentUser)
 app.post('/auth/login', authCtrl.login)
