@@ -37,14 +37,18 @@ function Dashboard(props) {
 	let [showAddRoom, setShowAddRoom] = useState(false)
 	let [showEditField, setEditField] = useState(false)
 	let [unreadMessage, setUnreadMessage] = useState([])
+	const [newMessageTrigger, setNewMessageTrigger] = useState(false)
+
 
 	useEffect(() => {
 		const { company_id } = props
-		let co_id = company_id // make this number dynamic when there is a session
-		// console.log('co_id', co_id)
-		axios.get(`/rooms/${co_id}`).then(res => {
-			setCompany(res.data)
-		}).catch(console.log)
+		if (company_id) {
+			let co_id = company_id // make this number dynamic when there is a session
+			// console.log('co_id', co_id)
+			axios.get(`/rooms/${co_id}`).then(res => {
+				setCompany(res.data)
+			}).catch(console.log)
+		}
 	}, [])
 	console.log(company)
 
@@ -59,16 +63,21 @@ function Dashboard(props) {
 	// UNREAD MESSAGES USEFFECT
 	useEffect(() => {
 		const { team_member_id } = props
-		axios.get(`/unread-messages/${team_member_id}`).then(res => {
-			setUnreadMessage(res.data)
-		}).catch(err => console.log('didnt get unread messages', err))
+		if (team_member_id) {
+			axios.get(`/unread-messages/${team_member_id}`).then(res => {
+				setUnreadMessage(res.data)
+			}).catch(err => console.log('didnt get unread messages', err))
+		}
 	}, [])
+
 	useEffect(() => {
 		const { team_member_id } = props
-		axios.get(`/unread-messages/${team_member_id}`).then(res => {
-			setUnreadMessage(res.data)
-		}).catch(err => console.log('didnt get unread messages', err))
-	}, [props.team_member_id])
+		if (team_member_id) {
+			axios.get(`/unread-messages/${team_member_id}`).then(res => {
+				setUnreadMessage(res.data)
+			}).catch(err => console.log('didnt get unread messages', err))
+		}
+	}, [props.team_member_id, newMessageTrigger])
 	// UNREAD MESSAGES USEEFFECT
 
 	const handleDeleteChatRoom = (id) => {
@@ -86,7 +95,7 @@ function Dashboard(props) {
 		console.log('id passed in', id)
 		setDisplayChatRoom(id)
 		console.log(id)
-		axios.delete(`/unread-messages/${team_member_id}/${id}`).then( res => {
+		axios.delete(`/unread-messages/${team_member_id}/${id}`).then(res => {
 			console.log(res.data)
 		}).catch(err => console.log('frontend delete didnt work', err))
 	}
@@ -118,6 +127,7 @@ function Dashboard(props) {
 				setEditField={setEditField}
 				setCompany={setCompany}
 				unreadMessage={unreadMessage}
+				newMessageTrigger={newMessageTrigger}
 			/>
 		)
 	})
@@ -134,11 +144,12 @@ function Dashboard(props) {
 					<ChatWindow
 						displayChatRoom={displayChatRoom}
 						chat_room_id={company.chat_room_id}
+						newMessageTrigger={() => setNewMessageTrigger(state => !state)}
 					/>)
 				}
 			</div>
-			{showAddRoom ? <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} /> : null}
-		</div>
+			{showAddRoom && <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} />}
+		</div> 
 	)
 }
 
