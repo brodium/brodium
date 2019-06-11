@@ -58,10 +58,16 @@ function EditChatRoom(props) {
             return el.chat_room_id === props.chat_room_id
         })
         setShowNotification(showNotification)
-    })
+    }, [])
+
+    useEffect(() => {
+        const showNotification = props.unreadMessage.find((el) => {
+            return el.chat_room_id === props.chat_room_id
+        })
+        setShowNotification(showNotification)
+    }, [props.newMessageTrigger])
 
     return (
-
 
         <div className='editChatRoom'
             onClick={() => props.chatRoomClick(props.chat_room_id)}>
