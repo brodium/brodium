@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ChatWindow from './chatWindow/ChatWindow';
 import AddChatRoom from './AddChatRoom/AddChatRoom';
 import EditChatRoom from './EditChatRoom/EditChatRoom';
-import { setUser, setCompany } from '../../mightyDucks/authReducer'
+// import { setUser, setCompany } from '../../mightyDucks/authReducer'
 // import { handleChatRoomClick } from './../../jacksonLogic/Functions'
 
 const chatWindow = {
@@ -69,6 +69,7 @@ function Dashboard(props) {
 			setUnreadMessage(res.data)
 		}).catch(err => console.log('didnt get unread messages', err))
 	}, [props.team_member_id])
+	// UNREAD MESSAGES USEEFFECT
 
 	const handleDeleteChatRoom = (id) => {
 		axios.delete(`/rooms/${id}`).then(res => {
@@ -80,8 +81,14 @@ function Dashboard(props) {
 	}
 
 	const handleChatRoomClick = (id) => {
+		const { team_member_id } = props
+		console.log('team member', team_member_id)
+		console.log('id passed in', id)
 		setDisplayChatRoom(id)
 		console.log(id)
+		axios.delete(`/unread-messages/${team_member_id}/${id}`).then( res => {
+			console.log(res.data)
+		}).catch(err => console.log('frontend delete didnt work', err))
 	}
 
 	const handleAddingChatRoom = () => {
@@ -114,8 +121,6 @@ function Dashboard(props) {
 			/>
 		)
 	})
-	//undefined
-	console.log('im looking for chat room id for chat window', company.chat_room_id)
 	return (
 		<div style={flex} className="main_sideBar">
 			<div style={sideBar}>
