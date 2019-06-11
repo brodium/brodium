@@ -66,6 +66,7 @@ function EditChatRoom(props) {
             <label> {props.description} </label>
             { showNotification && <div style={notification}> </div> }
             <div> 
+                
                 <div> {!showEditField ?
                     <i 
                         className="far fa-edit" 

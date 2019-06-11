@@ -41,9 +41,10 @@ module.exports = {
 
 	removeUnreadMessages (req, res) {
 		const db = req.app.get('db')
-		const { team_member_id } = req.params
+		const { team_member_id, chat_room_id } = req.params
+		console.log('params', team_member_id, chat_room_id)
 
-		db.removeUnreadMessages({team_member_id}).then( res => {
+		db.removeUnreadMessages({team_member_id, chat_room_id}).then( () => {
 			res.sendStatus(200)
 		})
 		.catch(console.log)
