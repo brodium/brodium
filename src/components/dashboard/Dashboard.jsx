@@ -36,7 +36,7 @@ function Dashboard(props) {
 	let [displayChatRoom, setDisplayChatRoom] = useState(null) // props.google_places_id
 	let [showAddRoom, setShowAddRoom] = useState(false)
 	let [showEditField, setEditField] = useState(false)
-	let [ unreadMessage, setUnreadMessage ] = useState([])
+	let [unreadMessage, setUnreadMessage] = useState([])
 
 	useEffect(() => {
 		const { company_id } = props
@@ -47,7 +47,7 @@ function Dashboard(props) {
 		}).catch(console.log)
 	}, [])
 	console.log(company)
-	
+
 	useEffect(() => {
 		const { company_id } = props
 		let co_id = company_id // make this number dynamic when there is a session
@@ -59,13 +59,13 @@ function Dashboard(props) {
 	// UNREAD MESSAGES USEFFECT
 	useEffect(() => {
 		const { team_member_id } = props
-		axios.get(`/unread-messages/${team_member_id}`).then( res => {
+		axios.get(`/unread-messages/${team_member_id}`).then(res => {
 			setUnreadMessage(res.data)
 		}).catch(err => console.log('didnt get unread messages', err))
 	}, [])
 	useEffect(() => {
 		const { team_member_id } = props
-		axios.get(`/unread-messages/${team_member_id}`).then( res => {
+		axios.get(`/unread-messages/${team_member_id}`).then(res => {
 			setUnreadMessage(res.data)
 		}).catch(err => console.log('didnt get unread messages', err))
 	}, [props.team_member_id])
@@ -103,7 +103,7 @@ function Dashboard(props) {
 			setShowAddRoom(false)
 		}).catch(console.log)
 	}
-	
+
 
 	const chatRooms = company.map((el, i) => {
 		return (

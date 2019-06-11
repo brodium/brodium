@@ -20,16 +20,16 @@ const LoginForm = (props) => {
           password
         })
 
-        const {team_member_id, firstname, lastname, isadmin, company, company_id, img} = res.data
-        console.log(company_id)
+      const { team_member_id, firstname, lastname, isadmin, company, company_id, img } = res.data
+      console.log(company_id)
 
-        props.setUser({team_member_id, firstname, lastname, email, isadmin, img})
-        props.setCompany({company, company_id})
+      props.setUser({ team_member_id, firstname, lastname, email, isadmin, img })
+      props.setCompany({ company, company_id })
 
-        // setEmail('')
-        // setPassword('')
-    
-        props.history.push(`/`)
+      // setEmail('')
+      // setPassword('')
+
+      props.history.push(`/`)
     }
     catch (err) {
       console.log(err)
@@ -48,8 +48,8 @@ const LoginForm = (props) => {
   }
 
   return (
-    <>
-      <h2>Login</h2>
+    <div className="login-hero">
+      {/* <h2>Login</h2> */}
       <form onSubmit={handleSubmit}>
         <div>
           <input
@@ -67,13 +67,15 @@ const LoginForm = (props) => {
             value={password}
           />
         </div>
-        <button
-          onClick={handleSubmit}
-          type='submit'
-        >Login</button>
+        <div className="login-btn">
+          <button
+            onClick={handleSubmit}
+            type='submit'
+          >Login</button>
+        </div>
       </form>
 
-    </>
+    </div>
   )
 }
 const mapDispatchToProps = {

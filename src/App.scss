@@ -1,19 +1,41 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,500,600,700,800,900&display=swap');
 
+@import './variables';
 @import './Components/header/Header';
-@import './Components/Landing/Landing';
+@import './Components/Landing/RegisterForm';
 @import './Components/dashboard/chatWindow/ChatWindow';
 @import './Components/dashboard/chatWindow/Messages';
 @import './Components/dashboard/Dashboard';
 @import './Components/TeamMembers/Employee';
 @import './Components/TeamMembers/TeamMembers';
+@import'./Components/Landing/ConditionalRenderComp';
+@import './Components/Landing/LoginForm';
+@import './Components/Profile/Profile';
+@import './Components/Landing/Place';
+@import './Components/TeamMembers/OnboardingTeamMember';
+@import './Components/dashboard/Dashboard';
+@import './Components/Landing/RegisterForm';
 
 
-
-.App {
-  text-align: center;
+* {
+	margin: 0;
+	padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Libre Franklin', sans-serif;
+  font-size: 1em;
+  text-rendering: optimizeLegibility;
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
+
+// header {
+//   width: 100%;
+//   position: relative;
+//   top: 0;
+//   height: 6.25em;
+//   z-index: 100;
+// }
