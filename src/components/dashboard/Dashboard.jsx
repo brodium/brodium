@@ -10,7 +10,7 @@ import EditChatRoom from './EditChatRoom/EditChatRoom';
 const chatWindow = {
 	display: 'flex',
 	justifyContent: 'center',
-	// border: 'solid black',
+	// border: '1px solid red',
 	width: '100vw'
 }
 
@@ -27,6 +27,7 @@ const sideBar = {
 	padding: '0px',
 	display: 'flex',
 	flexDirection: 'column',
+	// border: '1px solid red',
 	justifyContent: 'space-between'
 }
 
@@ -86,7 +87,7 @@ function Dashboard(props) {
 		console.log('id passed in', id)
 		setDisplayChatRoom(id)
 		console.log(id)
-		axios.delete(`/unread-messages/${team_member_id}/${id}`).then( res => {
+		axios.delete(`/unread-messages/${team_member_id}/${id}`).then(res => {
 			console.log(res.data)
 		}).catch(err => console.log('frontend delete didnt work', err))
 	}
