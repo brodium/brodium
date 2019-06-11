@@ -104,6 +104,7 @@ function Dashboard(props) {
 		})
 		.catch(err => console.log('frontend delete didnt work', err))
 	}
+	// need some space for delete notification
 
 	const handleAddingChatRoom = () => {
 		setShowAddRoom(true)
