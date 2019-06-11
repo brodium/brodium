@@ -20,9 +20,11 @@ function ChatWindow(props) {
 	useEffect(() => { scrollToBottom() }, [messages])
 
 	useEffect(() => {
-		Axios.get(`/messages/${props.displayChatRoom}`).then(res => {
-			setMessages(res.data)
-		})
+		if (props.displayChatRoom) {
+			Axios.get(`/messages/${props.displayChatRoom}`).then(res => {
+				setMessages(res.data)
+			})
+		}
 	}, [])
 
 	useEffect(() => {
@@ -49,6 +51,8 @@ function ChatWindow(props) {
 		// console.log(data)
 		if (data.room === props.displayChatRoom) {
 			setMessages(state => [...state, { message: data.messageInput,  team_member_id: data.team_member_id}])
+		} else {
+			props.newMessageTrigger()
 		}
 	}
 
