@@ -37,6 +37,8 @@ function Dashboard(props) {
 	let [showAddRoom, setShowAddRoom] = useState(false)
 	let [showEditField, setEditField] = useState(false)
 	let [unreadMessage, setUnreadMessage] = useState([])
+	const [newMessageTrigger, setNewMessageTrigger] = useState(false)
+
 
 	useEffect(() => {
 		const { company_id } = props
@@ -75,7 +77,7 @@ function Dashboard(props) {
 				setUnreadMessage(res.data)
 			}).catch(err => console.log('didnt get unread messages', err))
 		}
-	}, [props.team_member_id])
+	}, [props.team_member_id, newMessageTrigger])
 	// UNREAD MESSAGES USEEFFECT
 
 	const handleDeleteChatRoom = (id) => {
@@ -87,21 +89,13 @@ function Dashboard(props) {
 		}).catch(console.log)
 	}
 
-	const newMessageTrigger = () => {
-		const { team_member_id } = props
-		axios.get(`/unread-messages/${team_member_id}`).then(res => {
-			console.log('message trigger')
-			setUnreadMessage(res.data)
-		}).catch(err => console.log('didnt get unread messages', err))
-	}
-
 	const handleChatRoomClick = (id) => {
 		const { team_member_id } = props
 		console.log('team member', team_member_id)
 		console.log('id passed in', id)
 		setDisplayChatRoom(id)
 		console.log(id)
-		axios.delete(`/unread-messages/${team_member_id}/${id}`).then( res => {
+		axios.delete(`/unread-messages/${team_member_id}/${id}`).then(res => {
 			console.log(res.data)
 		}).catch(err => console.log('frontend delete didnt work', err))
 	}
@@ -133,6 +127,7 @@ function Dashboard(props) {
 				setEditField={setEditField}
 				setCompany={setCompany}
 				unreadMessage={unreadMessage}
+				newMessageTrigger={newMessageTrigger}
 			/>
 		)
 	})
@@ -149,12 +144,12 @@ function Dashboard(props) {
 					<ChatWindow
 						displayChatRoom={displayChatRoom}
 						chat_room_id={company.chat_room_id}
-						newMessageTrigger={newMessageTrigger}
+						newMessageTrigger={() => setNewMessageTrigger(state => !state)}
 					/>)
 				}
 			</div>
-			{showAddRoom ? <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} /> : null}
-		</div>
+			{showAddRoom && <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} />}
+		</div> 
 	)
 }
 

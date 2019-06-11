@@ -65,7 +65,7 @@ function EditChatRoom(props) {
             return el.chat_room_id === props.chat_room_id
         })
         setShowNotification(showNotification)
-    }, [props.unreadMessage.length])
+    }, [props.newMessageTrigger])
 
     return (
 
