@@ -6,7 +6,7 @@ import { clearUser } from './../../mightyDucks/authReducer';
 import { Link, withRouter } from 'react-router-dom';
 
 const fullHeader = {
-	borderBottom: '.5px solid black',
+	// borderBottom: '.5px solid black',
 	display: 'flex',
 	justifyContent: 'space-between',
 	height: '125px'
@@ -14,18 +14,19 @@ const fullHeader = {
 
 const img = {
 	height: '105px',
-	marginBottom: '-7px'
+	marginBottom: '-6px',
+	marginLeft: '-8px'
 }
 
 const restOfLogo = {
-	marginBottom: '10px',
-	fontSize: '35px',
+	margin: '0 0 10px -11px',
+	fontSize: '45px',
 	fontWeight: '600'
 }
 
 const brodiumLogoDiv = {
-	// border: '.5px solid black',
-	margin: '5px 0px 5px 15px',
+	// border: '1px solid red',
+	margin: '5px 0px 5px 0',
 	padding: '5px'
 }
 
@@ -36,7 +37,7 @@ const hamburger = {
 	justifyContent: 'flex-end',
 	height: '100%',
 	// border: 'solid black',
-	margin: '0px 15px 10px 0px',
+	margin: '0 0 10px 0',
 	color: '#414141',
 	cursor: 'pointer'
 }
@@ -67,7 +68,7 @@ function Header(props) {
 				<img style={img} src={BrodiumLogo} alt='B for brodium' />
 				<label style={restOfLogo}> rodium </label>
 			</div>
-			<div style={hamburger} className="hamburgerMenu_div"> 
+			<div style={hamburger} className="hamburgerMenu_div">
 				<i className="fas fa-bars" onClick={() => handleMenu()} ></i>
 				{!showMenu ? null :
 					<div className="hamyMenu_div">
@@ -78,7 +79,7 @@ function Header(props) {
 							<li onClick={() => logout()} > Logout </li>
 						</ul>
 					</div>
-			}
+				}
 			</div>
 		</div>
 	)

@@ -2,12 +2,17 @@
 
 @import './variables';
 @import './Components/header/Header';
-@import './Components/Landing/Landing';
+@import './Components/Landing/RegisterForm';
 @import './Components/dashboard/chatWindow/ChatWindow';
 @import './Components/dashboard/chatWindow/Messages';
 @import './Components/dashboard/Dashboard';
 @import './Components/TeamMembers/Employee';
 @import './Components/TeamMembers/TeamMembers';
+@import'./Components/Landing/ConditionalRenderComp';
+@import './Components/Landing/LoginForm';
+@import './Components/Profile/Profile';
+@import './Components/Landing/Place';
+@import './Components/TeamMembers/OnboardingTeamMember';
 
 
 * {
@@ -20,7 +25,9 @@ body {
   font-family: 'Libre Franklin', sans-serif;
   font-size: 1em;
   text-rendering: optimizeLegibility;
-  // padding: 0 10px;
+  max-width: 1420px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 // header {

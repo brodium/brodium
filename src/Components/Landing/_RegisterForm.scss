@@ -1,0 +1,97 @@
+.registerLandingComp{
+ margin-top: 1.25em;
+ padding-bottom: 1.25em;
+ h2 {
+  margin: .625em 0;
+ }
+}
+ 
+.registerBox1{
+  width: 100%;
+  margin-bottom: 15px;
+  margin-bottom: 10px;
+}
+
+.user {
+  display: flex;
+}
+ 
+.user-inputs {
+width: 30%;
+padding-right: 2em;
+margin-right: 1.25em;
+  .user-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 10px 0;
+    input {
+      border-top: none;
+      border-right: none;
+      border-left: none;
+      height: 1.5em;
+      width: 15.625em;
+      font-size: 1em;
+      }
+  }
+}
+
+.company-inputs {
+  width: 30%;
+  padding-right: 2em;
+  margin-left: 2.5em;
+    .company-input {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin: 10px 0;
+      input {
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        height: 1.5em;
+        width: 15.625em;
+        font-size: 1em;
+        }
+    }
+  button {
+    background-color: $blue;
+    border: none;
+    margin: .625em 0;
+    font-weight: 600;
+  }
+  p {
+    font-weight: 600;
+    text-transform: capitalize;
+    font-style: italic;
+  }
+}
+
+.inputs{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.companyMappedDisplayed {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  border: 1px solid rgba(105, 105, 105, .2);
+  overflow-x: scroll;
+  padding: 15px;
+  margin-bottom: 10px;
+  .companyBoxDisplayed {
+    cursor: pointer;
+    margin: .156em 0;
+  }
+}
+
+.register-co-btn {
+  margin: 25px 0;
+  font-weight: 700;
+  font-size: 1.1em;
+  background-color: $green;
+}
