@@ -139,4 +139,4 @@ app.post('/email-team-member', mailerCtrl.sendLoginRequest)
 
 app.get('/unread-messages/:team_member_id', msgCtrl.getUnreadMessages )
 app.post(`/unread-messages`, msgCtrl.addUnreadMessages)
-app.delete(`/unread-messages/:team-member-id`, msgCtrl.removeUnreadMessages)
+app.delete(`/unread-messages/:team_member_id/:chat_room_id`, msgCtrl.removeUnreadMessages)
