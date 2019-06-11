@@ -1,0 +1,32 @@
+.login-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  // margin-left: 16.625em;
+  margin-left: 14.125em;
+  padding-top: 3em;
+  div {
+    margin: 2.5em 0;
+  }
+  input {
+    margin-top: 1em;
+    font-size: 1em;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    height: 2em;
+    width: 15.5em;
+  }
+  .login-btn {
+    button {
+      height: 3em;
+      width: 7em;
+      font-size: 1em;
+      font-weight: 700;
+      color: #f9f8fd;
+      background-color: $blue;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}

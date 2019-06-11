@@ -5,8 +5,10 @@ export const reverseValue = (value) => {
 }
 
 export const redirectIfFalse = (val) => {
-  if (!val) {
+  if (val === false) {
     return false
+  } else {
+    return true
   }
 }
 

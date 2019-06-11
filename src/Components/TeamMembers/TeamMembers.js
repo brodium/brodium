@@ -24,11 +24,8 @@ const TeamMembers = (props) => {
   // -- LIFECYCLE EVENTS -- //
 
   useEffect(() => {
-    // if (!props.isadmin) {
-    //   props.history.push("/")
-    // }
     const checkIsAdmin = redirectIfFalse(props.admin)
-    if (checkIsAdmin) {
+    if (!checkIsAdmin) {
       props.history.push("/")
     }
   }, [])
@@ -51,7 +48,7 @@ const TeamMembers = (props) => {
   }
   useEffect(() => { getTeamMembers() }, [teamMembers])
 
-  useEffect(() => { getTeamMembers() }, [])
+  useEffect(() => { getTeamMembers() })
 
   // -- METHODS -- //
 
@@ -117,9 +114,11 @@ const TeamMembers = (props) => {
   return (
     <div className="team-members" >
       <h1>Team Members</h1>
+      <hr />
       <div className="team-members-hero">
         {teamMember}
       </div>
+      <hr />
 
       <div className="add-team-member">
         {

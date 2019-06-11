@@ -50,8 +50,8 @@ function OnBoardingTeamMember(props) {
 
   return (
     <>
-      <h3>On-Boarding Page</h3>
-      <div>
+      <h2>On-Boarding</h2>
+      <div className="onboarding-info">
         {/* <div>{company_name}</div> */}
         <div> {`${firstname} ${lastname}`}</div>
         <div>{`${email}`}</div>
@@ -65,15 +65,17 @@ function OnBoardingTeamMember(props) {
               onChange={UpdatePasswordInput2}
             />
           </div> */}
-          <div>
+          <div className="password-input">
+            <label htmlFor="password">Enter Password Here:</label>
             <input
               name='password'
+              className='password'
               type='text'
               onChange={UpdatePasswordInput}
-
             />
           </div>
-          <button onClick={onBoardUpdatePassword}>change password</button>
+          <p>please make note of your password <br /> as you will be redirected to the login page</p>
+          <button onClick={onBoardUpdatePassword}>set password</button>
 
 
         </form>
