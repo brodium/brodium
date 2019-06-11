@@ -12,3 +12,9 @@ export const handleAddingChatRoom = ( value, setShowAddRoom) => {
 export const handleEditView = ( val ,setEditField, showEditField ) => {
     setEditField(!showEditField)
 }
+
+export const getChatrooms = (axios, co_id, setCompany) => {
+    return axios.get(`/rooms/${co_id}`).then(res => {
+        setCompany(res.data)
+    }).catch(console.log)
+}

@@ -5,7 +5,7 @@ import ChatWindow from './chatWindow/ChatWindow';
 import AddChatRoom from './AddChatRoom/AddChatRoom';
 import EditChatRoom from './EditChatRoom/EditChatRoom';
 // import { setUser, setCompany } from '../../mightyDucks/authReducer'
-import { handleAddingChatRoom } from './../../jacksonLogic/Functions'
+import { handleAddingChatRoom, getChatrooms } from './../../jacksonLogic/Functions'
 
 const chatWindow = {
 	display: 'flex',
@@ -45,9 +45,10 @@ function Dashboard(props) {
 		if (company_id) {
 			let co_id = company_id // make this number dynamic when there is a session
 			// console.log('co_id', co_id)
-			axios.get(`/rooms/${co_id}`).then(res => {
-				setCompany(res.data)
-			}).catch(console.log)
+			// axios.get(`/rooms/${co_id}`).then(res => {
+			// 	setCompany(res.data)
+			// }).catch(console.log)
+			getChatrooms(axios, co_id, setCompany)
 		}
 	}, [])
 	console.log(company)
