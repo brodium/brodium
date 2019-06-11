@@ -87,8 +87,13 @@ function Dashboard(props) {
 		setDisplayChatRoom(id)
 		console.log(id)
 		axios.delete(`/unread-messages/${team_member_id}/${id}`).then( res => {
-			console.log(res.data)
-		}).catch(err => console.log('frontend delete didnt work', err))
+			const { team_member_id } = props
+			axios.get(`/unread-messages/${team_member_id}`).then(res => {
+			setUnreadMessage(res.data)
+		})
+		.catch(err => console.log('didnt get unread messages', err))
+		})
+		.catch(err => console.log('frontend delete didnt work', err))
 	}
 
 	const handleAddingChatRoom = () => {
