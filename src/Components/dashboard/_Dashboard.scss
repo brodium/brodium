@@ -1,3 +1,31 @@
+i:hover{
+  font-size: 1.1em;
+  cursor: pointer;
+  }
+
+.chat-rooms{
+  padding-top: 10px ;
+  padding-right: 15px;
+  transition: font-size .25s ease-out;
+  hr {
+    width: 80%; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+  }
+  cursor: pointer;
+}
+
+.chat-rooms:hover {
+  // background-color: gray;
+  // transition-delay: .5s;
+  font-size: 1.1em;
+
+}
+
+.whenHovered1:hover{
+cursor: pointer;
+}
 button {
     padding: 9px 15px;
     font-size: 1em;
