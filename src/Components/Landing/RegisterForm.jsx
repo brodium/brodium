@@ -69,57 +69,44 @@ function RegisterForm(props) {
 						<div className="company-input">
 							<label htmlFor="company">Company:</label>
 							<input value={company} id="company" type="text" onChange={(e) => setCompany(e.target.value)} />
-							{/* <div className='registerBox2'>
-					</div> */}
-
-
-							<div className="company-city">
-								<span >Company Search</span>
-								<br />
-								<label htmlFor="company">Company:</label>
-								<input value={company} id="company" type="text" onChange={(e) => setCompany(e.target.value)} />
-								<div>
-								</div>
-								<div className="company-input">
-									<label htmlFor="city">City:</label>
-									<input value={city} id="city" type="text" onChange={(e) => setCity(e.target.value)} />
-								</div>
-								<div className="company-input">
-									<label htmlFor="state">State:</label>
-									<input value={state} id="state" type="text" onChange={(e) => setState(e.target.value)} />
-								</div>
-								<button onClick={async () => {
-									setSearchResults(await findCompany(company, city, state))
-								}}>Find Company
+						</div>
+						<div className="company-input">
+							<label htmlFor="city">City:</label>
+							<input value={city} id="city" type="text" onChange={(e) => setCity(e.target.value)} />
+						</div>
+						<div className="company-input">
+							<label htmlFor="state">State:</label>
+							<input value={state} id="state" type="text" onChange={(e) => setState(e.target.value)} />
+						</div>
+						<button onClick={async () => {
+							setSearchResults(await findCompany(company, city, state))
+						}}>Find Company
 						</button>
-								<p>please select your company below, before clicking on the register button</p>
-							</div>
-						</div>
-
-
-
-
-						<button className="register-co-btn" onClick={register}>Register</button>
-
-						<div className='companyMappedDisplayed'>
-							{searchResults.map(place => (
-								<div key={place.id} onClick={() => setPlace(place)}>
-									<div className='companyBoxDisplayed'>
-										<Place place={place} />
-									</div>
-									<hr />
-								</div>
-							))}
-						</div>
-
+						<p>please select your company below, before clicking on the register button</p>
 					</div>
 				</div>
-				)
-			}
-			
+
+				<button className="register-co-btn" onClick={register}>Register</button>
+
+				<div className='companyMappedDisplayed'>
+					{searchResults.map(place => (
+						<div key={place.id} onClick={() => setPlace(place)}>
+							<div className='companyBoxDisplayed'>
+								<Place place={place} />
+							</div>
+							<hr />
+						</div>
+					))}
+				</div>
+
+			</div>
+		</div>
+	)
+}
+
 const mapDispatchToProps = {
-					setCompany,
-				setUser
-			}
-			
+	setCompany,
+	setUser
+}
+
 export default connect(null, mapDispatchToProps)(withRouter(RegisterForm))
