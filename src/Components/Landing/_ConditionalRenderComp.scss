@@ -1,0 +1,44 @@
+.conditional-render-comp-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 40vh;
+  position: relative;
+  .defining-message {
+    display: flex;
+    flex-direction: column;
+    margin: 8em 0 5em 16em; 
+    width: 100%;
+    float: left;
+    p {
+      font-size: 2.5em;
+      font-weight: 700; 
+      text-transform: capitalize;
+    }
+  }
+  
+  .login-reg-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    hr {
+      height: 2em;
+    }
+    button {
+      margin: 0 15px;
+      height: 3em;
+      width: 7em;
+      font-size: 1em;
+      font-weight: 700;
+      color: #f9f8fd;
+      background-color: $blue;
+      border: none;
+      cursor: pointer;
+      transition: background-color 1.5s ease-out;
+    }
+    button:hover {
+      background-color: $green;      
+    }
+  }
+}

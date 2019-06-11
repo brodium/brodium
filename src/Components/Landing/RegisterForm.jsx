@@ -27,12 +27,12 @@ function RegisterForm(props) {
 			company: { company_name: name, address: formatted_address, google_places_id: place_id }
 		})
 			.then(company => {
-				
+
 				Axios.post('/auth/register-user', {
 					user: { firstname, lastname, isadmin: true, email, password }
 				})
 					.then(user => {
-						
+
 						props.setCompany(company.data)
 						props.setUser(user.data)
 						props.history.push('/')
@@ -42,69 +42,51 @@ function RegisterForm(props) {
 
 	return (
 		<div className="registerLandingComp">
+			<h2>Register</h2>
 			<div className='registerBox1'>
-				<div className='register-box-inputs'>
-					<h2>Register</h2>
-					<div className="inputs">
-						<label htmlFor="firstname">First Name:</label>
-						<input value={firstname} id='firstname' type="text" onChange={(e) => setFirstName(e.target.value)} />
-					</div>
 
-					<div className="inputs">
-						<label htmlFor="lastname">Last Name:</label>
-						<input value={lastname} id="lastname" type="text" onChange={(e) => setLastName(e.target.value)} />
-					</div>
-
-					<div className="inputs">
-						<label htmlFor="email">Email:</label>
-						<input value={email} id="email" type="email" onChange={(e) => setEmail(e.target.value)} />
-					</div>
-
-					<div className="inputs">
-						<label htmlFor="password">Password:</label>
-						<input value={password} id="password" type="password" onChange={(e) => setPassword(e.target.value)} />
-					</div>
-
-					{/* <div className='registerBox2'>
-					</div> */}
-
-
-					<div className="company-city">
-						<span >Company Search</span>
-						<br />
-						<label htmlFor="company">Company:</label>
-						<input value={company} id="company" type="text" onChange={(e) => setCompany(e.target.value)} />
-						<div>
+				<div className="user">
+					<div className="user-inputs">
+						<div className="user-input">
+							<label htmlFor="firstname">First Name:</label>
+							<input value={firstname} id='firstname' type="text" onChange={(e) => setFirstName(e.target.value)} />
 						</div>
-						<div className="inputs">
+						<div className="user-input">
+							<label htmlFor="lastname">Last Name:</label>
+							<input value={lastname} id="lastname" type="text" onChange={(e) => setLastName(e.target.value)} />
+						</div>
+						<div className="user-input">
+							<label htmlFor="email">Email:</label>
+							<input value={email} id="email" type="email" onChange={(e) => setEmail(e.target.value)} />
+						</div>
+						<div className="user-input">
+							<label htmlFor="password">Password:</label>
+							<input value={password} id="password" type="password" onChange={(e) => setPassword(e.target.value)} />
+						</div>
+					</div>
 
+					<div className="company-inputs">
+						<div className="company-input">
+							<label htmlFor="company">Company:</label>
+							<input value={company} id="company" type="text" onChange={(e) => setCompany(e.target.value)} />
+						</div>
+						<div className="company-input">
 							<label htmlFor="city">City:</label>
 							<input value={city} id="city" type="text" onChange={(e) => setCity(e.target.value)} />
 						</div>
-
-					</div>
-					<div>
-						<div>
-							<div>
-
-								<label htmlFor="state">State:</label>
-								<input value={state} id="state" type="text" onChange={(e) => setState(e.target.value)} />
-
-							</div>
+						<div className="company-input">
+							<label htmlFor="state">State:</label>
+							<input value={state} id="state" type="text" onChange={(e) => setState(e.target.value)} />
 						</div>
-						<button
-							className='find-co-btn'
-							onClick={async () => {
-								setSearchResults(await findCompany(company, city, state))
-							}}>Find Company</button>
+						<button onClick={async () => {
+							setSearchResults(await findCompany(company, city, state))
+						}}>Find Company
+						</button>
+						<p>please select your company below, before clicking on the register button</p>
 					</div>
-
-
-					<button
-						className='register-btn'
-						onClick={register}>Register</button>
 				</div>
 
+				<button className="register-co-btn" onClick={register}>Register</button>
 
 				<div className='companyMappedDisplayed'>
 					{searchResults.map(place => (

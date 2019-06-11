@@ -16,14 +16,29 @@ const ConditionalRenderComp = (props) => {
 
 
   return (
-    <>
-      <div>
-        <button onClick={signin}>Sign-in</button>
+    // <>
+    //   <div>
+    //     <button onClick={signin}>Sign-in</button>
+    //   </div>
+    //   <div>
+    //     <button onClick={register}>Register</button>
+    //   </div>
+    // </>
+    <div className="conditional-render-comp-hero">
+      <div className="defining-message">
+        <p>make brodium</p>
+        <p>your unfair advantage</p>
       </div>
-      <div>
-        <button onClick={register}>Register</button>
+      <div className="login-reg-btns">
+        <div>
+          <button onClick={signin}>Log In</button>
+        </div>
+        <hr />
+        <div>
+          <button onClick={register}>Register</button>
+        </div>
       </div>
-    </>
+    </div>
   )
 
 }
