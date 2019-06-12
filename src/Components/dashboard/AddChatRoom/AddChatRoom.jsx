@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import axios from 'axios';
 
+
 function AddChatRoom(props) {
     // console.log(props)
     const [title, setTitle] = useState('')
@@ -28,20 +29,33 @@ function AddChatRoom(props) {
         .catch(err => console.log('doesnt work dumby', err))
     }
 
+    const cancelNewRoomToList = () => {
+        props.setShowAddRoom(false)
+    }
+
     return(
-        <div>
-             AddChatRoom 
-            <input 
-                placeholder="title"
-                onChange={(e) => titleInput(e.target.value)}
-                type="text"
-                />
-            <input 
-                placeholder="description"
-                onChange={(e) => descriptionInput(e.target.value)}
-                type="text"
-                />
-            <button onClick={() => addNewRoomToList()}> add new chat room </button>
+        <div className='background_addRoom_div'>
+            <div className="whiteBackground_div">
+                <div className="wrappedInfo_addRoom_div">
+                    <h2> Add New Chat Room </h2> 
+                    <div className="input_addRoom_div">
+                        <input 
+                            placeholder="title"
+                            onChange={(e) => titleInput(e.target.value)}
+                            type="text"
+                            />
+                        <input 
+                            placeholder="description"
+                            onChange={(e) => descriptionInput(e.target.value)}
+                            type="text"
+                            />
+                    </div>
+                    <div className="btn_addRoom_div">
+                        <button className="addRoom_btn" onClick={() => addNewRoomToList()}> add </button>
+                        <button className="addRoom_btn" onClick={() => cancelNewRoomToList()} > Cancel </button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
