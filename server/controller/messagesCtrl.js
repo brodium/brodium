@@ -27,16 +27,18 @@ module.exports = {
 
 	addUnreadMessages (req, res) {
 		const db = req.app.get('db')
-		const { chat_room_id, co_id } = req.body
-
-		db.getTeamMembers({co_id}).then( members => {
-			members.forEach( member => {
-				db.addUnreadMessages({chat_room_id, team_member_id: member.team_member_id})
-				.catch(console.log)
-			});
-			res.sendStatus(200)
-		})
-		.catch(console.log)
+		const { chat_room_id, co_id, team_member_id } = req.body
+			//dont add for team_member that sent it.
+			db.getTeamMembers({co_id}).then( members => {
+				members.forEach( member => {
+					if(team_member_id !== member.team_member_id){
+						db.addUnreadMessages({chat_room_id, team_member_id: member.team_member_id})
+						.catch(console.log)
+					}
+				});
+				res.sendStatus(200)
+			})
+			.catch(console.log)
 	},
 
 	removeUnreadMessages (req, res) {
