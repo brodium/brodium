@@ -1,30 +1,33 @@
 .chatWindow_div {
   // border: solid blue;
-  height: 90vh;
+  height: 80vh;
   margin-bottom: 2em;
   width: 100%;
-  padding: 10px 0 10px 10px;
+  padding: 10px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .message-container {
-  background-color: #414141;
-  height: 75%;
+  // background-color: #414141;
+  height: 85%;
   // width: auto;
   padding: 5px;
   overflow-y: scroll;
   margin-bottom: 10px;
-  // border: solid red ; 
+  // border: 1px solid red ; 
 }
 
 .chat-form {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  // justify-content: space-between;
   .text-area {
-    background: #fbfbfb;
-    height: 2.313em;
-    margin-right: .625em;
-    border: 1px solid #eee;
+    background: #F8F8F8;
+    height: 2.5em;
+    margin-right: 1.5em;
+    border: 1px solid black;
     border-radius: 2px;
     padding: .625em;
     font-size: 1em;
@@ -34,10 +37,13 @@
   button {
     padding: 9px 15px;
     font-size: 1em;
-    height: 2.313em;
+    // height: 2.313em;
+    height: 2.5em;
+    width: 5em;
     color: white;
     background: $green;
     cursor: pointer;
+    border: none;
   }
 }
 
