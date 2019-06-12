@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from "react-redux"
+import React, { useState, useEffect } from 'react';
+import { connect } from "react-redux";
 import Axios from 'axios';
+import {getTeamMember} from '../../../ShawnsTests/utils';
 
 const Messages = (props) => {
 
