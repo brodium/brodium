@@ -71,6 +71,7 @@
         margin-bottom: 15px;
         .addRoom_btn {
             width: 125px;
+            height: 35px;
             text-transform: capitalize;
             font-weight: 700;
             font-family: 'Fira Sans', sans-serif;
@@ -79,6 +80,9 @@
             border: none;
             cursor: pointer;
             transition: background-color 1.5s ease-out;
+            border-radius: 5px;
+            font-size: 15px;
+            color: white;
         }
         .addRoom_btn:hover {
             background-color: $green; 
