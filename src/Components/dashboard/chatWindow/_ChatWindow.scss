@@ -1,5 +1,7 @@
 .chatWindow_div {
   // border: solid blue;
+  height: 90vh;
+  margin-bottom: 2em;
   width: 100%;
   padding: 10px 0 10px 10px;
 }
@@ -32,6 +34,7 @@
   button {
     padding: 9px 15px;
     font-size: 1em;
+    height: 2.313em;
     color: white;
     background: $green;
     cursor: pointer;

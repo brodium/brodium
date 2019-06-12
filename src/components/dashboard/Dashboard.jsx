@@ -19,17 +19,17 @@ const flex = {
 	flexDirection: 'row'
 }
 
-const sideBar = {
-	width: '250px',
-	borderRight: 'solid black .5px',
-	margin: '0px 0px 0px 10px',
-	height: '90vh',
-	padding: '0px',
-	display: 'flex',
-	flexDirection: 'column',
-	// border: '1px solid red',
-	justifyContent: 'space-between'
-}
+// const sideBar = {
+// 	width: '250px',
+// 	borderRight: 'solid black .5px',
+// 	margin: '0px 0px 0px 10px',
+// 	height: '90vh',
+// 	padding: '0px',
+// 	display: 'flex',
+// 	flexDirection: 'column',
+// 	// border: '1px solid red',
+// 	justifyContent: 'space-between'
+// }
 
 function Dashboard(props) {
 
@@ -96,14 +96,14 @@ function Dashboard(props) {
 		console.log('id passed in', id)
 		setDisplayChatRoom(id)
 		console.log(id)
-		axios.delete(`/unread-messages/${team_member_id}/${id}`).then( res => {
+		axios.delete(`/unread-messages/${team_member_id}/${id}`).then(res => {
 			const { team_member_id } = props
 			axios.get(`/unread-messages/${team_member_id}`).then(res => {
-			setUnreadMessage(res.data)
+				setUnreadMessage(res.data)
+			})
+				.catch(err => console.log('didnt get unread messages', err))
 		})
-		.catch(err => console.log('didnt get unread messages', err))
-		})
-		.catch(err => console.log('frontend delete didnt work', err))
+			.catch(err => console.log('frontend delete didnt work', err))
 	}
 	// need some space for delete notification
 
@@ -140,10 +140,11 @@ function Dashboard(props) {
 	})
 	return (
 		<div style={flex} className="main_sideBar">
-			<div style={sideBar}>
+			{/* <div style={sideBar}> */}
+			<div className="sideBar">
 				<div> {chatRooms} </div>
 				<div>
-					<button onClick={() => handleAddingChatRoom()}> Add Chatroom </button>
+					<button className="add-chatroom-btn" onClick={() => handleAddingChatRoom()}> Add Chatroom </button>
 				</div>
 			</div>
 			<div style={chatWindow} >
@@ -156,7 +157,7 @@ function Dashboard(props) {
 				}
 			</div>
 			{showAddRoom && <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} />}
-		</div> 
+		</div>
 	)
 }
 

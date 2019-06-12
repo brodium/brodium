@@ -78,7 +78,7 @@ function RegisterForm(props) {
 							<label htmlFor="state">State:</label>
 							<input value={state} id="state" type="text" onChange={(e) => setState(e.target.value)} />
 						</div>
-						<button onClick={async () => {
+						<button className="find-co-btn" onClick={async () => {
 							setSearchResults(await findCompany(company, city, state))
 						}}>Find Company
 						</button>

@@ -91,16 +91,12 @@ function EditChatRoom(props) {
                             defaultValue={props.description}
                             type="text" />
                         <button
-                            className='whenHovered1'
+                            className='editChatRoom-btn whenHovered1'
                             onClick={() => handleCancelBtn()} >
-                            X
+                            Cancel
                             </button>
                         <button
-                            onClick={() => saveEditChanges(props.chat_room_id)}>
-                            Save
-                            </button>
-                        <button
-                            className='whenHovered1'
+                            className='editChatRoom-btn whenHovered1'
                             onClick={() => saveEditChanges(props.chat_room_id)}>
                             Save
                             </button>
