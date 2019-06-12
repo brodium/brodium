@@ -50,7 +50,13 @@ function ChatWindow(props) {
 	const messageReceiver = (data) => {
 		// make logic to show the message or not based off of the company id
 		if (data.room === props.displayChatRoom) {
-			setMessages(state => [...state, { message: data.messageInput,  team_member_id: data.team_member_id, chat_message_id: Date.now() }])
+			setMessages(state => [...state, { 
+				message: data.messageInput,  
+				team_member_id: data.team_member_id, 
+				rating: data.rating, 
+				name: data.name,
+				chat_message_id: Date.now()
+			}])
 		} else {
 			props.newMessageTrigger()
 		}
@@ -67,7 +73,8 @@ function ChatWindow(props) {
 				name: firstname + ' ' + lastname,
 				company_id,
 				room: props.displayChatRoom,
-				team_member_id: props.team_member_id
+				team_member_id: props.team_member_id,
+				author_name: null
 			})
 		})
 		.catch(console.log)
@@ -78,8 +85,6 @@ function ChatWindow(props) {
 			team_member_id: props.team_member_id,
 			room: props.displayChatRoom
 		}).catch(console.log)
-
-
 
 		setMessageInput('')
 	}
@@ -108,7 +113,7 @@ function ChatWindow(props) {
 					onChange={(e) => setMessageInput(e.target.value)}
 					className="text-area"
 				/>
-				<button onClick={broadcast}>Send Broadcast</button>
+				<button onClick={broadcast}>Send</button>
 			</div>
 
 		</div>

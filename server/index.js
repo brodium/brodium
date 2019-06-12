@@ -54,48 +54,52 @@ io.on('connection', socket => {
 
 const checkForReviews = async () => {
     console.log("cron job")
-    const db = await app.get('db')
+    const db = app.get('db')
     try {
-        const companies = await db.getAllCompanies().catch(console.log)
-        companies.forEach(async company => {
-            if (!company.google_places_id || company.google_places_id === 'gid') {
-                return
-            }
-            const storedReviews = await db.getGoogleReviewsByCompanyId({company_id: company.company_id}).catch(console.log)
-            const reviewsOnGoogle = await googleCtrl.getDetails(company.google_places_id)
-            if (reviewsOnGoogle.length > storedReviews.length) {
-                const newReviewCount = reviewsOnGoogle.length - storedReviews.length
-                //emit to socket
-                for (let i = 0; i < newReviewCount; i++) {
-                    const {text, author_name, author_url, language, profile_photo_url, rating, time} = reviewsOnGoogle[i]
+        const storedReviews = await db.getGoogleReviewsByCompanyId({ company_id: 27 }).catch(console.log)
+        const reviewsOnGoogle = await googleCtrl.getDetails('ChIJfYKWT1eXTYcR_a7a4hlR4fE')
+        if (reviewsOnGoogle[0].time !== storedReviews[storedReviews.length-1].time_stamp) {
+            console.log(storedReviews[storedReviews.length-1].time_stamp)
+            //emit to socket
+            const { text, author_name, author_url, language, profile_photo_url, rating, time } = reviewsOnGoogle[0]
 
-                    io.in(company.company_id).emit('socket room message', {
-                        messageInput: text,
-                        name: author_name,
-                        company_id: company.company_id,
-                        room: company.chat_room_id,
-                        team_member_id: null
-                    })
-                    db.addReview({author_name, author_url, lang: language, profile_photo_url, rating,review: text, time_stamp: time, company_id: company.company_id})
-                    .catch(console.log)
+            io.in(27).emit('socket room message', {
+                messageInput: text,
+                author_name,
+                rating,
+                company_id: 27,
+                room: 28,
+                team_member_id: null
+            })
+            await db.addReview({
+                author_name, 
+                author_url,
+                lang: language, 
+                profile_photo_url,
+                rating,
+                review: text,
+                time_stamp: time,
+                company_id: 27
+            }).catch(console.log)
 
-                    db.addMessage({
-                        message: text,
-                        google_review: true,
-                        chat_room_id: company.chat_room_id,
-                        time_stamp: new Date(),
-                    }).catch(console.log)
-                }
-            }
-        });
-    }
-    catch (error) {
+            await db.addMessage({
+                message: text,
+                author_name,
+                rating,
+                google_review: true,
+                chat_room_id: 28,
+                time_stamp: new Date(),
+                team_member_id: null
+            }).then(() => console.log('added message')).catch(console.log)
+        }
+    } catch (error) {
         console.log(error)
     }
+
 }
 
-// const job = new CronJob('*/59 * * * * *', checkForReviews, null, true, 'America/Los_Angeles')
-// job.start()
+const job = new CronJob('5 4 * * *', checkForReviews, null, true, 'America/Los_Angeles')
+job.start()
 
 // app.get('/auth', authCtrl.getCurrentUser)
 app.post('/auth/login', authCtrl.login)
@@ -137,6 +141,6 @@ app.get('/onboarding/:team_member_id', tmCtrl.onBoardingTeamMember)
 app.put('/onboarding/:team_member_id', tmCtrl.onBoardingUpdatePassword)
 app.post('/email-team-member', mailerCtrl.sendLoginRequest)
 
-app.get('/unread-messages/:team_member_id', msgCtrl.getUnreadMessages )
+app.get('/unread-messages/:team_member_id', msgCtrl.getUnreadMessages)
 app.post(`/unread-messages`, msgCtrl.addUnreadMessages)
 app.delete(`/unread-messages/:team_member_id/:chat_room_id`, msgCtrl.removeUnreadMessages)

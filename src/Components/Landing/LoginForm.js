@@ -10,7 +10,6 @@ const LoginForm = (props) => {
 
 
   const handleSubmit = async (e) => {
-    console.log('does this work')
     e.preventDefault();
 
     try {
@@ -21,7 +20,6 @@ const LoginForm = (props) => {
         })
 
       const { team_member_id, firstname, lastname, isadmin, company, company_id, img } = res.data
-      console.log(company_id)
 
       props.setUser({ team_member_id, firstname, lastname, email, isadmin, img })
       props.setCompany({ company, company_id })

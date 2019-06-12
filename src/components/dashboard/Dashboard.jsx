@@ -40,7 +40,6 @@ function Dashboard(props) {
 			getChatrooms(axios, co_id, setCompany)
 		}
 	}, [])
-console.log(company)
 	useEffect(() => {
 		const { company_id } = props
 		let co_id = company_id // make this number dynamic when there is a session

@@ -1,10 +1,10 @@
 module.exports = {
 	addMessage(req, res) {
 		const db = req.app.get('db')
-		const {messageInput: message, google_review, team_member_id, room: chat_room_id} = req.body
+		const {messageInput: message, google_review, team_member_id, room: chat_room_id, author_name, rating} = req.body
 
 		const time_stamp = new Date()
-		db.addMessage({message, google_review, time_stamp, team_member_id, chat_room_id})
+		db.addMessage({author_name, rating, message, google_review, time_stamp, team_member_id, chat_room_id})
 		.then(() => res.sendStatus(200))
 		.catch(console.log)
 	},

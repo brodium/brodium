@@ -1,7 +1,6 @@
 .message {
   box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
   border-radius: 5px;
-  height: 4vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -24,4 +23,23 @@
   background-color: #fff;
   margin-right: 15rem;
   margin-left: 0;
+}
+
+.review {
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-x: scroll;
+  padding: .5em;
+  background-color: white;
+  margin: 5px 10px;
+  margin-right: 5rem;
+  margin-left: 5rem;
+  .review-author {
+    font-weight: bold;
+  }
+  .review-rating {
+    color: #E7711A;
+  }
 }
