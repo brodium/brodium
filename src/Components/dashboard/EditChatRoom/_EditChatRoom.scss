@@ -12,10 +12,26 @@
     margin: 5px;
     font-size: .75em;
   }
+  label {
+    font-size: .8em;
+    font-style: italic;
+    font-weight: 500;
+  }
+  hr {
+    width: 60%;
+    margin: 0 auto;
+  }
 }
 
 .editChatRoom:hover {
   background-color: $background-color;
   color: white;
+}
+
+.edit-delete-chatroom-btns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin: .5em 0 1em 0;
 }
 

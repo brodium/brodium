@@ -74,8 +74,9 @@ function EditChatRoom(props) {
             <h4> {props.title} </h4>
             <label> {props.description} </label>
 
+
             {showNotification && <div style={notification}> </div>}
-            <div>
+            <div className="edit-delete-chatroom-btns">
                 <div className=' whenHoovered1'> {!showEditField ?
                     <i
                         className="far fa-edit"
@@ -108,6 +109,7 @@ function EditChatRoom(props) {
                     className="far fa-trash-alt whenHoovered3"
                     onClick={() => props.deleteChatRoom(props.chat_room_id)} > </i>
             </div>
+            <hr />
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { v4 as randomString } from 'uuid';
 

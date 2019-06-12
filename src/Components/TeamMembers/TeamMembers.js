@@ -32,13 +32,6 @@ const TeamMembers = (props) => {
 
   const getTeamMembers = async () => {
     const { company_id } = props
-    // await axios.get(`/team-members/${company_id}`)
-    //   .then(res => {
-    //     if (res.data.length !== teamMembers.length) {
-    //       setTeamMembers(res.data)
-    //       return teamMembers
-    //     }
-    //   }).catch(console.log)
     const numberOfTeamMembers = await getNumberOfTeamMembers(company_id)
 
     if (numberOfTeamMembers.length !== teamMembers.length) {
@@ -74,14 +67,6 @@ const TeamMembers = (props) => {
     const value = () => {
       return checkNewMemberIsAdmin(checkIsAdmin.value)
     }
-
-    // const value = () => {
-    //   if (checkIsAdmin.value === "true") {
-    //     return true
-    //   } else {
-    //     return false
-    //   }
-    // }
 
     setValues({
       ...form, newIsadmin: value()
@@ -135,6 +120,7 @@ const TeamMembers = (props) => {
                     type="text"
                     name="newFirstname"
                     onChange={updateField}
+                    className="new-firstname"
                   />
                 </label>
                 <label>
@@ -144,6 +130,7 @@ const TeamMembers = (props) => {
                     type="text"
                     name="newLastname"
                     onChange={updateField}
+                    className="new-lastname"
                   />
                 </label>
                 <label>
@@ -153,6 +140,7 @@ const TeamMembers = (props) => {
                     type="text"
                     name="newEmail"
                     onChange={updateField}
+                    className="new-email"
                   />
                 </label>
                 <label htmlFor="newIsadmin">
