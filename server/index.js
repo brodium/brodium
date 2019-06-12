@@ -61,13 +61,13 @@ const checkForReviews = async () => {
             if (!company.google_places_id || company.google_places_id === 'gid') {
                 return
             }
-            const storedReviews = await db.getGoogleReviewsByCompanyId({company_id: company.company_id}).catch(console.log)
+            const storedReviews = await db.getGoogleReviewsByCompanyId({ company_id: company.company_id }).catch(console.log)
             const reviewsOnGoogle = await googleCtrl.getDetails(company.google_places_id)
             if (reviewsOnGoogle.length > storedReviews.length) {
                 const newReviewCount = reviewsOnGoogle.length - storedReviews.length
                 //emit to socket
                 for (let i = 0; i < newReviewCount; i++) {
-                    const {text, author_name, author_url, language, profile_photo_url, rating, time} = reviewsOnGoogle[i]
+                    const { text, author_name, author_url, language, profile_photo_url, rating, time } = reviewsOnGoogle[i]
 
                     io.in(company.company_id).emit('socket room message', {
                         messageInput: text,
@@ -76,8 +76,8 @@ const checkForReviews = async () => {
                         room: company.chat_room_id,
                         team_member_id: null
                     })
-                    db.addReview({author_name, author_url, lang: language, profile_photo_url, rating,review: text, time_stamp: time, company_id: company.company_id})
-                    .catch(console.log)
+                    db.addReview({ author_name, author_url, lang: language, profile_photo_url, rating, review: text, time_stamp: time, company_id: company.company_id })
+                        .catch(console.log)
 
                     db.addMessage({
                         message: text,
@@ -94,8 +94,8 @@ const checkForReviews = async () => {
     }
 }
 
-const job = new CronJob('*/59 * * * * *', checkForReviews, null, true, 'America/Los_Angeles')
-job.start()
+// const job = new CronJob('*/59 * * * * *', checkForReviews, null, true, 'America/Los_Angeles')
+// job.start()
 
 // app.get('/auth', authCtrl.getCurrentUser)
 app.post('/auth/login', authCtrl.login)
@@ -137,6 +137,6 @@ app.get('/onboarding/:team_member_id', tmCtrl.onBoardingTeamMember)
 app.put('/onboarding/:team_member_id', tmCtrl.onBoardingUpdatePassword)
 app.post('/email-team-member', mailerCtrl.sendLoginRequest)
 
-app.get('/unread-messages/:team_member_id', msgCtrl.getUnreadMessages )
+app.get('/unread-messages/:team_member_id', msgCtrl.getUnreadMessages)
 app.post(`/unread-messages`, msgCtrl.addUnreadMessages)
 app.delete(`/unread-messages/:team_member_id/:chat_room_id`, msgCtrl.removeUnreadMessages)
