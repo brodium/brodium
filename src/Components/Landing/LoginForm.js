@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios';
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -55,6 +55,7 @@ const LoginForm = (props) => {
             type='email'
             onChange={handleInputChange1}
             value={email}
+            className="login-email"
           />
         </div>
         <div>
@@ -63,10 +64,12 @@ const LoginForm = (props) => {
             type='password'
             onChange={handleInputChange2}
             value={password}
+            className="login-password"
           />
         </div>
-        <div className="login-btn">
+        <div>
           <button
+            className="login-btn"
             onClick={handleSubmit}
             type='submit'
           >Login</button>

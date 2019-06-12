@@ -126,10 +126,10 @@ function Dashboard(props) {
 		<div style={flex} className="main_sideBar">
 			{/* <div style={sideBar}> */}
 			<div className="sideBar">
-				<div> {chatRooms} </div>
-				<div>
+				<div className="add-chatroom-container">
 					<button className="add-chatroom-btn" onClick={() => handleAddingChatRoom(showAddRoom, setShowAddRoom)}> Add Chatroom </button>
 				</div>
+				<div> {chatRooms} </div>
 			</div>
 			<div style={chatWindow} >
 				{displayChatRoom && (

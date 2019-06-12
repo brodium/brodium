@@ -70,12 +70,12 @@
         justify-content: space-around;
         margin-bottom: 15px;
         .addRoom_btn {
-            width: 125px;
-            height: 35px;
             text-transform: capitalize;
+            height: 3em;
+            width: 7em;
+            font-size: 1em;
             font-weight: 700;
-            font-family: 'Fira Sans', sans-serif;
-            letter-spacing: 1px;
+            color: #f9f8fd;
             background-color: $blue;
             border: none;
             cursor: pointer;
