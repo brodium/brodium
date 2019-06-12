@@ -1,0 +1,21 @@
+.editChatRoom {
+  // border: 1px solid red;
+  margin: 10px 0;
+  padding: .313em;
+  text-align: center;
+  .editChatRoom-btn {
+    background-color: $blue;
+    color: white;
+    font-weight: 600;
+    height: 1.75em;
+    width: 4.5em;
+    margin: 5px;
+    font-size: .75em;
+  }
+}
+
+.editChatRoom:hover {
+  background-color: $background-color;
+  color: white;
+}
+
