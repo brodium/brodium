@@ -50,7 +50,7 @@ function ChatWindow(props) {
 		// make logic to show the message or not based off of the company id
 		// console.log(data)
 		if (data.room === props.displayChatRoom) {
-			setMessages(state => [...state, { message: data.messageInput,  team_member_id: data.team_member_id}])
+			setMessages(state => [...state, { message: data.messageInput,  team_member_id: data.team_member_id, rating: data.rating, name: data.name}])
 		} else {
 			props.newMessageTrigger()
 		}
@@ -104,7 +104,7 @@ function ChatWindow(props) {
 					onChange={(e) => setMessageInput(e.target.value)}
 					className="text-area"
 				/>
-				<button onClick={broadcast}>Send Broadcast</button>
+				<button onClick={broadcast}>Send</button>
 			</div>
 
 		</div>

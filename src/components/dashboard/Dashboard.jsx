@@ -91,10 +91,7 @@ function Dashboard(props) {
 
 	const handleChatRoomClick = (id) => {
 		const { team_member_id } = props
-		console.log('team member', team_member_id)
-		console.log('id passed in', id)
 		setDisplayChatRoom(id)
-		console.log(id)
 		axios.delete(`/unread-messages/${team_member_id}/${id}`).then( res => {
 			const { team_member_id } = props
 			axios.get(`/unread-messages/${team_member_id}`).then(res => {

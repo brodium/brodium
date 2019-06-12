@@ -14,7 +14,7 @@ module.exports = {
 	async getDetails(google_place_id) {
 		let details
 		try {
-			details = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${process.env.REACT_APP_GOOGLE_KEY}&placeid=${google_place_id}`)
+			details = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=${process.env.REACT_APP_GOOGLE_KEY}&placeid=${google_place_id}`).catch(console.log)
 		} catch (error) {
 			console.log(error)
 		}
