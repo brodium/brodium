@@ -19,18 +19,6 @@ const flex = {
 	flexDirection: 'row'
 }
 
-// const sideBar = {
-// 	width: '250px',
-// 	borderRight: 'solid black .5px',
-// 	margin: '0px 0px 0px 10px',
-// 	height: '90vh',
-// 	padding: '0px',
-// 	display: 'flex',
-// 	flexDirection: 'column',
-// 	// border: '1px solid red',
-// 	justifyContent: 'space-between'
-// }
-
 function Dashboard(props) {
 
 	const [company, setCompany] = useState([])
@@ -52,8 +40,7 @@ function Dashboard(props) {
 			getChatrooms(axios, co_id, setCompany)
 		}
 	}, [])
-	console.log(company)
-
+console.log(company)
 	useEffect(() => {
 		const { company_id } = props
 		let co_id = company_id // make this number dynamic when there is a session
@@ -117,7 +104,6 @@ function Dashboard(props) {
 			setShowAddRoom(false)
 		}).catch(console.log)
 	}
-
 
 	const chatRooms = company.map((el, i) => {
 		return (

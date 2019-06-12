@@ -45,25 +45,32 @@ function ChatWindow(props) {
 			socket.emit('leave socket room', props.company_id)
 		}
 	}, [])
+
 	
-	const messageReceiver = data => {
+	const messageReceiver = (data) => {
 		// make logic to show the message or not based off of the company id
-		// console.log(data)
 		if (data.room === props.displayChatRoom) {
-			setMessages(state => [...state, { message: data.messageInput,  team_member_id: data.team_member_id}])
+			setMessages(state => [...state, { message: data.messageInput,  team_member_id: data.team_member_id, chat_message_id: Date.now() }])
 		} else {
 			props.newMessageTrigger()
 		}
 	}
 
 	const broadcast = () => {
-		socket.emit('socket room message', {
-			messageInput,
-			name: firstname + ' ' + lastname,
-			company_id,
-			room: props.displayChatRoom,
+		Axios.post('/unread-messages', {
+			chat_room_id: props.displayChatRoom,
+			co_id: props.company_id,
 			team_member_id: props.team_member_id
+		}).then(() => {
+			socket.emit('socket room message', {
+				messageInput,
+				name: firstname + ' ' + lastname,
+				company_id,
+				room: props.displayChatRoom,
+				team_member_id: props.team_member_id
+			})
 		})
+		.catch(console.log)
 
 		Axios.post('/messages', {
 			messageInput, 
@@ -72,10 +79,7 @@ function ChatWindow(props) {
 			room: props.displayChatRoom
 		}).catch(console.log)
 
-		Axios.post('/unread-messages', {
-			chat_room_id: props.displayChatRoom,
-			co_id: props.company_id
-		}).catch(console.log)
+
 
 		setMessageInput('')
 	}
