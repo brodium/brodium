@@ -1,15 +1,15 @@
-describe('test#1 Sean-1', () => {
+describe('test#1 Shawn-1', () => {
   it('Visits the Landing Page', () => {
     cy.visit("http://localhost:3000/#/landing")
   })
 })
-describe('test#2 Sean-2', () => {
+describe('test#2 Shawn-2', () => {
   it('click on register button', () => {
     cy.get('.select-register-btn').click()
     cy.url().should('include', '/register')
   })
 })
-describe('test#3 Sean-3', () => {
+describe('test#3 Shawn-3', () => {
   it('inputs first name', () => {
     const first = 'Colton'
     cy.get('#firstname')
@@ -18,7 +18,7 @@ describe('test#3 Sean-3', () => {
       .type(first)
   })
 })
-describe('test#4 Sean-4', () => {
+describe('test#4 Shawn-4', () => {
   it('inputs last name', () => {
     const last = 'Freeze'
     cy.get('#lastname')
@@ -27,7 +27,7 @@ describe('test#4 Sean-4', () => {
       .type(last)
   })
 })
-describe('test#5 Sean-5', () => {
+describe('test#5 Shawn-5', () => {
   it('inputs email', () => {
     const email = 'frozeninwaiting@live.com'
     cy.get('#email')
@@ -118,13 +118,13 @@ describe("test#15 Colton-5", () => {
 })
 describe("test#16 Christian-1", () => {
   it("Clicks Login", () => {
-    cy.get(".login-btn").click()
+    cy.get(".login-btn").should("exist").click()
     cy.url().should('include', '/')
   })
 })
 describe('test#17 Christian-2', () => {
   it('click on ham menu', () => {
-    cy.get('.fa-bars').click()
+    cy.get('.fa-bars').should("exist").click()
   })
 })
 describe('test#18 Christian-3', () => {
