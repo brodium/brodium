@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import LoginForm from './LoginForm';
-import RegisterForm from './RegisterForm'
+import React from 'react';
 
 
 const ConditionalRenderComp = (props) => {
@@ -16,14 +14,6 @@ const ConditionalRenderComp = (props) => {
 
 
   return (
-    // <>
-    //   <div>
-    //     <button onClick={signin}>Sign-in</button>
-    //   </div>
-    //   <div>
-    //     <button onClick={register}>Register</button>
-    //   </div>
-    // </>
     <div className="conditional-render-comp-hero">
       <div className="defining-message">
         <p>make brodium</p>
@@ -31,11 +21,11 @@ const ConditionalRenderComp = (props) => {
       </div>
       <div className="login-reg-btns">
         <div>
-          <button onClick={signin}>Log In</button>
+          <button className="select-login-btn" onClick={signin}>Log In</button>
         </div>
         <hr />
         <div>
-          <button onClick={register}>Register</button>
+          <button className="select-register-btn" onClick={register}>Register</button>
         </div>
       </div>
     </div>

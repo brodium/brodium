@@ -68,25 +68,34 @@ function Header(props) {
 				<img style={img} src={BrodiumLogo} alt='B for brodium' />
 				<label style={restOfLogo}> rodium </label>
 			</div>
-			<div style={hamburger} className="hamburgerMenu_div">
-				<i className="fas fa-bars" onClick={() => handleMenu()} ></i>
-				{!showMenu ? null :
-					<div className="hamyMenu_div">
-						<ul className="unOrderedList_header">
-							<li> profile name </li>
-							<Link className="link" to='/profile'> <li onClick={() => handleShowMeauState()}> Profile </li> </Link>
-							<Link className="link" to='/team-members'> <li onClick={() => handleShowMeauState()}> Team Members </li> </Link>
-							<li onClick={() => logout()} > Logout </li>
-						</ul>
-					</div>
-				}
-			</div>
+
+			{props.team_member_id ?
+				<div style={hamburger} className="hamburgerMenu_div">
+					<i className="fas fa-bars" onClick={() => handleMenu()} ></i>
+					{!showMenu ? null :
+						<div className="hamyMenu_div">
+							<ul className="unOrderedList_header">
+								<li> profile name </li>
+								<Link className="link" to='/profile'> <li onClick={() => handleShowMeauState()}> Profile </li> </Link>
+								<Link className="link team-member-link" to='/team-members'> <li onClick={() => handleShowMeauState()}> Team Members </li> </Link>
+								<li onClick={() => logout()} > Logout </li>
+							</ul>
+						</div>
+					}
+				</div> :
+				<div></div>
+			}
+
 		</div>
 	)
+}
+
+function mapStateToProps(state) {
+	return state
 }
 
 const mapDispatchToProps = {
 	clearUser
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(Header))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header))

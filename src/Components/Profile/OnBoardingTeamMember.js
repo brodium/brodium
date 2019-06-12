@@ -27,7 +27,6 @@ function OnBoardingTeamMember(props) {
 
   const onBoardUpdatePassword = async (e) => {
     e.preventDefault()
-    // console.log(oldPassword, password, 'upPass@onBoardTMembers')
     await axios.put(`/onboarding/${team_member_id}`, { oldPassword, password }).then(() => {
 
     })
