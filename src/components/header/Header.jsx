@@ -73,7 +73,7 @@ function Header(props) {
 				{!showMenu ? null :
 					<div className="hamyMenu_div">
 						<ul className="unOrderedList_header">
-							<li> profile name </li>
+							<Link className="link" to='/'> <li onClick={() => handleShowMeauState()}> Dashboard </li> </Link>
 							<Link className="link" to='/profile'> <li onClick={() => handleShowMeauState()}> Profile </li> </Link>
 							<Link className="link" to='/team-members'> <li onClick={() => handleShowMeauState()}> Team Members </li> </Link>
 							<li onClick={() => logout()} > Logout </li>

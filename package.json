@@ -47,6 +47,6 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.2",
-    "cypress": "^3.3.1"
+    "cypress": "^2.1.0"
   }
 }
