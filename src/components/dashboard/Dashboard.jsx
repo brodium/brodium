@@ -5,7 +5,7 @@ import ChatWindow from './chatWindow/ChatWindow';
 import AddChatRoom from './AddChatRoom/AddChatRoom';
 import EditChatRoom from './EditChatRoom/EditChatRoom';
 // import { setUser, setCompany } from '../../mightyDucks/authReducer'
-// import { handleChatRoomClick } from './../../jacksonLogic/Functions'
+import { handleAddingChatRoom, getChatrooms } from './../../jacksonLogic/Functions'
 
 const chatWindow = {
 	display: 'flex',
@@ -46,9 +46,10 @@ function Dashboard(props) {
 		if (company_id) {
 			let co_id = company_id // make this number dynamic when there is a session
 			// console.log('co_id', co_id)
-			axios.get(`/rooms/${co_id}`).then(res => {
-				setCompany(res.data)
-			}).catch(console.log)
+			// axios.get(`/rooms/${co_id}`).then(res => {
+			// 	setCompany(res.data)
+			// }).catch(console.log)
+			getChatrooms(axios, co_id, setCompany)
 		}
 	}, [])
 	console.log(company)
@@ -92,10 +93,7 @@ function Dashboard(props) {
 
 	const handleChatRoomClick = (id) => {
 		const { team_member_id } = props
-		console.log('team member', team_member_id)
-		console.log('id passed in', id)
 		setDisplayChatRoom(id)
-		console.log(id)
 		axios.delete(`/unread-messages/${team_member_id}/${id}`).then(res => {
 			const { team_member_id } = props
 			axios.get(`/unread-messages/${team_member_id}`).then(res => {
@@ -107,10 +105,10 @@ function Dashboard(props) {
 	}
 	// need some space for delete notification
 
-	const handleAddingChatRoom = () => {
-		setShowAddRoom(true)
-		// console.log(showAddRoom)
-	}
+	// const handleAddingChatRoom = () => {
+	// 	setShowAddRoom(true)
+	// 	// console.log(showAddRoom)
+	// }
 
 	const renderEverything = () => {
 		let co_id = props.company_id
@@ -144,7 +142,7 @@ function Dashboard(props) {
 			<div className="sideBar">
 				<div> {chatRooms} </div>
 				<div>
-					<button className="add-chatroom-btn" onClick={() => handleAddingChatRoom()}> Add Chatroom </button>
+					<button className="add-chatroom-btn" onClick={() => handleAddingChatRoom(showAddRoom, setShowAddRoom)}> Add Chatroom </button>
 				</div>
 			</div>
 			<div style={chatWindow} >
@@ -156,7 +154,7 @@ function Dashboard(props) {
 					/>)
 				}
 			</div>
-			{showAddRoom && <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} />}
+			{showAddRoom && <AddChatRoom companyId={props.company_id} renderEverything={renderEverything} setShowAddRoom={setShowAddRoom} />}
 		</div>
 	)
 }

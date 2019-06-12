@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import { handleEditView } from './../../../jacksonLogic/Functions';
 
 const notification = {
     height: '10px',
@@ -16,9 +17,9 @@ function EditChatRoom(props) {
     let [editDescription, setEditDescription] = useState(props.description)
     let [showNotification, setShowNotification] = useState(false)
 
-    const handleEditView = () => {
-        setEditField(!showEditField)
-    }
+    // const handleEditView = () => {
+    //     setEditField(!showEditField)
+    // }
 
     const handleCancelBtn = () => {
         setEditField(!showEditField)
@@ -79,7 +80,7 @@ function EditChatRoom(props) {
                 <div className=' whenHoovered1'> {!showEditField ?
                     <i
                         className="far fa-edit"
-                        onClick={() => handleEditView(props.chat_room_id)}
+                        onClick={() => handleEditView(props.chat_room_id, setEditField, showEditField)}
                     > </i> :
                     <div>
                         <input
