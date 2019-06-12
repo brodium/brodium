@@ -31,7 +31,6 @@ function EditChatRoom(props) {
 
     const handleInputDescript = (val) => {
         setEditDescription(val)
-        // console.log(editDescription)
     }
 
     const saveEditChanges = (id) => {
@@ -66,7 +65,7 @@ function EditChatRoom(props) {
             return el.chat_room_id === props.chat_room_id
         })
         setShowNotification(showNotification)
-    }, [props.newMessageTrigger])
+    }, [props.newMessageTrigger, props.unreadMessage.length])
 
     return (
 
