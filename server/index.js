@@ -58,15 +58,14 @@ const checkForReviews = async () => {
     try {
         const storedReviews = await db.getGoogleReviewsByCompanyId({ company_id: 27 }).catch(console.log)
         const reviewsOnGoogle = await googleCtrl.getDetails('ChIJfYKWT1eXTYcR_a7a4hlR4fE')
-        console.log(reviewsOnGoogle)
-        if (reviewsOnGoogle[0].time === storedReviews[storedReviews.length-1].time_stamp) {
-
+        if (reviewsOnGoogle[0].time !== storedReviews[storedReviews.length-1].time_stamp) {
+            console.log(storedReviews[storedReviews.length-1].time_stamp)
             //emit to socket
             const { text, author_name, author_url, language, profile_photo_url, rating, time } = reviewsOnGoogle[0]
 
             io.in(27).emit('socket room message', {
                 messageInput: text,
-                name: author_name,
+                author_name,
                 rating,
                 company_id: 27,
                 room: 28,
@@ -85,10 +84,13 @@ const checkForReviews = async () => {
 
             await db.addMessage({
                 message: text,
+                author_name,
+                rating,
                 google_review: true,
                 chat_room_id: 28,
                 time_stamp: new Date(),
-            }).catch(console.log)
+                team_member_id: null
+            }).then(() => console.log('added message')).catch(console.log)
         }
     } catch (error) {
         console.log(error)
@@ -96,8 +98,8 @@ const checkForReviews = async () => {
 
 }
 
-// const job = new CronJob('* * * * *', checkForReviews, null, true, 'America/Los_Angeles')
-// job.start()
+const job = new CronJob('5 4 * * *', checkForReviews, null, true, 'America/Los_Angeles')
+job.start()
 
 // app.get('/auth', authCtrl.getCurrentUser)
 app.post('/auth/login', authCtrl.login)

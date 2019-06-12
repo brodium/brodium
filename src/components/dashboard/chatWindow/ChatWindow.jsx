@@ -62,7 +62,8 @@ function ChatWindow(props) {
 			name: firstname + ' ' + lastname,
 			company_id,
 			room: props.displayChatRoom,
-			team_member_id: props.team_member_id
+			team_member_id: props.team_member_id,
+			author_name: null
 		})
 
 		Axios.post('/messages', {
