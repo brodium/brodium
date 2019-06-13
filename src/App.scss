@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,500,600,700,800,900&display=swap');
 
 @import './variables';
-@import './components/header/Header';
-@import './components/Landing/RegisterForm';
-@import './components/dashboard/chatWindow/ChatWindow';
-@import './components/dashboard/chatWindow/Messages';
-@import './components/dashboard/Dashboard';
-@import './components/TeamMembers/Employee';
-@import './components/TeamMembers/TeamMembers';
-@import'./components/Landing/ConditionalRenderComp';
-@import './components/Landing/LoginForm';
-@import './components/Profile/Profile';
-@import './components/Landing/Place';
-@import './components/Profile/OnboardingTeamMember';
-@import './components/dashboard/Dashboard';
-@import './components/Landing/RegisterForm';
-@import './components/dashboard/EditChatRoom/EditChatRoom';
-@import './components/dashboard/AddChatRoom/AddChatRoom';
+@import './Components/header/Header';
+@import './Components/Landing/RegisterForm';
+@import './Components/dashboard/chatWindow/ChatWindow';
+@import './Components/dashboard/chatWindow/Messages';
+@import './Components/dashboard/Dashboard';
+@import './Components/TeamMembers/Employee';
+@import './Components/TeamMembers/TeamMembers';
+@import'./Components/Landing/ConditionalRenderComp';
+@import './Components/Landing/LoginForm';
+@import './Components/Profile/Profile';
+@import './Components/Landing/Place';
+@import './Components/Profile/OnboardingTeamMember';
+@import './Components/dashboard/Dashboard';
+@import './Components/Landing/RegisterForm';
+@import './Components/dashboard/EditChatRoom/EditChatRoom';
+@import './Components/dashboard/AddChatRoom/AddChatRoom';
 
 
 * {
