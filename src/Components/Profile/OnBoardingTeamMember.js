@@ -74,7 +74,7 @@ function OnBoardingTeamMember(props) {
             />
           </div>
           <p>please make note of your password <br /> as you will be redirected to the login page</p>
-          <button onClick={onBoardUpdatePassword}>set password</button>
+          <button className="set-password-btn" onClick={onBoardUpdatePassword}>set password</button>
 
 
         </form>

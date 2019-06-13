@@ -8,13 +8,13 @@ test(
 )
 
 test(
-  "should return false if value is false", () => {
+  "should return false (boolean) if argument is false (boolean)", () => {
     expect(redirectIfFalse(false)).toEqual(false)
   }
 )
 
 test(
-  "should return a boolean of true if argument is 'true'", () => {
+  "should return true (boolean) if argument is 'true' (string)", () => {
     expect(checkNewMemberIsAdmin("true")).toEqual(true)
   }
 )
@@ -25,9 +25,10 @@ describe("Axios calls", () => {
       expect(emailNewTeamMember(999, "Christian", "ca96187@gmail.com")).resolves.toBe("")
     }
   )
+
   test(
-    "should return truthy", () => {
-      expect(getNumberOfTeamMembers(2)).toBeTruthy()
+    "axios call should return an array", () => {
+      expect(getNumberOfTeamMembers(2)).resolves.toBe([])
     }
   )
 })
