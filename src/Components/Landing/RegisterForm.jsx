@@ -90,8 +90,7 @@ function RegisterForm(props) {
 
 				<div className='companyMappedDisplayed'>
 					{searchResults.map(place => (
-						<div
-						key={place.id} onClick={() => setPlace(place)}>
+						<div key={place.id} onClick={() => setPlace(place)}>
 							<div className='companyBoxDisplayed'>
 								<Place place={place} />
 							</div>
