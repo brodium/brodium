@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import Header from './Components/header/Header';
+import Header from './components/header/Header';
 import './App.scss';
 import routes from './routes';
 import Axios from 'axios';

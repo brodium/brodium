@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Dashboard from './Components/dashboard/Dashboard';
-import TeamMembers from "./Components/TeamMembers/TeamMembers";
-import LandingLogin from './Components/Landing/LandingLogin';
-import LoginForm from './Components/Landing/LoginForm';
-import RegisterForm from './Components/Landing/RegisterForm';
-import Profile from './Components/Profile/Profile';
-import OnBoarding from './Components/Profile/OnBoardingTeamMember';
+import Dashboard from './components/dashboard/Dashboard';
+import TeamMembers from "./components/TeamMembers/TeamMembers";
+import LandingLogin from './components/Landing/LandingLogin';
+import LoginForm from './components/Landing/LoginForm';
+import RegisterForm from './components/Landing/RegisterForm';
+import Profile from './components/Profile/Profile';
+import OnBoarding from './components/Profile/OnBoardingTeamMember';
 
 export default (
 	<Switch>

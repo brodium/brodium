@@ -1,5 +1,5 @@
 // future unit tests here
-const functions = require('../Components/Landing/LoginForm')
+const functions = require('../components/Landing/LoginForm')
 
 
 test("handleInputChange1() should return input in the email box", () => {
