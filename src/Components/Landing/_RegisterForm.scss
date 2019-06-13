@@ -62,6 +62,7 @@ margin-right: 1.25em;
     padding: .5em .625em;
     font-size: 1em;
     color: white;
+    cursor: pointer;
   }
   p {
     font-weight: 600;
@@ -100,4 +101,10 @@ margin-right: 1.25em;
   font-size: 1.1em;
   color: white;
   background-color: $green;
+  cursor: pointer;
+}
+
+.co-search-result-onClick {
+  background-color: $background-color;
+  color: white;
 }

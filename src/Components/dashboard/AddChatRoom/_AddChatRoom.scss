@@ -80,6 +80,9 @@
             border: none;
             cursor: pointer;
             transition: background-color 1.5s ease-out;
+            border-radius: 5px;
+            font-size: 15px;
+            color: white;
         }
         .addRoom_btn:hover {
             background-color: $green; 

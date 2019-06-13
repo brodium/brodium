@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import ChatWindow from './chatWindow/ChatWindow';
 import AddChatRoom from './AddChatRoom/AddChatRoom';
 import EditChatRoom from './EditChatRoom/EditChatRoom';
-import { handleAddingChatRoom, getChatrooms } from './../../jacksonLogic/Functions';
+// import { setUser, setCompany } from '../../mightyDucks/authReducer'
+import { handleAddingChatRoom, getChatrooms, getUnreadMessages } from './../../jacksonLogic/Functions'
 import {getCompany} from '../../ShawnsTests/utils';
 
 const chatWindow = {
@@ -27,7 +28,6 @@ function Dashboard(props) {
 	let [showEditField, setEditField] = useState(false)
 	let [unreadMessage, setUnreadMessage] = useState([])
 	const [newMessageTrigger, setNewMessageTrigger] = useState(false)
-
 
 	useEffect(() => {
 		const { company_id } = props
@@ -61,9 +61,10 @@ function Dashboard(props) {
 	useEffect(() => {
 		const { team_member_id } = props
 		if (team_member_id) {
-			axios.get(`/unread-messages/${team_member_id}`).then(res => {
-				setUnreadMessage(res.data)
-			}).catch(err => console.log('didnt get unread messages', err))
+			// axios.get(`/unread-messages/${team_member_id}`).then(res => {
+			// 	setUnreadMessage(res.data)
+			// }).catch(err => console.log('didnt get unread messages', err))
+			getUnreadMessages(axios, team_member_id, setUnreadMessage)
 		}
 	}, [])
 
@@ -88,7 +89,9 @@ function Dashboard(props) {
 
 	const handleChatRoomClick = (id) => {
 		const { team_member_id } = props
+
 		setDisplayChatRoom(id)
+
 		axios.delete(`/unread-messages/${team_member_id}/${id}`).then(res => {
 			const { team_member_id } = props
 			axios.get(`/unread-messages/${team_member_id}`).then(res => {
@@ -127,6 +130,7 @@ function Dashboard(props) {
 				setCompany={setCompany}
 				unreadMessage={unreadMessage}
 				newMessageTrigger={newMessageTrigger}
+				displayChatRoom={displayChatRoom}
 			/>
 		)
 	})

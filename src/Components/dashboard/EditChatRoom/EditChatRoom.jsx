@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { handleEditView } from './../../../jacksonLogic/Functions';
+import { handleEditView, handleInputTitle } from './../../../jacksonLogic/Functions';
 
 const notification = {
     height: '10px',
@@ -11,22 +11,13 @@ const notification = {
 }
 
 function EditChatRoom(props) {
-    // console.log('edit chat room rendered')
     let [showEditField, setEditField] = useState(false)
     let [editTitle, setEditTitle] = useState(props.title)
     let [editDescription, setEditDescription] = useState(props.description)
     let [showNotification, setShowNotification] = useState(false)
 
-    // const handleEditView = () => {
-    //     setEditField(!showEditField)
-    // }
-
     const handleCancelBtn = () => {
         setEditField(!showEditField)
-    }
-
-    const handleInputTitle = (val) => {
-        setEditTitle(val)
     }
 
     const handleInputDescript = (val) => {
@@ -51,8 +42,6 @@ function EditChatRoom(props) {
         }).catch(console.log)
     }
 
-    // console.log('unread message chat room id', props.unreadMessage)
-
     useEffect(() => {
         const showNotification = props.unreadMessage.find((el) => {
             return el.chat_room_id === props.chat_room_id
@@ -67,9 +56,11 @@ function EditChatRoom(props) {
         setShowNotification(showNotification)
     }, [props.newMessageTrigger, props.unreadMessage.length])
 
+
     return (
 
-        <div className='editChatRoom'
+        <div 
+            className={props.displayChatRoom === props.chat_room_id ? 'editChatRoom editChatRoom-click' : 'editChatRoom'}
             onClick={() => props.chatRoomClick(props.chat_room_id)}>
             <h4> {props.title} </h4>
             <label> {props.description} </label>
@@ -84,7 +75,7 @@ function EditChatRoom(props) {
                     > </i> :
                     <div>
                         <input
-                            onChange={(e) => handleInputTitle(e.target.value)}
+                            onChange={(e) => handleInputTitle(e.target.value, setEditTitle)}
                             defaultValue={props.title}
                             type="text" />
                         <input
