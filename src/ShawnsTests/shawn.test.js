@@ -15,3 +15,4 @@ test('should return object', () => {
 test('should return object', () => {
 	expect(getTeamMember()).resolves.toEqual('unable to get team-member')
 })
+

@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from "react-redux";
-import Axios from 'axios';
 import {getTeamMember} from '../../../ShawnsTests/utils';
 
 const Messages = (props) => {
 
-  const [teamMember, setTeamMember] = useState({})
+  const [teamMember, setTeamMember] = useState({});
 
   useEffect(() => {
 
     if (props.message.team_member_id) {
-      Axios.get(`/team-member/${props.message.team_member_id}`)
-        .then(res => setTeamMember(res.data))
-        .catch(console.log)
+      getMemberInfo(props.message.team_member_id)
     }
-  }, [])
+  }, []);
+
+  const getMemberInfo = async team_member_id => {
+    const result = await getTeamMember(team_member_id)
+    setTeamMember(result)
+  }
 
   return (
     <>
