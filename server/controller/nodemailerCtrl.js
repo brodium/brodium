@@ -1,5 +1,5 @@
 require("dotenv").config()
-const { EMAIL_PASSWORD, EMAIL } = process.env
+const { EMAIL_PASSWORD, EMAIL, DOMAIN } = process.env
 const nodemailer = require("nodemailer")
 
 module.exports = {
@@ -25,11 +25,10 @@ module.exports = {
       <p style="color: #C61B21; font-weight: 700; font-family: 'Tinos', serif; font-size: 16px; font-style: italic;">Please click on the link below to continue. If you are not redirected, please copy and paste the link into your browser's address bar.</p>
       <br />
 
-      <a href="http://localhost:3000/#/onboarding/${team_member_id}">http://localhost:3000/#/onboarding/${team_member_id}</a>
+      <a href="${DOMAIN}#/onboarding/${team_member_id}">${DOMAIN}#/onboarding/${team_member_id}</a>
+        <p>Thanks!</p>`,
 
-      <p>Thanks!</p>`,
-
-      text: `Hi ${firstname}, You have been invited to join your team on the Brodium platform. Please copy and paste the following URL into your browser's address bar to complete your registration: http://localhost:3000/#/onboarding/${team_member_id}`
+      text: `Hi ${firstname}, You have been invited to join your team on the Brodium platform.Please copy and paste the following URL into your browser's address bar to complete your registration: ${DOMAIN}#/onboarding/${team_member_id}`
     }
 
     transporter.sendMail(mailOptions, (err, info) => {
