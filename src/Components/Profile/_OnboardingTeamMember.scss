@@ -23,8 +23,13 @@ h2 {
     font-style: italic;
     font-weight: 700;
   }
-  button {
+  .set-password-btn {
     background-color: $blue;
+    border: none;
+    margin: .625em 0;
+    padding: .5em .625em;
+    font-size: 1em;
+    color: white;
     text-transform: capitalize;
   }
 }

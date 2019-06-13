@@ -13,7 +13,6 @@ describe('test#3 Shawn-3', () => {
   it('inputs first name', () => {
     const first = 'Colton'
     cy.get('#firstname')
-      // .first()
       .should('exist')
       .type(first)
   })
@@ -22,7 +21,6 @@ describe('test#4 Shawn-4', () => {
   it('inputs last name', () => {
     const last = 'Freeze'
     cy.get('#lastname')
-      // .first()
       .should('exist')
       .type(last)
   })
@@ -31,7 +29,6 @@ describe('test#5 Shawn-5', () => {
   it('inputs email', () => {
     const email = 'frozeninwaiting@live.com'
     cy.get('#email')
-      // .first()
       .should('exist')
       .type(email)
   })

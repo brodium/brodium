@@ -6,6 +6,7 @@ import AddChatRoom from './AddChatRoom/AddChatRoom';
 import EditChatRoom from './EditChatRoom/EditChatRoom';
 // import { setUser, setCompany } from '../../mightyDucks/authReducer'
 import { handleAddingChatRoom, getChatrooms, getUnreadMessages } from './../../jacksonLogic/Functions'
+import {getCompany} from '../../ShawnsTests/utils';
 
 const chatWindow = {
 	display: 'flex',
@@ -41,11 +42,20 @@ function Dashboard(props) {
 	}, [])
 	useEffect(() => {
 		const { company_id } = props
-		let co_id = company_id // make this number dynamic when there is a session
-		axios.get(`/rooms/${co_id}`).then(res => {
-			setCompany(res.data)
-		}).catch(console.log)
+		if (company_id) {
+			getCompanyById(company_id)
+		}
+		// axios.get(`/rooms/${co_id}`).then(res => {
+		// 	setCompany(res.data)
+		// 	setDisplayChatRoom(res.data[0].chat_room_id)
+		// }).catch(console.log)
 	}, [props.company_id])
+
+	const getCompanyById = async co_id => {
+		const result = await getCompany(co_id)
+		setCompany(result)
+		setDisplayChatRoom(result[0].chat_room_id)
+	}
 
 	// UNREAD MESSAGES USEFFECT
 	useEffect(() => {
