@@ -11,4 +11,8 @@ export const getTeamMember = (team_member_id) => {
 	.catch(() => 'unable to get team-member')
 }
 
-
+export const getCompany = co_id => {
+	return Axios.get(`/rooms/${co_id}`)
+	.then(res => res.data)
+	.catch('unable to get company')
+}
