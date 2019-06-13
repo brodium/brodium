@@ -64,7 +64,8 @@ function Profile(props) {
               ref={imgInput}
               onChange={() => getSig(imgInput.current.files[0])}
             />
-            {!profilePic && <button onClick={() => imgInput.current.click()}>Add Profile Picture</button>}
+            <br />
+            <button className="add-image-btn" onClick={() => imgInput.current.click()}>Change Profile Picture</button>
           </div>
       }
       <div className="user-info">

@@ -102,7 +102,7 @@ function ChatWindow(props) {
 						/>
 					)
 				})}
-				<div ref={messagesEndRef} />
+				<div ref={messagesEndRef}></div>
 			</div>
 
 			<div className="chat-form">
