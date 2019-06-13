@@ -19,16 +19,17 @@ module.exports = {
       from: '"Charley Andrews" <hiutclone@gmail.com>',
       to: email,
       subject: 'You Have Been Invited to Join Brodium',
-      text: `Hi ${firstname}, You have been invited to join your team on the Brodium platform. Please copy and paste the following URL to complete your registration: http://localhost:3000/#/onboarding/${team_member_id}`,
 
       html: `<p style="font-family: 'Tinos', serif; font-size: 16px;">Hi ${firstname},</p>
       <p style="font-family: 'Tinos', serif; font-size: 16px;">You have been invited to join your team on the Brodium platform.</p>
-      <p style="color: #C61B21; font-weight: 700; font-family: 'Tinos', serif; font-size: 16px; font-style: italic;">Please click on the link below to continue. If you are not redirected, please copy and paste the link into your browser.</p>
+      <p style="color: #C61B21; font-weight: 700; font-family: 'Tinos', serif; font-size: 16px; font-style: italic;">Please click on the link below to continue. If you are not redirected, please copy and paste the link into your browser's address bar.</p>
       <br />
 
       <a href="http://localhost:3000/#/onboarding/${team_member_id}">http://localhost:3000/#/onboarding/${team_member_id}</a>
 
-      <p>Thanks!</p>`
+      <p>Thanks!</p>`,
+
+      text: `Hi ${firstname}, You have been invited to join your team on the Brodium platform. Please copy and paste the following URL into your browser's address bar to complete your registration: http://localhost:3000/#/onboarding/${team_member_id}`
     }
 
     transporter.sendMail(mailOptions, (err, info) => {

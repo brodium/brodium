@@ -16,7 +16,8 @@ const fullHeader = {
 const img = {
 	height: '65px',
 	marginBottom: '-6px',
-	marginLeft: '-8px'
+	marginLeft: '-8px',
+	paddingLeft: '4px'
 }
 
 const restOfLogo = {
@@ -39,6 +40,7 @@ const hamburger = {
 	justifyContent: 'flex-end',
 	height: '100%',
 	// border: 'solid black',
+	paddingRight: '4px',
 	margin: '0 0 10px 0',
 	color: '#414141',
 	cursor: 'pointer'
@@ -65,7 +67,12 @@ function Header(props) {
 	}
 
 	return (
-		<div className="fullHeader_div" style={fullHeader} >
+		<div
+
+			className={
+				props.team_member_id ? "fullHeader_div" : "fullHeader_div-no-login"}
+
+			style={fullHeader} >
 			<div className="brodiumLogo_div" style={brodiumLogoDiv}>
 				<img style={img} src={BrodiumLogo} alt='B for brodium' />
 				<label style={restOfLogo}> rodium </label>

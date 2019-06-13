@@ -118,13 +118,13 @@ describe("test#15 Colton-5", () => {
 })
 describe("test#16 Christian-1", () => {
   it("Clicks Login", () => {
-    cy.get(".login-btn").click()
+    cy.get(".login-btn").should("exist").click()
     cy.url().should('include', '/')
   })
 })
 describe('test#17 Christian-2', () => {
   it('click on ham menu', () => {
-    cy.get('.fa-bars').click()
+    cy.get('.fa-bars').should("exist").click()
   })
 })
 describe('test#18 Christian-3', () => {

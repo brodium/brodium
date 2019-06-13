@@ -67,8 +67,9 @@ const LoginForm = (props) => {
             className="login-password"
           />
         </div>
-        <div className="login-btn">
+        <div>
           <button
+            className="login-btn"
             onClick={handleSubmit}
             type='submit'
           >Login</button>

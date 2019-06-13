@@ -1,28 +1,23 @@
 .chatWindow_div {
-  // border: solid blue;
-  height: 80vh;
-  margin-bottom: 2em;
+  height: 85vh;
+  margin-bottom: 1.5em;
   width: 100%;
-  padding: 10px 0 0 10px;
+  padding: .625em 0 0 .625em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .message-container {
-  // background-color: #414141;
   height: 85%;
-  // width: auto;
   padding: 5px;
   overflow-y: scroll;
   margin-bottom: 10px;
-  // border: 1px solid red ; 
 }
 
 .chat-form {
   display: flex;
   width: 100%;
-  // justify-content: space-between;
   .text-area {
     background: #F8F8F8;
     height: 2.5em;
@@ -37,7 +32,6 @@
   button {
     padding: 9px 15px;
     font-size: 1em;
-    // height: 2.313em;
     height: 2.5em;
     width: 5em;
     color: white;

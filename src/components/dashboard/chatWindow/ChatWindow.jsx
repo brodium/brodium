@@ -46,14 +46,14 @@ function ChatWindow(props) {
 		}
 	}, [])
 
-	
+
 	const messageReceiver = (data) => {
 		// make logic to show the message or not based off of the company id
 		if (data.room === props.displayChatRoom) {
-			setMessages(state => [...state, { 
-				message: data.messageInput,  
-				team_member_id: data.team_member_id, 
-				rating: data.rating, 
+			setMessages(state => [...state, {
+				message: data.messageInput,
+				team_member_id: data.team_member_id,
+				rating: data.rating,
 				name: data.name,
 				chat_message_id: Date.now()
 			}])
@@ -77,10 +77,10 @@ function ChatWindow(props) {
 				author_name: null
 			})
 		})
-		.catch(console.log)
+			.catch(console.log)
 
 		Axios.post('/messages', {
-			messageInput, 
+			messageInput,
 			google_review: false,
 			team_member_id: props.team_member_id,
 			room: props.displayChatRoom
@@ -102,7 +102,7 @@ function ChatWindow(props) {
 						/>
 					)
 				})}
-				<div ref={messagesEndRef} />
+				<div ref={messagesEndRef}></div>
 			</div>
 
 			<div className="chat-form">
