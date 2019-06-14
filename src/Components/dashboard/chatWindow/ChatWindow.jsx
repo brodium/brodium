@@ -33,7 +33,7 @@ function ChatWindow(props) {
 	}, [props.displayChatRoom])
 
 	useEffect(() => {
-		const socket = io.connect(':4444')
+		const socket = io.connect({secure: true})
 		setSocket(socket)
 		socket.emit('socket room', company_id)
 		socket.on('socket room message', messageReceiver)
