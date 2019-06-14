@@ -10,6 +10,8 @@
   background-color: lightblue;
   margin: .625em .625em;
   margin-left: 15rem;
+  transform: rotate(180deg);
+  z-index: -1;
   div {
     margin: 0 1rem;
   }
@@ -37,6 +39,7 @@
   margin-right: 5rem;
   border: .3px solid #F3F3F3;
   margin-left: 5rem;
+  transform: rotate(180deg);
   .review-author {
     font-weight: bold;
   }

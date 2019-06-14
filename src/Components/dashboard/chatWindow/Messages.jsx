@@ -19,7 +19,7 @@ const Messages = (props) => {
   }
 
   return (
-    <>
+    <div>
       {
         teamMember.team_member_id &&
         <div className={
@@ -39,7 +39,7 @@ const Messages = (props) => {
         </div>
 
       }
-    </>
+    </div>
   )
 }
 
