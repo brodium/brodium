@@ -48,6 +48,7 @@ io.on('connection', socket => {
         socket.to(data).emit('join socket room', data)
     })
     socket.on('socket room message', data => {
+        console.log('message received in server', data)
         io.in(data.company_id).emit('socket room message', data)
     })
 
