@@ -6,32 +6,29 @@ import Messages from './Messages';
 
 
 function ChatWindow(props) {
-	// const [room, setRoom] = useState(props.displayChatRoom)
 	const [messages, setMessages] = useState([])
 	const [messageInput, setMessageInput] = useState('')
 	const [socket, setSocket] = useState(null)
 
-	const { firstname, lastname, company_id, img } = props
+	const { firstname, lastname, company_id } = props
 
 	const messagesEndRef = useRef(null)
 
-	const scrollToBottom = () => { messagesEndRef.current.scrollIntoView({ behavior: "smooth" }) }
+	const scrollToBottom = () => { messagesEndRef.current.scrollIntoView() }
 
-	useEffect(() => { scrollToBottom() }, [messages])
+	useEffect(() => { scrollToBottom() }, [])
 
 	useEffect(() => {
 		if (props.displayChatRoom) {
 			Axios.get(`/messages/${props.displayChatRoom}`).then(res => {
-				setMessages(res.data)
+				setMessages(res.data.reverse())
 			})
 		}
 	}, [])
 
 	useEffect(() => {
-		// setRoom(props.displayChatRoom)
 		Axios.get(`/messages/${props.displayChatRoom}`).then(res => {
-			// console.log(res.data)
-			setMessages(res.data)
+			setMessages(res.data.reverse())
 		})
 	}, [props.displayChatRoom])
 
@@ -44,19 +41,18 @@ function ChatWindow(props) {
 		return () => {
 			socket.emit('leave socket room', props.company_id)
 		}
-	}, [])
+	}, [props.displayChatRoom])
 
 
-	const messageReceiver = (data) => {
-		// make logic to show the message or not based off of the company id
+	const messageReceiver = data => {
 		if (data.room === props.displayChatRoom) {
-			setMessages(state => [...state, {
+			setMessages(state => [{
 				message: data.messageInput,
 				team_member_id: data.team_member_id,
 				rating: data.rating,
 				name: data.name,
 				chat_message_id: Date.now()
-			}])
+			}, ...state])
 		} else {
 			props.newMessageTrigger()
 		}
@@ -93,6 +89,7 @@ function ChatWindow(props) {
 		<div className="chatWindow_div">
 
 			<div className="message-container">
+				<div ref={messagesEndRef}> </div>
 				{messages.map((message) => {
 					return (
 						<Messages
@@ -102,7 +99,6 @@ function ChatWindow(props) {
 						/>
 					)
 				})}
-				<div ref={messagesEndRef}></div>
 			</div>
 
 			<div className="chat-form">

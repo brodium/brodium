@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 import ChatWindow from './chatWindow/ChatWindow';
 import AddChatRoom from './AddChatRoom/AddChatRoom';
 import EditChatRoom from './EditChatRoom/EditChatRoom';
-// import { setUser, setCompany } from '../../mightyDucks/authReducer'
 import { handleAddingChatRoom, getChatrooms, getUnreadMessages } from './../../jacksonLogic/Functions'
 import { getCompany } from '../../ShawnsTests/utils';
 
 const chatWindow = {
 	display: 'flex',
 	justifyContent: 'center',
-	// border: '1px solid red',
 	width: '100vw'
 }
 
@@ -23,7 +21,7 @@ const flex = {
 function Dashboard(props) {
 
 	const [company, setCompany] = useState([])
-	let [displayChatRoom, setDisplayChatRoom] = useState(null) // props.google_places_id
+	let [displayChatRoom, setDisplayChatRoom] = useState(null)
 	let [showAddRoom, setShowAddRoom] = useState(false)
 	let [showEditField, setEditField] = useState(false)
 	let [unreadMessage, setUnreadMessage] = useState([])
@@ -32,11 +30,7 @@ function Dashboard(props) {
 	useEffect(() => {
 		const { company_id } = props
 		if (company_id) {
-			let co_id = company_id // make this number dynamic when there is a session
-			// console.log('co_id', co_id)
-			// axios.get(`/rooms/${co_id}`).then(res => {
-			// 	setCompany(res.data)
-			// }).catch(console.log)
+			let co_id = company_id 
 			getChatrooms(axios, co_id, setCompany)
 		}
 	}, [])
@@ -45,10 +39,7 @@ function Dashboard(props) {
 		if (company_id) {
 			getCompanyById(company_id)
 		}
-		// axios.get(`/rooms/${co_id}`).then(res => {
-		// 	setCompany(res.data)
-		// 	setDisplayChatRoom(res.data[0].chat_room_id)
-		// }).catch(console.log)
+		
 	}, [props.company_id])
 
 	const getCompanyById = async co_id => {
@@ -61,9 +52,6 @@ function Dashboard(props) {
 	useEffect(() => {
 		const { team_member_id } = props
 		if (team_member_id) {
-			// axios.get(`/unread-messages/${team_member_id}`).then(res => {
-			// 	setUnreadMessage(res.data)
-			// }).catch(err => console.log('didnt get unread messages', err))
 			getUnreadMessages(axios, team_member_id, setUnreadMessage)
 		}
 	}, [])
@@ -101,7 +89,6 @@ function Dashboard(props) {
 		})
 			.catch(err => console.log('frontend delete didnt work', err))
 	}
-	// need some space for delete notification
 
 	// const handleAddingChatRoom = () => {
 	// 	setShowAddRoom(true)
@@ -136,7 +123,6 @@ function Dashboard(props) {
 	})
 	return (
 		<div style={flex} className="main_sideBar">
-			{/* <div style={sideBar}> */}
 			<div className="sideBar">
 				<div className="add-chatroom-container">
 					<button className="add-chatroom-btn" onClick={() => handleAddingChatRoom(showAddRoom, setShowAddRoom)}> Add Chatroom </button>

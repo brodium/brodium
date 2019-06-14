@@ -5,7 +5,6 @@ const session = require('express-session')
 const CronJob = require('cron').CronJob;
 const socket = require('socket.io')
 
-const reviewCtrl = require('./controller/reviewCtrl')
 const authCtrl = require('./controller/authCtrl')
 const msgCtrl = require('./controller/messagesCtrl')
 const roomCtrl = require('./controller/roomCtrl')
@@ -41,11 +40,15 @@ massive(CONNECTION_STRING).then(db => {
 // sockets
 const io = socket(app.listen(SERVER_PORT, () => { console.log(`listening on port ${SERVER_PORT}`) }))
 io.on('connection', socket => {
-    console.log(`users are connected`)
+    // console.log(`users are connected`)
     socket.on('socket room', data => {
         socket.join(data)
-        console.log('joined socket room', data)
+        // console.log('joined socket room', data)
         socket.to(data).emit('join socket room', data)
+    })
+    socket.on('leave socket room', data => {
+        socket.leave(data)
+        // console.log('leaving')
     })
     socket.on('socket room message', data => {
         io.in(data.company_id).emit('socket room message', data)

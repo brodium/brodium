@@ -19,14 +19,13 @@
     border: solid black 1px;
     position: absolute;
     font-size: 22px;
-    // left: 1190px;
     right: 0px;
-    top: 125px;
-    // bottom: 125px;
+    top: 92px;
     background-color: rgba(65, 65, 65, 0.8);
     width: 225px;
     height: 200px;
     margin-right: 1px;
+    z-index: 1;
 }
 
 .unOrderedList_header {
