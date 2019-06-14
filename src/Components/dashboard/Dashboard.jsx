@@ -45,7 +45,7 @@ function Dashboard(props) {
 	const getCompanyById = async co_id => {
 		const result = await getCompany(co_id)
 		setCompany(result)
-		// setDisplayChatRoom(result[0].chat_room_id)
+		setDisplayChatRoom(result[0].chat_room_id)
 	}
 
 	// UNREAD MESSAGES USEFFECT

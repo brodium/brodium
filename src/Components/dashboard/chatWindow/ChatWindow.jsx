@@ -45,9 +45,7 @@ function ChatWindow(props) {
 
 
 	const messageReceiver = data => {
-		console.log('before if', props.displayChatRoom)
 		if (data.room === props.displayChatRoom) {
-			console.log('after if', props.displayChatRoom)
 			setMessages(state => [{
 				message: data.messageInput,
 				team_member_id: data.team_member_id,
