@@ -6,7 +6,7 @@ import AddChatRoom from './AddChatRoom/AddChatRoom';
 import EditChatRoom from './EditChatRoom/EditChatRoom';
 // import { setUser, setCompany } from '../../mightyDucks/authReducer'
 import { handleAddingChatRoom, getChatrooms, getUnreadMessages } from './../../jacksonLogic/Functions'
-import {getCompany} from '../../ShawnsTests/utils';
+import { getCompany } from '../../ShawnsTests/utils';
 
 const chatWindow = {
 	display: 'flex',
